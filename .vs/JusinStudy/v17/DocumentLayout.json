@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\jhLee\\Documents\\GitHub\\Jusin148\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A06EBA62-1358-4728-A058-63CFCA0E851B}|JusinStudy.vcxproj|C:\\Users\\jhLee\\Documents\\GitHub\\Jusin148\\240424.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A06EBA62-1358-4728-A058-63CFCA0E851B}|JusinStudy.vcxproj|solutionrelative:240424.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A06EBA62-1358-4728-A058-63CFCA0E851B}|JusinStudy.vcxproj|C:\\Users\\jhLee\\Documents\\GitHub\\Jusin148\\2404textrpg.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A06EBA62-1358-4728-A058-63CFCA0E851B}|JusinStudy.vcxproj|solutionrelative:2404textrpg.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "240424.cpp",
+              "DocumentMoniker": "C:\\Users\\jhLee\\Documents\\GitHub\\Jusin148\\240424.cpp",
+              "RelativeDocumentMoniker": "240424.cpp",
+              "ToolTip": "C:\\Users\\jhLee\\Documents\\GitHub\\Jusin148\\240424.cpp",
+              "RelativeToolTip": "240424.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABwAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-04-24T16:10:36.629Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "2404textrpg.cpp",
+              "DocumentMoniker": "C:\\Users\\jhLee\\Documents\\GitHub\\Jusin148\\2404textrpg.cpp",
+              "RelativeDocumentMoniker": "2404textrpg.cpp",
+              "ToolTip": "C:\\Users\\jhLee\\Documents\\GitHub\\Jusin148\\2404textrpg.cpp",
+              "RelativeToolTip": "2404textrpg.cpp",
+              "ViewState": "AQIAACoAAAAAAAAAAAAAAE0AAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-04-24T14:55:35.135Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

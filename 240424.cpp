@@ -4,7 +4,7 @@ using namespace std;
 
 enum TEST
 {
-	INPUT,
+	INPUT = 100,
 	OUTPUT,
 	SEARCH,
 	EXIT
@@ -25,7 +25,8 @@ void HW_Exit(bool* _bCheck);
 
 int main()
 {
-	HW();
+	//HW();
+	cout << TEST(0);
 	return 0;
 }
 
