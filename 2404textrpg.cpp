@@ -3,6 +3,7 @@
 using namespace std;
 
 const int iCount_Character = 3;
+//const int iCount_Monster = 3;
 
 typedef struct tPlayer
 {
@@ -205,6 +206,10 @@ void Menu_Fight(PPLAYER _pPlayer[], int* _pChoice, int* _pSelect, PMON _pMon[])
 			break;
 		case 2:
 			bCheck = false;
+			for (int i = 0; i < iCount_Character; i++)
+			{
+				_pMon[*_pSelect]->iHealth = (i + 1) * 30;
+			}
 			*_pSelect = 0;
 
 			break;
@@ -219,11 +224,16 @@ void Menu_Fight(PPLAYER _pPlayer[], int* _pChoice, int* _pSelect, PMON _pMon[])
 void Player_Stat(PPLAYER _pPlayer[], int* _pChoice)
 {
 	system("cls");
+	if (_pPlayer[*_pChoice]->iHealth < 0)
+	{
+		_pPlayer[*_pChoice]->iHealth = 0;
+	}
 	cout << "직업 : " << _pPlayer[*_pChoice]->pJob << "\n체력 : " << _pPlayer[*_pChoice]->iHealth << "\t공격력 : " << _pPlayer[*_pChoice]->iAttack << endl;
 }
 
 void Monster_Stat(PMON _pMon[], int* _pSelect)
 {
+	
 	cout << "\n--몬스터 상태창--\n굼바" << "\n체력 : " << _pMon[*_pSelect]->iHealth << "\t공격력 : " << _pMon[*_pSelect]->iAttack << endl;
 }
 
@@ -237,7 +247,21 @@ void Attack(PPLAYER _pPlayer[], int* _pChoice, int* _pSelect, bool* _pCheck, PMO
 		Monster_Stat(_pMon, _pSelect);
 		cout << "죽음!" << endl;
 		system("pause");
-		_pPlayer[*_pChoice]->iHealth = HP(*_pChoice);
+		switch (*_pChoice)
+		{
+		case 0:
+			_pPlayer[*_pChoice]->iHealth = HP(WARRIOR);
+			break;
+		case 1:
+			_pPlayer[*_pChoice]->iHealth = HP(WIZARD);
+			break;
+		case 2:
+			_pPlayer[*_pChoice]->iHealth = HP(THIEF);
+			break;
+		default:
+			break;
+		}
+		
 		*_pCheck = false;
 	}
 	else if (_pMon[*_pSelect]->iHealth <= 0)

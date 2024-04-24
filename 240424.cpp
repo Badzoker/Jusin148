@@ -26,7 +26,7 @@ void HW_Exit(bool* _bCheck);
 int main()
 {
 	//HW();
-	cout << TEST(0);
+	cout << TEST(INPUT);
 	return 0;
 }
 
