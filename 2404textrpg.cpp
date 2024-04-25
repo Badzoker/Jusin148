@@ -13,26 +13,6 @@ typedef struct tPlayer
 
 }PLAYER, * PPLAYER;
 
-//typedef struct tWarrior
-//{
-//	const char* pJob;
-//	int iHealth;
-//	int iAttack;
-//}WARRIOR, * PWARRIOR;
-//
-//typedef struct tWizard
-//{
-//	const char* pJob;
-//	int iHealth;
-//	int iAttack;
-//}WIZARD, * PWIZARD;
-//
-//typedef struct tThief
-//{
-//	const char* pJob;
-//	int iHealth;
-//	int iAttack;
-//}THIEF, * PTHIEF;
 
 typedef struct tMonster
 {
@@ -41,11 +21,7 @@ typedef struct tMonster
 
 }MON, * PMON;
 
-enum THEEND
-{
-	LOSE,
-	VICTORY
-};
+
 enum HP
 {
 	WARRIOR = 100,
@@ -75,7 +51,7 @@ void Text_Rpg()
 {
 	int iChoice(0);
 	int* pChoice = &iChoice;
-	PLAYER tPlayer[iCount_Character] = {};
+	PLAYER tPlayer[iCount_Character] = {"전사", 100, 10, "마법사", 50, 20, "도적", 75, 15};
 	PPLAYER pPlayer[iCount_Character] = {};
 	MON tMon[iCount_Character] = {};
 	PMON pMon[iCount_Character] = {};
@@ -86,7 +62,7 @@ void Text_Rpg()
 		pMon[i]->iHealth = (i + 1) * 30;
 		pMon[i]->iAttack = (i + 1) * 3;
 	}
-	pPlayer[0]->pJob = "전사";
+	/*pPlayer[0]->pJob = "전사";
 	pPlayer[1]->pJob = "마법사";
 	pPlayer[2]->pJob = "도적";
 	pPlayer[0]->iHealth = 100;
@@ -94,28 +70,8 @@ void Text_Rpg()
 	pPlayer[2]->iHealth = 75;
 	pPlayer[0]->iAttack = 10;
 	pPlayer[1]->iAttack = 20;
-	pPlayer[2]->iAttack = 15;
-
-	/*PPLAYER pWar = &tPlayer[0];
-	PPLAYER pWiz = &tPlayer[1];
-	PPLAYER pThi = &tPlayer[2];
-
-	pWar->pJob = "전사";
-	pWiz->pJob = "마법사";
-	pThi->pJob = "도적";
-	pWar->iHealth = 100;
-	pWiz->iHealth = pWar->iHealth / 2;
-	pThi->iHealth = pWar->iHealth / 4 * 3;
-	pWar->iAttack = 10;
-	pWiz->iAttack = pWar->iAttack * 2;
-	pThi->iAttack = pWar->iAttack * 3 /2;
-
-
-	PMON pMon1 = &tMon[0];
-	PMON pMon2 = &tMon[1];
-	PMON pMon3 = &tMon[2];
-	pMon1->iAttack = 3;
-	pMon1->iHealth = 30;*/
+	pPlayer[2]->iAttack = 15;*/
+	
 	Menu_Start(pChoice);
 	Menu_Home(pPlayer, pChoice, pMon);
 }
@@ -153,10 +109,8 @@ void Menu_Home(PPLAYER _pPlayer[], int* _pChoice, PMON _pMon[])
 			break;
 		}
 	}
-
 	if (!bCheck)
 		cout << "Text_rpg 끝" << endl;
-
 }
 
 void Menu_Stage(PPLAYER _pPlayer[], int* _pChoice, int* _pSelect, PMON _pMon[])
@@ -191,6 +145,10 @@ void Menu_Fight(PPLAYER _pPlayer[], int* _pChoice, int* _pSelect, PMON _pMon[])
 	*_pSelect -= 1;
 	bool bCheck = true;
 	bool* pCheck = &bCheck;
+	for (int i = 0; i < iCount_Character; i++) //몬스터 체력 초기화
+	{
+		_pMon[i]->iHealth = (i + 1) * 30;
+	}
 	while (bCheck)
 	{
 		int iAction(0);
@@ -210,7 +168,6 @@ void Menu_Fight(PPLAYER _pPlayer[], int* _pChoice, int* _pSelect, PMON _pMon[])
 				_pMon[i]->iHealth = (i + 1) * 30;
 			}
 			*_pSelect = 0;
-
 			break;
 		default:
 			cout << "다시 선택하시오\n";
@@ -232,7 +189,6 @@ void Player_Stat(PPLAYER _pPlayer[], int* _pChoice)
 
 void Monster_Stat(PMON _pMon[], int* _pSelect)
 {
-
 	cout << "\n--몬스터 상태창--\n굼바" << "\n체력 : " << _pMon[*_pSelect]->iHealth << "\t공격력 : " << _pMon[*_pSelect]->iAttack << endl;
 }
 
@@ -260,7 +216,6 @@ void Attack(PPLAYER _pPlayer[], int* _pChoice, int* _pSelect, bool* _pCheck, PMO
 		default:
 			break;
 		}
-
 		*_pCheck = false;
 	}
 	else if (_pMon[*_pSelect]->iHealth <= 0)
@@ -269,7 +224,7 @@ void Attack(PPLAYER _pPlayer[], int* _pChoice, int* _pSelect, bool* _pCheck, PMO
 		Monster_Stat(_pMon, _pSelect);
 		cout << "승리!" << endl;
 		system("pause");
-		_pMon[*_pSelect]->iHealth = 30;
+		_pMon[*_pSelect]->iHealth = 30 * (*_pSelect + 1);
 		*_pCheck = false;
 	}
 }
