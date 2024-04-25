@@ -2,6 +2,8 @@
 
 using namespace std;
 
+//함수포인터를 사용해서 만들어보기
+
 enum TEST
 {
 	INPUT = 100,
