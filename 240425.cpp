@@ -31,6 +31,8 @@ enum JOB
 	END
 };
 
+#pragma region 함수선언부
+
 void HW1();
 INFO Choose_Char(int _iInput);
 void Print_Char(INFO* _player);
@@ -40,6 +42,7 @@ void HW1_Fight(INFO* _player, int* _pChoice);
 INFO Create_Monster(int* _iChoice);
 void Print_Monster(INFO* _monster);
 
+#pragma endregion
 
 int main()
 {
@@ -47,6 +50,8 @@ int main()
 	HW1();
 	return 0;
 }
+
+#pragma region 함수정의부
 
 void HW1()
 {
@@ -230,3 +235,5 @@ void Print_Monster(INFO* _monster)
 {
 	cout << "\n+++++++++++++\n괴물 : " << _monster->szName << "\n체력 : " << _monster->iHealth << "\t  공격력 : " << _monster->iAttack << endl;
 }
+
+#pragma endregion

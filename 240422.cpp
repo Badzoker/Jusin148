@@ -1,5 +1,18 @@
 #include <iostream>
 
+#ifdef _DEBUG
+
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+
+#ifndef DBG_NEW 
+#define DBG_NEW new ( _NORMAL_BLOCK , __FILE__ , __LINE__ ) 
+#define new DBG_NEW 
+
+#endif
+#endif
+
 using namespace std;
 void HW1();
 void HW1_Change90(int* _pArray);
@@ -9,6 +22,8 @@ void Test2(int(*pTemp)[3]);
 
 int main()
 {
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	
 	//HW1();
 	//HW2();
 	//Test();
@@ -19,6 +34,7 @@ int main()
 void HW1() // 1.  다음의 숫자들을 2차원 배열을 이용하여 출력하고 90도씩 4회 회전을 출력하라
 {
 	int iArray[4][4] = {};
+	
 	int* pArray = &iArray[0][0];
 	for (int i = 0; i < 4; i++) // 첫 입력
 	{
