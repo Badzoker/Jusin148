@@ -24,8 +24,20 @@ int main()
 {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	//HW1();
-	HW2();
-
+	//HW2();
+	//int* pArray = new int[25]; //동적할당 5행
+	int** ppArray = new int* [5];
+	cout << ppArray << endl;
+	for (int i = 0; i < 5; i++)
+	{
+		ppArray[i] = new int[5];
+		cout << ppArray[i] << endl;
+	}
+	for (int i = 0; i < 5; i++)
+	{
+		delete[] ppArray[i];
+	}
+	delete[] ppArray;
 	return 0;
 }
 
@@ -110,7 +122,11 @@ void HW2() // 2. 0~24에 해당하는 5*5 상태로 출력, 숫자패드 2468 에 따라 이동하도
 {
 	int iInput(0), iX(1), iY(5); //변수 및 행렬의 Index
 	int* pArray = new int[25]; //동적할당 5행
-	
+	/*int** ppArray = new int* [5];
+	for (int i = 0; i < 5; i++)
+	{
+		ppArray[i] = new int[5];
+	}*/
 	bool bCheck(true); //while문을 위한 bool값
 	int iArray[5][5] = {};
 	for (int i = 0; i < 5; i++)//5x5 행렬 index 작성
