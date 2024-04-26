@@ -25,12 +25,7 @@ int main()
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	//HW1();
 	HW2();
-	/*int* p = new int(0);
-	int iTemp(0);
-	p = &iTemp;
 
-	delete p;
-	p = nullptr;*/ //->위험한 행동같음 스택메모리에서 힙메모리로 하는 느낌?
 	return 0;
 }
 
@@ -113,21 +108,20 @@ void HW1_Change90(int** _p)
 
 void HW2() // 2. 0~24에 해당하는 5*5 상태로 출력, 숫자패드 2468 에 따라 이동하도록
 {
-	int iArray[5][5] = {}; //5x5 행렬
 	int iInput(0), iX(1), iY(5); //변수 및 행렬의 Index
-	int* pZero = iArray[0]; //처음시작점(0 , 대표주소)
-	int* p = new int(*iArray[0]); //-> 동적할당으로 바꿈
-	//===========================================================
-	//*p = &iArray[0][0]; // 동적할당(1) 이거 위험한행동 같음  이것도 이중포인터로 하는 것 같음 제대로 봐야함
-	//===========================================================
+	int* pArray = new int[25]; //동적할당 5행
+	
 	bool bCheck(true); //while문을 위한 bool값
+	int iArray[5][5] = {};
 	for (int i = 0; i < 5; i++)//5x5 행렬 index 작성
 	{
 		for (int j = 0; j < 5; j++)
 		{
-			iArray[i][j] = 5 * i + j;
+			pArray[5 *i + j] = 5 * i + j;
 		}
 	}
+	int* p = pArray;
+	
 	while (bCheck)
 	{
 		system("cls");
@@ -135,7 +129,7 @@ void HW2() // 2. 0~24에 해당하는 5*5 상태로 출력, 숫자패드 2468 에 따라 이동하도
 		{
 			for (int j = 0; j < 5; j++)
 			{
-				cout << iArray[i][j] << "\t";
+				cout << pArray[5 * i + j] << "\t";
 			}
 			cout << endl;
 		}
@@ -247,7 +241,6 @@ void HW2() // 2. 0~24에 해당하는 5*5 상태로 출력, 숫자패드 2468 에 따라 이동하도
 			break;
 		case 10:
 			bCheck = false; // 종료
-			
 			break;
 		default:
 			cout << "다시 입력하시오 \n"; //예외처리
@@ -256,9 +249,10 @@ void HW2() // 2. 0~24에 해당하는 5*5 상태로 출력, 숫자패드 2468 에 따라 이동하도
 		system("pause");
 	}
 	cout << "끝\n";
-	*p = 0;
-	delete p;
-	p = nullptr; // heap 메모리반환(1)
+	
+	
+	delete[] pArray;
+	pArray = nullptr; // heap 메모리반환(1)
 }
 
 #pragma endregion 
