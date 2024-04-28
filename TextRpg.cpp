@@ -41,7 +41,7 @@ enum EQUIP
 {
 	WEAPON = 1,
 	SUBWEAPON,
-	//END
+	//END//HAHA
 };
 
 #pragma region 함수선언부
