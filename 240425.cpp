@@ -33,13 +33,13 @@ enum JOB
 
 #pragma region 함수선언부
 
-void HW1();
-INFO Choose_Char(int _iInput);
+void TextRpg_Menu();
+INFO* Choose_Char(int _iInput);
 void Print_Char(INFO* _player);
-void HW1_Home(INFO* _player);
-void HW1_Hunt(INFO* _player);
-void HW1_Fight(INFO* _player, int* _pChoice);
-INFO Create_Monster(int* _iChoice);
+void TextRpg_Home(INFO* _player);
+void TextRpg_Hunt(INFO* _player);
+void TextRpg_Fight(INFO* _player, INFO* _pMonster);
+void Create_Object(INFO** ppInfo, const char* _pName, int _iHealth, int _iAttack);
 void Print_Monster(INFO* _monster);
 
 #pragma endregion
@@ -47,58 +47,58 @@ void Print_Monster(INFO* _monster);
 int main()
 {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	HW1();
+	TextRpg_Menu();
 	return 0;
 }
 
 #pragma region 함수정의부
 
-void HW1()
+void TextRpg_Menu()
 {
 	int iInput(0);
-	INFO* tPlayer = new INFO{}; // 동적할당 1번
+	INFO* tPlayer = nullptr; 
 	cout << "직업을 선택하시오.(1. 전사 , 2. 마법사 , 3. 도적) :" << endl;
 	cin >> iInput;
 	switch (iInput)
 	{
 	case WARRIOR :
-		*tPlayer = Choose_Char(iInput);
+		tPlayer = Choose_Char(iInput);
 		break;
 	case WIZARD:
-		*tPlayer = Choose_Char(iInput);
+		tPlayer = Choose_Char(iInput);
 		break;
 	case THIEF:
-		*tPlayer = Choose_Char(iInput);
+		tPlayer = Choose_Char(iInput);
 		break;
 	
 	default: //해야하긴함
 		break;
 	}
-	HW1_Home(tPlayer);
-	delete tPlayer; //heap 반환 1번
-	tPlayer = nullptr;
+	TextRpg_Home(tPlayer);
+	if (tPlayer != nullptr)
+	{
+		delete tPlayer; //heap 반환 1번
+		tPlayer = nullptr;
+	}
 	
 }
 
-INFO Choose_Char(int _iInput)
+INFO* Choose_Char(int _iInput)
 {
-	INFO tTemp = {};
+	INFO* tTemp = nullptr;
 	switch (_iInput)
 	{
 	case 1:
-		strcpy_s(tTemp.szName, 32, "전사");
-		tTemp.iHealth = 100;
-		tTemp.iAttack = 10;
+		tTemp = new INFO;
+		strcpy_s(tTemp->szName, 32, "전사");
+		tTemp->iHealth = 100;
+		tTemp->iAttack = 10;
 		break;
 	case 2:
-		strcpy_s(tTemp.szName, 32, "마법사");
-		tTemp.iHealth = 50;
-		tTemp.iAttack = 20;
+		Create_Object(&tTemp, "마법사", 50, 20);
 		break;
 	case 3:
-		strcpy_s(tTemp.szName, 32, "도적");
-		tTemp.iHealth = 75;
-		tTemp.iAttack = 15;
+		Create_Object(&tTemp, "도적", 75, 15);
 		break;
 	default:
 		break;
@@ -112,7 +112,7 @@ void Print_Char(INFO* _player)
 	cout << "================\n직업 : " << _player->szName << "\n체력 : " << _player->iHealth << "\t  공격력 : " << _player->iAttack << endl;
 }
 
-void HW1_Home(INFO* _player)
+void TextRpg_Home(INFO* _player)
 {
 	int iInput(0);
 	while (true)
@@ -123,7 +123,7 @@ void HW1_Home(INFO* _player)
 		switch (iInput)
 		{
 		case 1:
-			HW1_Hunt(_player);
+			TextRpg_Hunt(_player);
 			break;
 		case 2:
 			return;
@@ -133,50 +133,62 @@ void HW1_Home(INFO* _player)
 	}
 }
 
-void HW1_Hunt(INFO* _player)
+void TextRpg_Hunt(INFO* _player)
 {
-	int* pInput = new int(0); //동적할당 2번
 	int iInput(0);
+	INFO* tMonster = nullptr;
 	while (true)
 	{
 		Print_Char(_player);
 		cout << "1. 초급\t2. 중급\t3. 고급\t4. 전 단계" << endl;
-		cin >> *pInput;
-		if (*pInput == 4)
+		cin >> iInput;
+		switch (iInput)
 		{
-			delete pInput;
-			pInput = nullptr; //heap 반환 2번
+		case 1:
+			Create_Object(&tMonster, "초급", 30 * iInput, 3 * iInput);
+			TextRpg_Fight(_player, tMonster);
+			break;
+		case 2:
+			Create_Object(&tMonster, "중급", 30 * iInput, 3 * iInput);
+			TextRpg_Fight(_player, tMonster);
+				break;
+		case 3:
+			Create_Object(&tMonster, "고급", 30 * iInput, 3 * iInput);
+			TextRpg_Fight(_player, tMonster);
+				break;
+		case 4:
+			/*if (tMonster != nullptr) // 질문 1. 없는데 지우려고 해서 그런건가?
+			{
+				delete tMonster;
+				tMonster = nullptr;
+			}*/
 			return;
-		}
-		else if (*pInput < 4)
-		{
-			HW1_Fight(_player, pInput);
-		}
-		else
-		{
+		default:
 			cout << "잘못 입력했습니다." << endl;
+			break;
 		}
 	}
 }
 
-void HW1_Fight(INFO* _player, int* _pChoice)
+void TextRpg_Fight(INFO* _player, INFO* _pMonster)
 {
 	int iInput(0);
-	INFO tMonster = Create_Monster(_pChoice);
 	while (true)
 	{
 		
 		Print_Char(_player);
-		Print_Monster(&tMonster);
+		Print_Monster(_pMonster);
 		cout << "1. 공격    2. 도망" << endl;
 		cin >> iInput;
 		switch (iInput)
 		{
 		case 1:
-			_player->iHealth -= tMonster.iAttack;
-			tMonster.iHealth -= _player->iAttack;
+			_player->iHealth -= _pMonster->iAttack;
+			_pMonster->iHealth -= _player->iAttack;
 			break;
 		case 2:
+			delete _pMonster;
+			_pMonster = nullptr;
 			return;
 		default:
 			break;
@@ -186,49 +198,33 @@ void HW1_Fight(INFO* _player, int* _pChoice)
 			system("cls");
 			cout << "================\n직업 : " << _player->szName << "\n체력 : " << 0 << "\t  공격력 : " << _player->iAttack << endl;
 			_player->iHealth = 100;
-			Print_Monster(&tMonster);
+			Print_Monster(_pMonster);
 			cout << "죽음" << endl;
 			system("pause");
+			delete _pMonster;
+			_pMonster = nullptr;
 			return;
 		}
-		else if (0 >= tMonster.iHealth)
+		else if (0 >= _pMonster->iHealth)
 		{
 			system("cls");
 			Print_Char(_player);
-			cout << "\n+++++++++++++\n괴물 : " << tMonster.szName << "\n체력 : " << 0 << "\t  공격력 : " << tMonster.iAttack << endl;
+			cout << "\n+++++++++++++\n괴물 : " << _pMonster->szName << "\n체력 : " << 0 << "\t  공격력 : " << _pMonster->iAttack << endl;
 			cout << "승리" << endl;
 			system("pause");
+			delete _pMonster;
+			_pMonster = nullptr;
 			return;
 		}
 	}
 }
 
-INFO Create_Monster(int* _iChoice)
+void Create_Object(INFO** ppInfo, const char* _pName, int _iHealth, int _iAttack)
 {
-	INFO tMonster = {};
-	int iTemp = *_iChoice;
-	switch (*_iChoice)
-	{
-	case 1:
-		strcpy_s(tMonster.szName, 32, "초급");
-		tMonster.iHealth = iTemp * 30;
-		tMonster.iAttack = iTemp * 3;
-		break;
-	case 2:
-		strcpy_s(tMonster.szName, 32, "중급");
-		tMonster.iHealth = iTemp * 30;
-		tMonster.iAttack = iTemp * 3;
-		break;
-	case 3:
-		strcpy_s(tMonster.szName, 32, "고급");
-		tMonster.iHealth = iTemp * 30;
-		tMonster.iAttack = iTemp * 3;
-		break;
-	default:
-		break;
-	}
-	
-	return tMonster;
+	*ppInfo = new INFO;
+	strcpy_s((*ppInfo)->szName, sizeof(INFO), _pName);
+	(*ppInfo)->iHealth = _iHealth;
+	(*ppInfo)->iAttack = _iAttack;
 }
 
 void Print_Monster(INFO* _monster)
