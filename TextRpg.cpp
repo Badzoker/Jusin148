@@ -120,17 +120,15 @@ INFO* Choose_Char(int _iInput)
 	}
 	return tTemp;
 }
-
 void Print_Char(INFO* _pPlayer)
 {
 	system("cls");
 	cout << "================\n직업 : " << _pPlayer->szName << "\n체력 : " << _pPlayer->iHealth << "\n마나 : " << _pPlayer->iMana << "\t  공격력 : " << _pPlayer->iAttack << endl;
 }
-
 void TextRpg_Home(INFO* _pPlayer)
 {
 	int iInput(0);
-	ITEM* tItem = nullptr;
+	ITEM* tItem = nullptr; // 동적할당 2번
 	tItem = Item_Start();
 	while (true)
 	{
@@ -149,7 +147,7 @@ void TextRpg_Home(INFO* _pPlayer)
 			Check_Stat(tItem);
 			break;
 		case 4:
-			if (tItem != nullptr)
+			if (tItem != nullptr) //heap 반환 2번
 			{
 				delete tItem;
 				tItem = nullptr;
@@ -161,7 +159,6 @@ void TextRpg_Home(INFO* _pPlayer)
 		}
 	}
 }
-
 ITEM* Item_Start()
 {
 	ITEM* tTemp = new ITEM;
@@ -213,11 +210,11 @@ void TextRpg_Hunt(INFO* _pPlayer, ITEM* _tItem)
 			TextRpg_Fight(_pPlayer, _tItem, tMonster);
 			break;
 		case 4:
-			/*if (tMonster != nullptr) // 질문 1. 없는데 지우려고 해서 그런건가?
-			{
-				delete tMonster;
-				tMonster = nullptr;
-			}*/
+			//if (tMonster != nullptr) // 질문 1. 없는데 지우려고 해서 그런건가?
+			//{
+			//	delete tMonster;
+			//	tMonster = nullptr;
+			//}
 			return;
 		default:
 			cout << "잘못 입력했습니다." << endl;
@@ -225,7 +222,6 @@ void TextRpg_Hunt(INFO* _pPlayer, ITEM* _tItem)
 		}
 	}
 }
-
 void TextRpg_Market(INFO* _pPlayer, ITEM* _tItem)
 {
 	int iInput(0);
@@ -392,7 +388,6 @@ void TextRpg_Fight(INFO* _pPlayer, ITEM* _tItem, INFO* _pMonster)
 		}
 	}
 }
-
 void Create_Object(INFO** ppInfo, const char* _pName, int _iHealth, int _iMana, int _iAttack)
 {
 	*ppInfo = new INFO;
@@ -401,7 +396,6 @@ void Create_Object(INFO** ppInfo, const char* _pName, int _iHealth, int _iMana, 
 	(*ppInfo)->iMana = _iMana;
 	(*ppInfo)->iAttack = _iAttack;
 }
-
 void Print_Monster(INFO* _pMonster)
 {
 	cout << "\n+++++++++++++\n괴물 : " << _pMonster->szName << "\n체력 : " << _pMonster->iHealth << "\n마나 : " << _pMonster->iMana << "\t  공격력 : " << _pMonster->iAttack << endl;
@@ -424,7 +418,6 @@ void Print_Item(ITEM* _tItem)
 	cout << "체력포션 : " << _tItem->iPotion << " 개" << endl;
 	cout << "마나포션 : " << _tItem->iManaPotion << " 개" << endl;
 }
-
 void TextRpg_Skill(INFO* _pPlayer, ITEM* _tItem, INFO* _pMonster)
 {
 	int iInput(0);
