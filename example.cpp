@@ -7,8 +7,16 @@ void Recycle(int a);
 
 int main()
 {
-	Recycle();
-	//Recycle(3);
+	int iArray[5] = { 1,2,5,7,8 };
+	int* pa = iArray + 19;
+	int* pb = iArray;
+	
+	/*cout << iArray << endl;
+	cout << *(iArray + 1) << endl;
+	cout << pa + 2 << endl;
+	cout << pa[3] << endl;
+	cout << *pb << endl;*/
+	cout << pa - pb << endl;
 }
 
 void Recycle()
