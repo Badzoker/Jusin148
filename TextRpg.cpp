@@ -30,11 +30,13 @@ typedef struct tItem
 	int iPotion;
 	int iManaPotion;
 }ITEM;
+
 enum JOB
 {
 	WARRIOR = 1,
 	WIZARD,
 	THIEF,
+	LOAD,
 	END
 };
 enum EQUIP
@@ -46,61 +48,100 @@ enum EQUIP
 
 #pragma region 함수선언부
 
+
 void TextRpg_Menu();
 INFO* Choose_Char(int _iInput);
 ITEM* Item_Start();
+
 void Print_Char(INFO* _pPlayer);
-void TextRpg_Home(INFO* _pPlayer);
-void TextRpg_Hunt(INFO* _pPlayer, ITEM* _tItem);
-void Check_Stat(ITEM* _tItem);
-void TextRpg_Market(INFO* _pPlayer, ITEM* _tItem);
-void TextRpg_Market_Equip(INFO* _pPlayer, ITEM* _tItem);
-void TextRpg_Market_Consumable(INFO* _pPlayer, ITEM* _tItem);
-void TextRpg_Fight(INFO* _pPlayer, ITEM* _tItem, INFO* _pMonster);
-void Create_Object(INFO** ppInfo, const char* _pName, int _iHealth,int _iMana, int _iAttack);
+void TextRpg_Home(INFO* _pPlayer, ITEM* _pItem);
+void TextRpg_Hunt(INFO* _pPlayer, ITEM* _pItem);
+void Check_Stat(ITEM* _pItem);
+void TextRpg_Market(INFO* _pPlayer, ITEM* _pItem);
+void TextRpg_Market_Equip(INFO* _pPlayer, ITEM* _pItem);
+void TextRpg_Market_Consumable(INFO* _pPlayer, ITEM* _pItem);
+void TextRpg_Fight(INFO* _pPlayer, ITEM* _pItem, INFO* _pMonster);
+INFO* Create_Object(const char* _pName, int _iHealth, int _iMana, int _iAttack);
 void Print_Monster(INFO* _monster);
-void TextRpg_Skill(INFO* _pPlayer, ITEM* _tItem, INFO* _pMonster);
-void TextRpg_Tool(INFO* _pPlayer, ITEM* _tItem);
-void Print_Item(ITEM* _tItem);
+void TextRpg_Skill(INFO* _pPlayer, ITEM* _pItem, INFO* _pMonster);
+void TextRpg_Tool(INFO* _pPlayer, ITEM* _pItem);
+void Print_Item(ITEM* _pItem);
 #pragma endregion
 
 int main()
 {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	TextRpg_Menu();
+	
 	return 0;
 }
 
 #pragma region 함수정의부
 
+
 void TextRpg_Menu()
 {
 	int iInput(0);
 	INFO* tPlayer = nullptr;
-
-	cout << "직업을 선택하시오.(1. 전사 , 2. 마법사 , 3. 도적) :" << endl;
+	ITEM* tItem = nullptr; // 동적할당 2번
+	FILE* pFileJob = NULL;
+	FILE* pFileItem = NULL;
+	errno_t errReadJob = fopen_s(&pFileJob, "Data/Job.txt", "rb");
+	errno_t errReadItem = fopen_s(&pFileItem, "Data/Item.txt", "rb");
+	cout << "직업을 선택하시오.(1. 전사 , 2. 마법사 , 3. 도적 , 4. 불러오기) :" << endl;
 	cin >> iInput;
 	switch (iInput)
 	{
 	case WARRIOR:
 		tPlayer = Choose_Char(iInput);
+		//tItem = Item_Start();
+
 		break;
 	case WIZARD:
 		tPlayer = Choose_Char(iInput);
+		tItem = Item_Start();
+
 		break;
 	case THIEF:
 		tPlayer = Choose_Char(iInput);
-		break;
+		tItem = Item_Start();
 
+		break;
+	case LOAD: 
+		if (0 == errReadJob && 0 == errReadItem)
+		{
+			tPlayer = new INFO;
+			tItem = new ITEM;
+			fread(tPlayer, sizeof(INFO), 1, pFileJob);
+			fclose(pFileJob);
+			fread(tItem, sizeof(ITEM), 1, pFileItem);
+			/*while (0 == feof(pFile))
+			{
+
+			}*/
+			
+			fclose(pFileItem);
+		}
+		else
+		{
+			cout << "불러오기 에러" << endl;
+		}
+		system("pause");
+		break;
 	default:
 		cout << "잘못 입력했습니다." << endl;
 		break;
 	}
-	TextRpg_Home(tPlayer);
+	TextRpg_Home(tPlayer, tItem);
 	if (tPlayer != nullptr)
 	{
 		delete tPlayer; //heap 반환 1번
 		tPlayer = nullptr;
+	}
+	if (tItem != nullptr) //heap 반환 2번
+	{
+		delete tItem;
+		tItem = nullptr;
 	}
 }
 INFO* Choose_Char(int _iInput)
@@ -109,13 +150,13 @@ INFO* Choose_Char(int _iInput)
 	switch (_iInput)
 	{
 	case 1:
-		Create_Object(&tTemp, "전사", 100, 20, 10);
+		tTemp = Create_Object("전사", 100, 20, 10);
 		break;
 	case 2:
-		Create_Object(&tTemp, "마법사", 50, 100,20);
+		tTemp = Create_Object("마법사", 50, 100,20);
 		break;
 	case 3:
-		Create_Object(&tTemp, "도적", 75, 50,15);
+		tTemp = Create_Object("도적", 75, 50,15);
 		break;
 	}
 	return tTemp;
@@ -125,33 +166,52 @@ void Print_Char(INFO* _pPlayer)
 	system("cls");
 	cout << "================\n직업 : " << _pPlayer->szName << "\n체력 : " << _pPlayer->iHealth << "\n마나 : " << _pPlayer->iMana << "\t  공격력 : " << _pPlayer->iAttack << endl;
 }
-void TextRpg_Home(INFO* _pPlayer)
+
+void TextRpg_Home(INFO* _pPlayer, ITEM* _pItem)
 {
-	int iInput(0);
-	ITEM* tItem = nullptr; // 동적할당 2번
-	tItem = Item_Start();
+	int iInput(0), iTemp(0);
+	
+	FILE* pFileJob = NULL;
+	FILE* pFileItem = NULL;
+	
+	errno_t errWriteJob = fopen_s(&pFileJob, "Data/Job.txt", "wb");
+	errno_t errWriteItem = fopen_s(&pFileItem, "Data/Item.txt", "wb");
+	char cTemp[32] = {};
+
 	while (true)
 	{
 		Print_Char(_pPlayer);
-		cout << "1. 사냥터    2. 상점    3. 상태창    4. 게임종료" << endl;
+		cout << "1. 사냥터    2. 상점    3. 상태창    4. 게임저장    5. 종료" << endl;
 		cin >> iInput;
 		switch (iInput)
 		{
 		case 1:
-			TextRpg_Hunt(_pPlayer, tItem);
+			TextRpg_Hunt(_pPlayer, _pItem);
 			break;
 		case 2:
-			TextRpg_Market(_pPlayer, tItem);
+			TextRpg_Market(_pPlayer, _pItem);
 			break;
 		case 3:
-			Check_Stat(tItem);
+			Check_Stat(_pItem);
 			break;
 		case 4:
-			if (tItem != nullptr) //heap 반환 2번
+			if (0 == errWriteJob && 0 == errWriteItem)
 			{
-				delete tItem;
-				tItem = nullptr;
+				cout << "저장됨" << endl;
+
+				fwrite(_pPlayer, sizeof(INFO), 1, pFileJob);
+				fclose(pFileJob);
+				fwrite(_pItem, sizeof(ITEM), 1, pFileItem);
+				fclose(pFileItem);
 			}
+			else
+			{
+				cout << "게임저장에러" << endl;
+			}
+			system("pause");
+			break;
+		case 5:
+			
 			return;
 		default:
 			cout << "잘못 입력했습니다." << endl;
@@ -168,28 +228,29 @@ ITEM* Item_Start()
 	tTemp->iManaPotion = 0;
 	return tTemp;
 }
-void Check_Stat(ITEM* _tItem)
+void Check_Stat(ITEM* _pItem)
 {
 	char cTemp[32] = {};
-	if (_tItem->bMain_Item)
+	if (_pItem->bMain_Item)
 		strcpy_s(cTemp, sizeof(cTemp), "착용중");
 	else
 		strcpy_s(cTemp, sizeof(cTemp), "없음");
 	cout << "주장비 : " << cTemp << endl;
 
-	if (_tItem->bSub_Item)
+	if (_pItem->bSub_Item)
 		strcpy_s(cTemp, sizeof(cTemp), "착용중");
 	else
 		strcpy_s(cTemp, sizeof(cTemp), "없음");
 	cout << "보조장비 : " << cTemp << endl;
 
-	cout << "체력포션 : " << _tItem->iPotion << " 개" << endl;
-	cout << "마나포션 : " << _tItem->iManaPotion << " 개" << endl;
+	cout << "체력포션 : " << _pItem->iPotion << " 개" << endl;
+	cout << "마나포션 : " << _pItem->iManaPotion << " 개" << endl;
 }
-void TextRpg_Hunt(INFO* _pPlayer, ITEM* _tItem)
+void TextRpg_Hunt(INFO* _pPlayer, ITEM* _pItem)
 {
 	int iInput(0);
-	INFO* tMonster = nullptr;
+	INFO* tMonster = new INFO;
+
 	while (true)
 	{
 		Print_Char(_pPlayer);
@@ -198,23 +259,25 @@ void TextRpg_Hunt(INFO* _pPlayer, ITEM* _tItem)
 		switch (iInput)
 		{
 		case 1:
-			Create_Object(&tMonster, "초급", 30 * iInput, 10 * iInput,3 * iInput);
-			TextRpg_Fight(_pPlayer, _tItem, tMonster);
+			tMonster = Create_Object("초급", 30 * iInput, 10 * iInput,3 * iInput);
+			TextRpg_Fight(_pPlayer, _pItem, tMonster);
 			break;
 		case 2:
-			Create_Object(&tMonster, "중급", 30 * iInput, 10 * iInput, 3 * iInput);
-			TextRpg_Fight(_pPlayer, _tItem, tMonster);
+			tMonster = Create_Object("중급", 30 * iInput, 10 * iInput, 3 * iInput);
+			TextRpg_Fight(_pPlayer, _pItem, tMonster);
 			break;
 		case 3:
-			Create_Object(&tMonster, "고급", 30 * iInput, 10 * iInput, 3 * iInput);
-			TextRpg_Fight(_pPlayer, _tItem, tMonster);
+			tMonster = Create_Object("고급", 30 * iInput, 10 * iInput, 3 * iInput);
+			TextRpg_Fight(_pPlayer, _pItem, tMonster);
 			break;
 		case 4:
-			//if (tMonster != nullptr) // 질문 1. 없는데 지우려고 해서 그런건가?
-			//{
-			//	delete tMonster;
-			//	tMonster = nullptr;
-			//}
+			if (tMonster != nullptr) // 질문 1. 없는데 지우려고 해서 그런건가?
+			{
+				cout << tMonster << endl;
+				system("pause");
+				/*delete tMonster;
+				tMonster = nullptr;*/
+			}
 			return;
 		default:
 			cout << "잘못 입력했습니다." << endl;
@@ -222,22 +285,22 @@ void TextRpg_Hunt(INFO* _pPlayer, ITEM* _tItem)
 		}
 	}
 }
-void TextRpg_Market(INFO* _pPlayer, ITEM* _tItem)
+void TextRpg_Market(INFO* _pPlayer, ITEM* _pItem)
 {
 	int iInput(0);
 	while (true)
 	{
 		Print_Char(_pPlayer);
-		Print_Item(_tItem);
+		Print_Item(_pItem);
 		cout << "1. 장비\t2. 도구\t3. 돌아가기" << endl;
 		cin >> iInput;
 		switch (iInput)
 		{
 		case 1:
-			TextRpg_Market_Equip(_pPlayer, _tItem);
+			TextRpg_Market_Equip(_pPlayer, _pItem);
 			break;
 		case 2:
-			TextRpg_Market_Consumable(_pPlayer, _tItem);
+			TextRpg_Market_Consumable(_pPlayer, _pItem);
 			break;
 		case 3:
 			return;
@@ -247,13 +310,13 @@ void TextRpg_Market(INFO* _pPlayer, ITEM* _tItem)
 		}
 	}
 }
-void TextRpg_Market_Equip(INFO* _pPlayer, ITEM* _tItem)
+void TextRpg_Market_Equip(INFO* _pPlayer, ITEM* _pItem)
 {
 	int iInput(0);
 	while (true)
 	{
 		Print_Char(_pPlayer);
-		Print_Item(_tItem);
+		Print_Item(_pItem);
 		if (!strcmp(_pPlayer->szName, "전사"))
 		{
 			cout << "1. 장검\t2. 방패\t3. 돌아가기" << endl;
@@ -271,10 +334,10 @@ void TextRpg_Market_Equip(INFO* _pPlayer, ITEM* _tItem)
 		switch (iInput)
 		{
 		case 1:
-			if (!_tItem->bMain_Item)
+			if (!_pItem->bMain_Item)
 			{
 				cout << "주장비 구매완료!" << endl;
-				_tItem->bMain_Item = true;
+				_pItem->bMain_Item = true;
 				_pPlayer->iAttack += 10; //그냥 구현만 함
 			}
 			else
@@ -284,10 +347,10 @@ void TextRpg_Market_Equip(INFO* _pPlayer, ITEM* _tItem)
 			system("pause");
 			break;
 		case 2:
-			if (!_tItem->bSub_Item)
+			if (!_pItem->bSub_Item)
 			{
 				cout << "보조장비 구매완료!" << endl;
-				_tItem->bSub_Item = true;
+				_pItem->bSub_Item = true;
 				_pPlayer->iHealth += 50;//그냥 구현만 함
 			}
 			else
@@ -304,27 +367,27 @@ void TextRpg_Market_Equip(INFO* _pPlayer, ITEM* _tItem)
 		}
 	}
 }
-void TextRpg_Market_Consumable(INFO* _pPlayer, ITEM* _tItem)
+void TextRpg_Market_Consumable(INFO* _pPlayer, ITEM* _pItem)
 {
 	int iInput(0);
 	while (true)
 	{
 		Print_Char(_pPlayer);
-		Print_Item(_tItem);
+		Print_Item(_pItem);
 		cout << "1. 체력포션\t2. 마나포션\t3. 돌아가기" << endl;
 		cin >> iInput;
 		switch (iInput)
 		{
 		case 1:
-			_tItem->iPotion += 1;
+			_pItem->iPotion += 1;
 			cout << "체력포션 구매완료!" << endl;
-			cout << "현재 포션수 : " << _tItem->iPotion << " 개" << endl;
+			cout << "현재 포션수 : " << _pItem->iPotion << " 개" << endl;
 			system("pause");
 			break;
 		case 2:
-			_tItem->iManaPotion += 1;
+			_pItem->iManaPotion += 1;
 			cout << "마나포션 구매완료!" << endl;
-			cout << "현재 마나포션수 : " << _tItem->iManaPotion << " 개" << endl;
+			cout << "현재 마나포션수 : " << _pItem->iManaPotion << " 개" << endl;
 			system("pause");
 			break;
 		case 3:
@@ -335,7 +398,7 @@ void TextRpg_Market_Consumable(INFO* _pPlayer, ITEM* _tItem)
 		}
 	}
 }
-void TextRpg_Fight(INFO* _pPlayer, ITEM* _tItem, INFO* _pMonster)
+void TextRpg_Fight(INFO* _pPlayer, ITEM* _pItem, INFO* _pMonster)
 {
 	int iInput(0);
 	while (true)
@@ -351,14 +414,16 @@ void TextRpg_Fight(INFO* _pPlayer, ITEM* _tItem, INFO* _pMonster)
 			_pMonster->iHealth -= _pPlayer->iAttack;
 			break;
 		case 2:
-			TextRpg_Skill(_pPlayer, _tItem, _pMonster);
+			TextRpg_Skill(_pPlayer, _pItem, _pMonster);
 			break;
 		case 3:
-			TextRpg_Tool(_pPlayer, _tItem);
+			TextRpg_Tool(_pPlayer, _pItem);
 			break;
 		case 4:
 			delete _pMonster;
 			_pMonster = nullptr;
+			cout << _pMonster << endl;
+			system("pause");
 			return;
 		default:
 			break;
@@ -373,6 +438,8 @@ void TextRpg_Fight(INFO* _pPlayer, ITEM* _tItem, INFO* _pMonster)
 			system("pause");
 			delete _pMonster;
 			_pMonster = nullptr;
+			cout << _pMonster << endl;
+			system("pause");
 			return;
 		}
 		else if (0 >= _pMonster->iHealth)
@@ -384,41 +451,44 @@ void TextRpg_Fight(INFO* _pPlayer, ITEM* _tItem, INFO* _pMonster)
 			system("pause");
 			delete _pMonster;
 			_pMonster = nullptr;
+			cout << _pMonster << endl;
+			system("pause");
 			return;
 		}
 	}
 }
-void Create_Object(INFO** ppInfo, const char* _pName, int _iHealth, int _iMana, int _iAttack)
+INFO* Create_Object(const char* _pName, int _iHealth, int _iMana, int _iAttack)
 {
-	*ppInfo = new INFO;
-	strcpy_s((*ppInfo)->szName, sizeof(INFO), _pName);
-	(*ppInfo)->iHealth = _iHealth;
-	(*ppInfo)->iMana = _iMana;
-	(*ppInfo)->iAttack = _iAttack;
+	INFO* pTemp = new INFO;
+	strcpy_s(pTemp->szName, sizeof(INFO), _pName);
+	pTemp->iHealth = _iHealth;
+	pTemp->iMana = _iMana;
+	pTemp->iAttack = _iAttack;
+	return pTemp;
 }
 void Print_Monster(INFO* _pMonster)
 {
 	cout << "\n+++++++++++++\n괴물 : " << _pMonster->szName << "\n체력 : " << _pMonster->iHealth << "\n마나 : " << _pMonster->iMana << "\t  공격력 : " << _pMonster->iAttack << endl;
 }
-void Print_Item(ITEM* _tItem)
+void Print_Item(ITEM* _pItem)
 {
 	char cTemp[32] = {};
-	if (_tItem->bMain_Item)
+	if (_pItem->bMain_Item)
 		strcpy_s(cTemp, sizeof(cTemp), "착용중");
 	else
 		strcpy_s(cTemp, sizeof(cTemp), "없음");
 	cout << "주장비 : " << cTemp << endl;
 
-	if (_tItem->bSub_Item)
+	if (_pItem->bSub_Item)
 		strcpy_s(cTemp, sizeof(cTemp), "착용중");
 	else
 		strcpy_s(cTemp, sizeof(cTemp), "없음");
 	cout << "보조장비 : " << cTemp << endl;
 
-	cout << "체력포션 : " << _tItem->iPotion << " 개" << endl;
-	cout << "마나포션 : " << _tItem->iManaPotion << " 개" << endl;
+	cout << "체력포션 : " << _pItem->iPotion << " 개" << endl;
+	cout << "마나포션 : " << _pItem->iManaPotion << " 개" << endl;
 }
-void TextRpg_Skill(INFO* _pPlayer, ITEM* _tItem, INFO* _pMonster)
+void TextRpg_Skill(INFO* _pPlayer, ITEM* _pItem, INFO* _pMonster)
 {
 	int iInput(0);
 	cout << "\n=====SKILL=====\n" << "1. 기본 스킬(mana -5)\t\t2. 강한 스킬(mana -20)\t\t3. 돌아가기\n";
@@ -462,7 +532,7 @@ void TextRpg_Skill(INFO* _pPlayer, ITEM* _tItem, INFO* _pMonster)
 	}
 	
 }
-void TextRpg_Tool(INFO* _pPlayer, ITEM* _tItem)
+void TextRpg_Tool(INFO* _pPlayer, ITEM* _pItem)
 {
 	int iInput(0);
 	cout << "\n=====TOOL=====\n" << "1. 체력포션(+15)\t\t2. 마나포션(+15)\t\t3. 돌아가기\n";
@@ -473,14 +543,14 @@ void TextRpg_Tool(INFO* _pPlayer, ITEM* _tItem)
 		switch (iInput)
 		{
 		case 1:
-			if (1 <= _tItem->iPotion)
+			if (1 <= _pItem->iPotion)
 			{
 				cout << "포션 사용!" << endl;
-				_tItem->iPotion -= 1;
+				_pItem->iPotion -= 1;
 				_pPlayer->iHealth += 15;
 				if (!strcmp(_pPlayer->szName, "전사")) // 이거 구분하는 법 좀더 쉽게 할 수 있도록 생각해보기
 				{
-					if (_tItem->bSub_Item)
+					if (_pItem->bSub_Item)
 					{
 						if (150 < _pPlayer->iHealth)
 						{
@@ -497,7 +567,7 @@ void TextRpg_Tool(INFO* _pPlayer, ITEM* _tItem)
 				}
 				else if (!strcmp(_pPlayer->szName, "마법사"))
 				{
-					if (_tItem->bSub_Item)
+					if (_pItem->bSub_Item)
 					{
 						if (100 < _pPlayer->iHealth)
 						{
@@ -514,7 +584,7 @@ void TextRpg_Tool(INFO* _pPlayer, ITEM* _tItem)
 				}
 				else//(!strcmp(_pPlayer->szName, "도적"))
 				{
-					if (_tItem->bSub_Item)
+					if (_pItem->bSub_Item)
 					{
 						if (125 < _pPlayer->iHealth)
 						{
@@ -536,10 +606,10 @@ void TextRpg_Tool(INFO* _pPlayer, ITEM* _tItem)
 			cout << "포션 갯수 부족!" << endl;
 			break;
 		case 2:
-			if (1 <= _tItem->iManaPotion)
+			if (1 <= _pItem->iManaPotion)
 			{
 				cout << "마나포션 사용!" << endl;
-				_tItem->iManaPotion -= 1;
+				_pItem->iManaPotion -= 1;
 				_pPlayer->iMana += 15;
 				if (!strcmp(_pPlayer->szName, "전사")) // 이거 구분하는 법 좀더 쉽게 할 수 있도록 생각해보기
 				{
