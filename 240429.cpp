@@ -16,7 +16,6 @@ int main()
 		while (0 == feof(pFile))
 		{
 			fputc(fgetc(pFile), pFile2);
-			//fread(iTemp, sizeof(iTemp), 1, pFile);
 		}
 		fclose(pFile);
 		fclose(pFile2);

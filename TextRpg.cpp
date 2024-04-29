@@ -86,40 +86,34 @@ void TextRpg_Menu()
 	ITEM* tItem = nullptr; // 동적할당 2번
 	FILE* pFileJob = NULL;
 	FILE* pFileItem = NULL;
-	errno_t errReadJob = fopen_s(&pFileJob, "Data/Job.txt", "rb");
-	errno_t errReadItem = fopen_s(&pFileItem, "Data/Item.txt", "rb");
+	errno_t errReadJob = 0;
+	errno_t errReadItem = 0;
 	cout << "직업을 선택하시오.(1. 전사 , 2. 마법사 , 3. 도적 , 4. 불러오기) :" << endl;
 	cin >> iInput;
 	switch (iInput)
 	{
 	case WARRIOR:
 		tPlayer = Choose_Char(iInput);
-		//tItem = Item_Start();
-
+		tItem = Item_Start();
 		break;
 	case WIZARD:
 		tPlayer = Choose_Char(iInput);
 		tItem = Item_Start();
-
 		break;
 	case THIEF:
 		tPlayer = Choose_Char(iInput);
 		tItem = Item_Start();
-
 		break;
 	case LOAD: 
+		errReadJob = fopen_s(&pFileJob, "./Data/Info/Job.txt", "rb");
+		errReadItem = fopen_s(&pFileItem, "./Data/Info/Item.txt", "rb");
 		if (0 == errReadJob && 0 == errReadItem)
 		{
 			tPlayer = new INFO;
 			tItem = new ITEM;
 			fread(tPlayer, sizeof(INFO), 1, pFileJob);
-			fclose(pFileJob);
 			fread(tItem, sizeof(ITEM), 1, pFileItem);
-			/*while (0 == feof(pFile))
-			{
-
-			}*/
-			
+			fclose(pFileJob);
 			fclose(pFileItem);
 		}
 		else
@@ -173,15 +167,13 @@ void TextRpg_Home(INFO* _pPlayer, ITEM* _pItem)
 	
 	FILE* pFileJob = NULL;
 	FILE* pFileItem = NULL;
-	
-	errno_t errWriteJob = fopen_s(&pFileJob, "Data/Job.txt", "wb");
-	errno_t errWriteItem = fopen_s(&pFileItem, "Data/Item.txt", "wb");
+	errno_t errWriteJob = 0;
+	errno_t errWriteItem = 0; 
 	char cTemp[32] = {};
-
 	while (true)
 	{
 		Print_Char(_pPlayer);
-		cout << "1. 사냥터    2. 상점    3. 상태창    4. 게임저장    5. 종료" << endl;
+		cout << "1. 사냥터    2. 상점    3. 상태창    4. 게임저장 후 종료    5. 종료" << endl;
 		cin >> iInput;
 		switch (iInput)
 		{
@@ -195,23 +187,24 @@ void TextRpg_Home(INFO* _pPlayer, ITEM* _pItem)
 			Check_Stat(_pItem);
 			break;
 		case 4:
+			errWriteJob = fopen_s(&pFileJob, "./Data/Info/Job.txt", "wb");
+			errWriteItem = fopen_s(&pFileItem, "./Data/Info/Item.txt", "wb");
 			if (0 == errWriteJob && 0 == errWriteItem)
 			{
-				cout << "저장됨" << endl;
-
+				cout << "job저장됨" << endl;
 				fwrite(_pPlayer, sizeof(INFO), 1, pFileJob);
-				fclose(pFileJob);
 				fwrite(_pItem, sizeof(ITEM), 1, pFileItem);
+				fclose(pFileJob);
 				fclose(pFileItem);
 			}
 			else
 			{
-				cout << "게임저장에러" << endl;
+				cout << "job게임저장에러" << endl;
 			}
+			cout << "게임저장후 종료" << endl;
 			system("pause");
-			break;
+			return;
 		case 5:
-			
 			return;
 		default:
 			cout << "잘못 입력했습니다." << endl;
@@ -249,7 +242,7 @@ void Check_Stat(ITEM* _pItem)
 void TextRpg_Hunt(INFO* _pPlayer, ITEM* _pItem)
 {
 	int iInput(0);
-	INFO* tMonster = new INFO;
+	INFO* tMonster = nullptr;
 
 	while (true)
 	{
