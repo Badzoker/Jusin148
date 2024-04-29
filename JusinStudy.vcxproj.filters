@@ -78,6 +78,9 @@
     <ClCompile Include="TextRpg.cpp">
       <Filter>소스 파일\Class</Filter>
     </ClCompile>
+    <ClCompile Include="240429.cpp">
+      <Filter>소스 파일\Class</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="240421Function.h">
