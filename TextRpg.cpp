@@ -18,10 +18,14 @@ using namespace std;
 typedef struct tInfo // 아마 소지금 및 보상도 계획해야할듯
 {
 	char szName[32];
-	int iHealth;
-	int iMana;
+	int iCurrentHp;
+	int iMaxHp;
+	int iCurrentMana;
+	int iMaxMana;
 	int iAttack;
-	
+	int iLevel;
+	int iExp;
+	int iMaxExp;
 }INFO;
 typedef struct tItem
 {
@@ -48,11 +52,9 @@ enum EQUIP
 
 #pragma region 함수선언부
 
-
 void TextRpg_Menu();
 INFO* Choose_Char(int _iInput);
 ITEM* Item_Start();
-
 void Print_Char(INFO* _pPlayer);
 void TextRpg_Home(INFO* _pPlayer, ITEM* _pItem);
 void TextRpg_Hunt(INFO* _pPlayer, ITEM* _pItem);
@@ -61,11 +63,13 @@ void TextRpg_Market(INFO* _pPlayer, ITEM* _pItem);
 void TextRpg_Market_Equip(INFO* _pPlayer, ITEM* _pItem);
 void TextRpg_Market_Consumable(INFO* _pPlayer, ITEM* _pItem);
 void TextRpg_Fight(INFO* _pPlayer, ITEM* _pItem, INFO* _pMonster);
-INFO* Create_Object(const char* _pName, int _iHealth, int _iMana, int _iAttack);
+INFO* Create_Object(const char* _pName, int _iCurrentHp, int _iCurrentMana, int _iAttack);
 void Print_Monster(INFO* _monster);
 void TextRpg_Skill(INFO* _pPlayer, ITEM* _pItem, INFO* _pMonster);
 void TextRpg_Tool(INFO* _pPlayer, ITEM* _pItem);
 void Print_Item(ITEM* _pItem);
+void LevelUp(INFO* _pPlayer);
+
 #pragma endregion
 
 int main()
@@ -145,12 +149,13 @@ INFO* Choose_Char(int _iInput)
 	{
 	case 1:
 		tTemp = Create_Object("전사", 100, 20, 10);
+		
 		break;
 	case 2:
-		tTemp = Create_Object("마법사", 50, 100,20);
+		tTemp = Create_Object("마법사", 50, 100, 20);
 		break;
 	case 3:
-		tTemp = Create_Object("도적", 75, 50,15);
+		tTemp = Create_Object("도적", 75, 50, 15);
 		break;
 	}
 	return tTemp;
@@ -158,7 +163,11 @@ INFO* Choose_Char(int _iInput)
 void Print_Char(INFO* _pPlayer)
 {
 	system("cls");
-	cout << "================\n직업 : " << _pPlayer->szName << "\n체력 : " << _pPlayer->iHealth << "\n마나 : " << _pPlayer->iMana << "\t  공격력 : " << _pPlayer->iAttack << endl;
+	cout << "================\n직업 : " << _pPlayer->szName << endl;
+	cout << "체력 : " << _pPlayer->iCurrentHp << " / " << _pPlayer->iMaxHp << endl;
+	cout << "마나 : " << _pPlayer->iCurrentMana << " / " << _pPlayer->iMaxMana << "\t  공격력 : " << _pPlayer->iAttack << endl;
+	cout << "경험치 : " << _pPlayer->iExp << " / " << _pPlayer->iMaxExp << endl;
+	cout << "레벨 : " << _pPlayer->iLevel << endl;
 }
 
 void TextRpg_Home(INFO* _pPlayer, ITEM* _pItem)
@@ -253,14 +262,17 @@ void TextRpg_Hunt(INFO* _pPlayer, ITEM* _pItem)
 		{
 		case 1:
 			tMonster = Create_Object("초급", 30 * iInput, 10 * iInput,3 * iInput);
+			tMonster->iExp = tMonster->iMaxHp;
 			TextRpg_Fight(_pPlayer, _pItem, tMonster);
 			break;
 		case 2:
 			tMonster = Create_Object("중급", 30 * iInput, 10 * iInput, 3 * iInput);
+			tMonster->iExp = tMonster->iMaxHp;
 			TextRpg_Fight(_pPlayer, _pItem, tMonster);
 			break;
 		case 3:
 			tMonster = Create_Object("고급", 30 * iInput, 10 * iInput, 3 * iInput);
+			tMonster->iExp = tMonster->iMaxHp;
 			TextRpg_Fight(_pPlayer, _pItem, tMonster);
 			break;
 		case 4:
@@ -344,7 +356,8 @@ void TextRpg_Market_Equip(INFO* _pPlayer, ITEM* _pItem)
 			{
 				cout << "보조장비 구매완료!" << endl;
 				_pItem->bSub_Item = true;
-				_pPlayer->iHealth += 50;//그냥 구현만 함
+				_pPlayer->iMaxHp += 50;//그냥 구현만 함
+				_pPlayer->iCurrentHp += 50;
 			}
 			else
 			{
@@ -393,7 +406,7 @@ void TextRpg_Market_Consumable(INFO* _pPlayer, ITEM* _pItem)
 }
 void TextRpg_Fight(INFO* _pPlayer, ITEM* _pItem, INFO* _pMonster)
 {
-	int iInput(0);
+	int iInput(0), iTemp(0);
 	while (true)
 	{
 		Print_Char(_pPlayer);
@@ -403,8 +416,8 @@ void TextRpg_Fight(INFO* _pPlayer, ITEM* _pItem, INFO* _pMonster)
 		switch (iInput)
 		{
 		case 1:
-			_pPlayer->iHealth -= _pMonster->iAttack;
-			_pMonster->iHealth -= _pPlayer->iAttack;
+			_pPlayer->iCurrentHp -= _pMonster->iAttack;
+			_pMonster->iCurrentHp -= _pPlayer->iAttack;
 			break;
 		case 2:
 			TextRpg_Skill(_pPlayer, _pItem, _pMonster);
@@ -421,11 +434,12 @@ void TextRpg_Fight(INFO* _pPlayer, ITEM* _pItem, INFO* _pMonster)
 		default:
 			break;
 		}
-		if (0 >= _pPlayer->iHealth)
+		if (0 >= _pPlayer->iCurrentHp)
 		{
 			system("cls");
 			cout << "================\n직업 : " << _pPlayer->szName << "\n체력 : " << 0 << "\t  공격력 : " << _pPlayer->iAttack << endl;
-			_pPlayer->iHealth = 100;
+			_pPlayer->iCurrentHp = _pPlayer->iMaxHp;
+			
 			Print_Monster(_pMonster);
 			cout << "죽음" << endl;
 			system("pause");
@@ -435,12 +449,19 @@ void TextRpg_Fight(INFO* _pPlayer, ITEM* _pItem, INFO* _pMonster)
 			system("pause");
 			return;
 		}
-		else if (0 >= _pMonster->iHealth)
+		else if (0 >= _pMonster->iCurrentHp)
 		{
 			system("cls");
 			Print_Char(_pPlayer);
 			cout << "\n+++++++++++++\n괴물 : " << _pMonster->szName << "\n체력 : " << 0 << "\t  공격력 : " << _pMonster->iAttack << endl;
+			_pPlayer->iExp += _pMonster->iExp;
 			cout << "승리" << endl;
+			if (_pPlayer->iExp >= _pPlayer->iMaxExp)
+			{
+				iTemp = (_pPlayer->iExp) - (_pPlayer->iMaxExp);
+				LevelUp(_pPlayer);
+				_pPlayer->iExp = iTemp;
+			}
 			system("pause");
 			delete _pMonster;
 			_pMonster = nullptr;
@@ -450,18 +471,23 @@ void TextRpg_Fight(INFO* _pPlayer, ITEM* _pItem, INFO* _pMonster)
 		}
 	}
 }
-INFO* Create_Object(const char* _pName, int _iHealth, int _iMana, int _iAttack)
+INFO* Create_Object(const char* _pName, int _iMaxHp, int _iMaxMana, int _iAttack)
 {
 	INFO* pTemp = new INFO;
 	strcpy_s(pTemp->szName, sizeof(INFO), _pName);
-	pTemp->iHealth = _iHealth;
-	pTemp->iMana = _iMana;
+	pTemp->iMaxHp = _iMaxHp;
+	pTemp->iCurrentHp = pTemp->iMaxHp;
+	pTemp->iMaxMana = _iMaxMana;
+	pTemp->iCurrentMana = _iMaxMana;
 	pTemp->iAttack = _iAttack;
+	pTemp->iLevel = 1;
+	pTemp->iMaxExp = 100;
+	pTemp->iExp = 0;
 	return pTemp;
 }
 void Print_Monster(INFO* _pMonster)
 {
-	cout << "\n+++++++++++++\n괴물 : " << _pMonster->szName << "\n체력 : " << _pMonster->iHealth << "\n마나 : " << _pMonster->iMana << "\t  공격력 : " << _pMonster->iAttack << endl;
+	cout << "\n+++++++++++++\n괴물 : " << _pMonster->szName << "\n체력 : " << _pMonster->iCurrentHp << "\n마나 : " << _pMonster->iCurrentMana << "\t  공격력 : " << _pMonster->iAttack << endl;
 }
 void Print_Item(ITEM* _pItem)
 {
@@ -492,24 +518,24 @@ void TextRpg_Skill(INFO* _pPlayer, ITEM* _pItem, INFO* _pMonster)
 		switch (iInput)
 		{
 		case 1:
-			if (5 <= _pPlayer->iMana)
+			if (5 <= _pPlayer->iCurrentMana)
 			{
 				cout << "기본 스킬 사용!" << endl;
-				_pPlayer->iMana -= 5;
-				_pPlayer->iHealth -= _pMonster->iAttack;
-				_pMonster->iHealth -= (_pPlayer->iAttack + 5);
+				_pPlayer->iCurrentMana -= 5;
+				_pPlayer->iCurrentHp -= _pMonster->iAttack;
+				_pMonster->iCurrentHp -= (_pPlayer->iAttack + 5);
 				system("pause");
 				return;
 			}
 			cout << "마나 부족!" << endl;
 			break;
 		case 2:
-			if (20 <= _pPlayer->iMana)
+			if (20 <= _pPlayer->iCurrentMana)
 			{
 				cout << "기본 스킬 사용!" << endl;
-				_pPlayer->iMana -= 20;
-				_pPlayer->iHealth -= _pMonster->iAttack;
-				_pMonster->iHealth -= (_pPlayer->iAttack + 20);
+				_pPlayer->iCurrentMana -= 20;
+				_pPlayer->iCurrentHp -= _pMonster->iAttack;
+				_pMonster->iCurrentHp -= (_pPlayer->iAttack + 20);
 				system("pause");
 				return;
 			}
@@ -540,59 +566,63 @@ void TextRpg_Tool(INFO* _pPlayer, ITEM* _pItem)
 			{
 				cout << "포션 사용!" << endl;
 				_pItem->iPotion -= 1;
-				_pPlayer->iHealth += 15;
-				if (!strcmp(_pPlayer->szName, "전사")) // 이거 구분하는 법 좀더 쉽게 할 수 있도록 생각해보기
+				_pPlayer->iCurrentHp += 15;
+				if (_pPlayer->iMaxHp <= _pPlayer->iCurrentHp)
 				{
-					if (_pItem->bSub_Item)
-					{
-						if (150 < _pPlayer->iHealth)
-						{
-							_pPlayer->iHealth = 150;
-						}
-					}
-					else
-					{
-						if (100 < _pPlayer->iHealth)
-						{
-							_pPlayer->iHealth = 100;
-						}
-					}
+					_pPlayer->iCurrentHp = _pPlayer->iMaxHp;
 				}
-				else if (!strcmp(_pPlayer->szName, "마법사"))
-				{
-					if (_pItem->bSub_Item)
-					{
-						if (100 < _pPlayer->iHealth)
-						{
-							_pPlayer->iHealth = 100;
-						}
-					}
-					else
-					{
-						if (50 < _pPlayer->iHealth)
-						{
-							_pPlayer->iHealth = 50;
-						}
-					}
-				}
-				else//(!strcmp(_pPlayer->szName, "도적"))
-				{
-					if (_pItem->bSub_Item)
-					{
-						if (125 < _pPlayer->iHealth)
-						{
-							_pPlayer->iHealth = 125;
-						}
-					}
-					else
-					{
-						if (75 < _pPlayer->iHealth)
-						{
-							_pPlayer->iHealth = 75;
-						}
-					}
-					
-				}
+				//if (!strcmp(_pPlayer->szName, "전사")) // 이거 구분하는 법 좀더 쉽게 할 수 있도록 생각해보기
+				//{
+				//	if (_pItem->bSub_Item)
+				//	{
+				//		if (150 < _pPlayer->iCurrentHp)
+				//		{
+				//			_pPlayer->iCurrentHp = 150;
+				//		}
+				//	}
+				//	else
+				//	{
+				//		if (_pPlayer->iMaxHp <= _pPlayer->iCurrentHp)
+				//		{
+				//			_pPlayer->iCurrentHp = _pPlayer->iMaxHp;
+				//		}
+				//	}
+				//}
+				//else if (!strcmp(_pPlayer->szName, "마법사"))
+				//{
+				//	if (_pItem->bSub_Item)
+				//	{
+				//		if (100 < _pPlayer->iCurrentHp)
+				//		{
+				//			_pPlayer->iCurrentHp = 100;
+				//		}
+				//	}
+				//	else
+				//	{
+				//		if (50 < _pPlayer->iCurrentHp)
+				//		{
+				//			_pPlayer->iCurrentHp = 50;
+				//		}
+				//	}
+				//}
+				//else//(!strcmp(_pPlayer->szName, "도적"))
+				//{
+				//	if (_pItem->bSub_Item)
+				//	{
+				//		if (125 < _pPlayer->iCurrentHp)
+				//		{
+				//			_pPlayer->iCurrentHp = 125;
+				//		}
+				//	}
+				//	else
+				//	{
+				//		if (75 < _pPlayer->iCurrentHp)
+				//		{
+				//			_pPlayer->iCurrentHp = 75;
+				//		}
+				//	}
+				//	
+				//}
 				system("pause");
 				return;
 			}
@@ -603,28 +633,32 @@ void TextRpg_Tool(INFO* _pPlayer, ITEM* _pItem)
 			{
 				cout << "마나포션 사용!" << endl;
 				_pItem->iManaPotion -= 1;
-				_pPlayer->iMana += 15;
-				if (!strcmp(_pPlayer->szName, "전사")) // 이거 구분하는 법 좀더 쉽게 할 수 있도록 생각해보기
+				_pPlayer->iCurrentMana += 15;
+				if (_pPlayer->iMaxMana <= _pPlayer->iCurrentMana)
 				{
-					if (20 < _pPlayer->iMana)
-					{
-						_pPlayer->iMana = 20;
-					}
+					_pPlayer->iCurrentMana = _pPlayer->iMaxMana;
 				}
-				else if (!strcmp(_pPlayer->szName, "마법사"))
-				{
-					if (100 < _pPlayer->iMana)
-					{
-						_pPlayer->iMana = 100;
-					}
-				}
-				else//(!strcmp(_pPlayer->szName, "도적"))
-				{
-					if (50 < _pPlayer->iMana)
-					{
-						_pPlayer->iMana = 50;
-					}
-				}
+				//if (!strcmp(_pPlayer->szName, "전사")) // 이거 구분하는 법 좀더 쉽게 할 수 있도록 생각해보기
+				//{
+				//	if (_pPlayer->iMaxMana <= _pPlayer->iCurrentMana)
+				//	{
+				//		_pPlayer->iCurrentMana = _pPlayer->iMaxMana;
+				//	}
+				//}
+				//else if (!strcmp(_pPlayer->szName, "마법사"))
+				//{
+				//	if (100 < _pPlayer->iMana)
+				//	{
+				//		_pPlayer->iMana = 100;
+				//	}
+				//}
+				//else//(!strcmp(_pPlayer->szName, "도적"))
+				//{
+				//	if (50 < _pPlayer->iMana)
+				//	{
+				//		_pPlayer->iMana = 50;
+				//	}
+				//}
 				system("pause");
 				return;
 			}
@@ -638,6 +672,19 @@ void TextRpg_Tool(INFO* _pPlayer, ITEM* _pItem)
 		}
 		system("pause");
 	}
+}
+
+void LevelUp(INFO* _pPlayer)
+{
+	cout << "레벨 업!" << endl;
+	_pPlayer->iLevel += 1;
+	_pPlayer->iAttack += 10;
+	_pPlayer->iMaxExp += 50;
+	_pPlayer->iExp = 0;
+	_pPlayer->iMaxHp += 30;
+	_pPlayer->iMaxMana += 20;
+	_pPlayer->iCurrentHp = _pPlayer->iMaxHp;
+	_pPlayer->iCurrentMana = _pPlayer->iMaxMana;
 }
 
 #pragma endregion
