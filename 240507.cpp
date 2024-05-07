@@ -1,4 +1,4 @@
-#include "0507MainGame.h"
+#include "HomeWork.h"
 #ifdef _DEBUG
 
 #define _CRTDBG_MAP_ALLOC
@@ -15,7 +15,7 @@
 int main()
 {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	CMainGame cGame;
+	HomeWork cGame;
 	cGame.Menu();
 	return 0;
 }

@@ -31,14 +31,8 @@
     <Filter Include="소스 파일\2405\Class">
       <UniqueIdentifier>{f6d5de37-3f22-4969-bc57-62dac6e2a127}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\2405\Header">
-      <UniqueIdentifier>{9051e3dc-2254-4981-b5b1-2c93ec332ad4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\Personal\Class">
       <UniqueIdentifier>{bebeda1b-caab-418b-9d89-29d58a8117bf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\Personal\Header">
-      <UniqueIdentifier>{a11dc8bd-eaa0-40d1-b5e9-e08dd0d8e00b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -117,18 +111,30 @@
     <ClCompile Include="Test.cpp">
       <Filter>소스 파일\2405\Class</Filter>
     </ClCompile>
+    <ClCompile Include="HomeWork.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="HomeStudent.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="240421Function.h">
-      <Filter>소스 파일\Personal\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="BackUp.h">
-      <Filter>소스 파일\Personal\Header</Filter>
-    </ClInclude>
     <ClInclude Include="0507MainGame.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="0507Student.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="HomeWork.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="240421Function.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="BackUp.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="HomeStudent.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

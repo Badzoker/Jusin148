@@ -1,9 +1,8 @@
-#include "0507Student.h"
-#include "0507MainGame.h"
+#include "HomeWork.h"
 
 int main()
 {
-	CMainGame lloo;
+	HomeWork lloo;
 	lloo.Menu();
 	return 0;
 }

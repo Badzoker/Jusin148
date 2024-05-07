@@ -1,10 +1,37 @@
-#include "0507Student.h"
-#include "0507MainGame.h"
+#include "HomeWork.h"
+#include "HomeStudent.h"
 #include <iostream>
 
 
-void CMainGame::Copy_Array(CStudent _cStu[], CStudent _cMax[])// 기존과 신규
+
+void HomeWork::Copy_Array(HomeStudent _cStu[], HomeStudent _cMax[], HomeStudent _cDst[])// 신규와 기존
 {
+	HomeStudent* cTemp = new HomeStudent[m_iMaxCount - m_iCurrentCount];
+	for (int i = 0; i < m_iMaxCount - m_iCurrentCount; i++)
+	{
+		cTemp[i].Set_Name(_cMax[i].Get_Name());
+		cTemp[i].Set_Kor(_cMax[i].Get_Kor());
+		cTemp[i].Set_Eng(_cMax[i].Get_Eng());
+		cTemp[i].Set_Math(_cMax[i].Get_Math());
+		cTemp[i].Set_Total(_cMax[i].Get_Total());
+	}
+	delete[] _cMax;
+	_cMax = nullptr;
+	_cMax = new HomeStudent[m_iMaxCount];
+	for (int i = 0; i < m_iMaxCount - m_iCurrentCount; i++)
+	{
+		_cMax[i].Set_Name(cTemp[i].Get_Name());
+		_cMax[i].Set_Kor(cTemp[i].Get_Kor());
+		_cMax[i].Set_Eng(cTemp[i].Get_Eng());
+		_cMax[i].Set_Math(cTemp[i].Get_Math());
+		_cMax[i].Set_Total(cTemp[i].Get_Total());
+	}
+	if (nullptr != cTemp)
+	{
+		delete[] cTemp;
+		cTemp = nullptr;
+	}
+
 	for (int i = 0; i < m_iCurrentCount; i++)
 	{
 		_cMax[m_iMaxCount - m_iCurrentCount + i].Set_Name(_cStu[i].Get_Name());
@@ -14,9 +41,8 @@ void CMainGame::Copy_Array(CStudent _cStu[], CStudent _cMax[])// 기존과 신규
 		_cMax[m_iMaxCount - m_iCurrentCount + i].Set_Total(_cStu[i].Get_Total());
 	}
 	//pStu = cStu_Max;
-
 }
-void CMainGame::Set_StudentInfo(CStudent _cStu[], CStudent _cMax[])// 입력
+void HomeWork::Set_StudentInfo(HomeStudent _cStu[], HomeStudent _cMax[], HomeStudent _cDst[])// 입력
 {
 	char szTemp[32] = {};
 	int iInput(0);
@@ -41,29 +67,28 @@ void CMainGame::Set_StudentInfo(CStudent _cStu[], CStudent _cMax[])// 입력
 		_cStu[i].Set_Total(_cStu[i].Cal_Total());
 	}
 	std::cout << "입력완료" << std::endl;
-	Copy_Array(_cStu, _cMax);
+	Copy_Array(_cStu, _cMax, _cDst);
 	system("pause");
 }
 
-void CMainGame::Set_Array(CStudent _cMax[])// 동적할당 부분
+void HomeWork::Set_Array(HomeStudent _cMax[], HomeStudent _cDst[])// 동적할당 부분
 {
-	CStudent* cStu = new CStudent[m_iCurrentCount];
+	HomeStudent* cStu = new HomeStudent[m_iCurrentCount];
 
-	Set_StudentInfo(cStu, _cMax);
+	Set_StudentInfo(cStu, _cMax, _cDst);
 	delete[] cStu;
 	cStu = nullptr;
 }
 
-void CMainGame::Set_Count(CStudent _cMax[]) // 숫자 입력 및 증가
+void HomeWork::Set_Count() // 숫자 입력 및 증가
 {
 	int iInput(0);
 	std::cout << "학생 수를 입력하시오." << std::endl;
 	std::cin >> iInput;
 	m_iCurrentCount = iInput;
 	m_iMaxCount += m_iCurrentCount;
-	Set_Array(_cMax);
 }
-void CMainGame::Printing_Grade(CStudent _cMax[])// 출력
+void HomeWork::Printing_Grade(HomeStudent _cMax[])// 출력
 {
 	system("cls");
 	std::cout << "학생이름\t국어점수\t영어점수\t수학점수" << std::endl;
@@ -80,7 +105,7 @@ void CMainGame::Printing_Grade(CStudent _cMax[])// 출력
 }
 
 
-void CMainGame::Free()
+void HomeWork::Free()
 {
 	/*if (m_CArray != nullptr)
 	{
@@ -89,10 +114,11 @@ void CMainGame::Free()
 	}*/
 }
 
-void CMainGame::Menu()
+void HomeWork::Menu()
 {
-	CStudent* cArray = new CStudent[50];
 	int iInput(0);
+	HomeStudent* cArray = new HomeStudent[5]; //max
+	HomeStudent* cDst = new HomeStudent[5]; //dst
 	while (true)
 	{
 		system("cls");
@@ -101,17 +127,23 @@ void CMainGame::Menu()
 		switch (iInput)
 		{
 		case 1:
-			Set_Count(cArray);
+			Set_Count();
+			//cArray = new HomeStudent[m_iMaxCount];
+			Set_Array(cArray, cDst);
 			break;
 		case 2:
 			Printing_Grade(cArray);
 			break;
 		case 3:
-			delete[] cArray;
-			cArray = nullptr;
+			if (cArray != nullptr)
+			{
+				delete[] cArray;
+				cArray = nullptr;
+			}
 			return;
 		default:
 			break;
 		}
 	}
+	
 }
