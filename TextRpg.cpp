@@ -556,58 +556,6 @@ void TextRpg_Tool(INFO* _pPlayer, ITEM* _pItem)
 				{
 					_pPlayer->iCurrentHp = _pPlayer->iMaxHp;
 				}
-				//if (!strcmp(_pPlayer->szName, "전사")) // 이거 구분하는 법 좀더 쉽게 할 수 있도록 생각해보기
-				//{
-				//	if (_pItem->bSub_Item)
-				//	{
-				//		if (150 < _pPlayer->iCurrentHp)
-				//		{
-				//			_pPlayer->iCurrentHp = 150;
-				//		}
-				//	}
-				//	else
-				//	{
-				//		if (_pPlayer->iMaxHp <= _pPlayer->iCurrentHp)
-				//		{
-				//			_pPlayer->iCurrentHp = _pPlayer->iMaxHp;
-				//		}
-				//	}
-				//}
-				//else if (!strcmp(_pPlayer->szName, "마법사"))
-				//{
-				//	if (_pItem->bSub_Item)
-				//	{
-				//		if (100 < _pPlayer->iCurrentHp)
-				//		{
-				//			_pPlayer->iCurrentHp = 100;
-				//		}
-				//	}
-				//	else
-				//	{
-				//		if (50 < _pPlayer->iCurrentHp)
-				//		{
-				//			_pPlayer->iCurrentHp = 50;
-				//		}
-				//	}
-				//}
-				//else//(!strcmp(_pPlayer->szName, "도적"))
-				//{
-				//	if (_pItem->bSub_Item)
-				//	{
-				//		if (125 < _pPlayer->iCurrentHp)
-				//		{
-				//			_pPlayer->iCurrentHp = 125;
-				//		}
-				//	}
-				//	else
-				//	{
-				//		if (75 < _pPlayer->iCurrentHp)
-				//		{
-				//			_pPlayer->iCurrentHp = 75;
-				//		}
-				//	}
-				//	
-				//}
 				system("pause");
 				return;
 			}
@@ -623,27 +571,6 @@ void TextRpg_Tool(INFO* _pPlayer, ITEM* _pItem)
 				{
 					_pPlayer->iCurrentMana = _pPlayer->iMaxMana;
 				}
-				//if (!strcmp(_pPlayer->szName, "전사")) // 이거 구분하는 법 좀더 쉽게 할 수 있도록 생각해보기
-				//{
-				//	if (_pPlayer->iMaxMana <= _pPlayer->iCurrentMana)
-				//	{
-				//		_pPlayer->iCurrentMana = _pPlayer->iMaxMana;
-				//	}
-				//}
-				//else if (!strcmp(_pPlayer->szName, "마법사"))
-				//{
-				//	if (100 < _pPlayer->iMana)
-				//	{
-				//		_pPlayer->iMana = 100;
-				//	}
-				//}
-				//else//(!strcmp(_pPlayer->szName, "도적"))
-				//{
-				//	if (50 < _pPlayer->iMana)
-				//	{
-				//		_pPlayer->iMana = 50;
-				//	}
-				//}
 				system("pause");
 				return;
 			}

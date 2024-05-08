@@ -2,8 +2,8 @@
 
 CMainGame::CMainGame()
 {
-	pMonster = nullptr;
-	pPlayer = nullptr;
+	m_pMonster = nullptr;
+	m_pPlayer = nullptr;
 }
 
 CMainGame::~CMainGame()
@@ -13,8 +13,8 @@ CMainGame::~CMainGame()
 
 void CMainGame::Initialize()
 {
-	pMonster = new CMonster;
-	pPlayer = new CPlayer;
+	m_pMonster = new CMonster;
+	m_pPlayer = new CPlayer;
 }
 
 void CMainGame::Update()
@@ -24,8 +24,8 @@ void CMainGame::Update()
 
 void CMainGame::Release()
 {
-	SAFE_DELETE(pMonster);
-	SAFE_DELETE(pPlayer);
+	SAFE_DELETE(m_pMonster);
+	SAFE_DELETE(m_pPlayer);
 }
 
 void CMainGame::Save()
@@ -39,8 +39,8 @@ void CMainGame::Save()
 	if (0 == errWriteJob && 0 == errWriteItem)
 	{
 		cout << "job저장됨" << endl;
-		fwrite(pPlayer->Get_Info(), sizeof(INFO), 1, pFileJob);
-		fwrite(pPlayer->Get_Item(), sizeof(ITEM), 1, pFileItem);
+		fwrite(m_pPlayer->Get_Info(), sizeof(INFO), 1, pFileJob);
+		fwrite(m_pPlayer->Get_Item(), sizeof(ITEM), 1, pFileItem);
 		fclose(pFileJob);
 		fclose(pFileItem);
 	}
@@ -65,11 +65,11 @@ void CMainGame::Menu()
 			system("cls");
 			cout << "직업을 선택하시오.(1. 전사 , 2. 마법사 , 3. 도적) :" << endl;
 			cin >> iInput;
-			pPlayer->Initialize(iInput);
+			m_pPlayer->Initialize(iInput);
 			Home();
 			break;
 		case 2:
-			pPlayer->Load();
+			m_pPlayer->Load();
 			Home();
 			break;
 		case 3:
@@ -87,7 +87,7 @@ void CMainGame::Home()
 	while (true)
 	{
 		system("cls");
-		pPlayer->Update();
+		m_pPlayer->Update();
 		cout << "1. 사냥터    2. 상점    3. 상태창    4. 게임저장 후 종료    5. 메뉴" << endl;
 		cin >> iInput;
 		switch (iInput)
@@ -99,7 +99,7 @@ void CMainGame::Home()
 			Shop();
 			break;
 		case 3:
-			pPlayer->Check_Equip();
+			m_pPlayer->Check_Equip();
 			system("pause");
 			break;
 		case 4:
@@ -120,7 +120,7 @@ void CMainGame::Shop()
 	while (true)
 	{
 		system("cls");
-		pPlayer->Check_Equip();
+		m_pPlayer->Check_Equip();
 		cout << "1. 장비\t2. 도구\t3. 돌아가기" << endl;
 		cin >> iInput;
 		switch (iInput)
@@ -146,16 +146,16 @@ void CMainGame::Shop_Equip()
 	while (true)
 	{
 		system("cls");
-		pPlayer->Check_Equip();
-		if (!strcmp(pPlayer->Get_Info()->szName, "전사"))
+		m_pPlayer->Check_Equip();
+		if (!strcmp(m_pPlayer->Get_Info()->szName, "전사"))
 		{
 			cout << "1. 장검\t2. 방패\t3. 돌아가기" << endl;
 		}
-		else if (!strcmp(pPlayer->Get_Info()->szName, "마법사"))
+		else if (!strcmp(m_pPlayer->Get_Info()->szName, "마법사"))
 		{
 			cout << "1. 지팡이\t2. 마법책(마나증가)\t3. 돌아가기" << endl;
 		}
-		else//(!strcmp(pPlayer->Get_Info()->szName, "도적"))
+		else//(!strcmp(m_pPlayer->Get_Info()->szName, "도적"))
 		{
 			cout << "1. 뾰족한 단검\t2. 작은 단검\t3. 돌아가기" << endl;
 		}
@@ -163,11 +163,11 @@ void CMainGame::Shop_Equip()
 		switch (iInput)
 		{
 		case 1:
-			if (!pPlayer->Get_Item()->bMain_Item)
+			if (!m_pPlayer->Get_Item()->bMain_Item)
 			{
 				cout << "주장비 구매완료!" << endl;
-				pPlayer->Get_Item()->bMain_Item = true;
-				pPlayer->Get_Info()->iAttack += 10; //그냥 구현만 함
+				m_pPlayer->Get_Item()->bMain_Item = true;
+				m_pPlayer->Get_Info()->iAttack += 10; //그냥 구현만 함
 			}
 			else
 			{
@@ -176,12 +176,12 @@ void CMainGame::Shop_Equip()
 			system("pause");
 			break;
 		case 2:
-			if (!pPlayer->Get_Item()->bSub_Item)
+			if (!m_pPlayer->Get_Item()->bSub_Item)
 			{
 				cout << "보조장비 구매완료!" << endl;
-				pPlayer->Get_Item()->bSub_Item = true;
-				pPlayer->Get_Info()->iMaxHp += 50;//그냥 구현만 함
-				pPlayer->Get_Info()->iCurrentHp += 50;
+				m_pPlayer->Get_Item()->bSub_Item = true;
+				m_pPlayer->Get_Info()->iMaxHp += 50;//그냥 구현만 함
+				m_pPlayer->Get_Info()->iCurrentHp += 50;
 			}
 			else
 			{
@@ -203,21 +203,21 @@ void CMainGame::Shop_Consumable()
 	while (true)
 	{
 		system("cls");
-		pPlayer->Check_Equip();
+		m_pPlayer->Check_Equip();
 		cout << "1. 체력포션\t2. 마나포션\t3. 돌아가기" << endl;
 		cin >> iInput;
 		switch (iInput)
 		{
 		case 1:
-			pPlayer->Get_Item()->iPotion += 1;
+			m_pPlayer->Get_Item()->iPotion += 1;
 			cout << "체력포션 구매완료!" << endl;
-			cout << "현재 포션수 : " << pPlayer->Get_Item()->iPotion << " 개" << endl;
+			cout << "현재 포션수 : " << m_pPlayer->Get_Item()->iPotion << " 개" << endl;
 			system("pause");
 			break;
 		case 2:
-			pPlayer->Get_Item()->iManaPotion += 1;
+			m_pPlayer->Get_Item()->iManaPotion += 1;
 			cout << "마나포션 구매완료!" << endl;
-			cout << "현재 마나포션수 : " << pPlayer->Get_Item()->iManaPotion << " 개" << endl;
+			cout << "현재 마나포션수 : " << m_pPlayer->Get_Item()->iManaPotion << " 개" << endl;
 			system("pause");
 			break;
 		case 3:
@@ -234,21 +234,21 @@ void CMainGame::Dungeon()
 	int iInput(0);
 	while (true)
 	{
-		pPlayer->Update();
+		m_pPlayer->Update();
 		cout << "1. 초급\t2. 중급\t3. 고급\t4. 돌아가기" << endl;
 		cin >> iInput;
 		switch (iInput)
 		{
 		case 1:
-			pMonster->Initialize(iInput);
+			m_pMonster->Initialize(iInput);
 			Fight();
 			break;
 		case 2:
-			pMonster->Initialize(iInput);
+			m_pMonster->Initialize(iInput);
 			Fight();
 			break;
 		case 3:
-			pMonster->Initialize(iInput);
+			m_pMonster->Initialize(iInput);
 			Fight();
 			break;
 		case 4:
@@ -265,32 +265,49 @@ void CMainGame::Fight()
 	int iInput(0);
 	while (true)
 	{
-		pPlayer->Update();
+		m_pPlayer->Update();
 		cout << "===============  v    s  ===============" << endl;
-		pMonster->Update();
+		m_pMonster->Update();
 		cout << "1. 공격    2. 스킬    3. 도구    4. 도망" << endl;
 		cin >> iInput;
 		switch (iInput)
 		{
 		case 1:
-			pMonster->Damaged(pPlayer->Attack());
-			if (0 >= pMonster->Get_Info()->iCurrentHp)
+			m_pMonster->Damaged(m_pPlayer->Attack());
+			if (0 >= m_pMonster->Get_Info()->iCurrentHp)
 			{
-				pPlayer->Take_Reward(pMonster->Reward());
+				m_pPlayer->Take_Reward(m_pMonster->Reward());
 				return;
 			}
-			pPlayer->Damaged(pMonster->Attack());
-			if (0 >= pPlayer->Get_Info()->iCurrentHp)
+			m_pPlayer->Damaged(m_pMonster->Attack());
+			if (0 >= m_pPlayer->Get_Info()->iCurrentHp)
 			{
-				pPlayer->Respawn();
+				m_pPlayer->Respawn();
 				return;
 			}
 			system("pause");
 			break;
 		case 2:
-			return;
+			if (0 != m_pPlayer->Skill())
+			{
+				m_pMonster->Damaged(m_pPlayer->Skill());
+				if (0 >= m_pMonster->Get_Info()->iCurrentHp)
+				{
+					m_pPlayer->Take_Reward(m_pMonster->Reward());
+					return;
+				}
+				m_pPlayer->Damaged(m_pMonster->Attack());
+				if (0 >= m_pPlayer->Get_Info()->iCurrentHp)
+				{
+					m_pPlayer->Respawn();
+					return;
+				}
+				system("pause");
+			}
+			break;
 		case 3:
-			return;
+			m_pPlayer->Using_Tools();
+			break;
 		case 4:
 			return;
 		default:

@@ -5,8 +5,8 @@
 class CMainGame
 {
 private:
-	CMonster* pMonster;
-	CPlayer* pPlayer;
+	CMonster* m_pMonster;
+	CPlayer* m_pPlayer;
 public:
 	CMainGame();
 	~CMainGame();

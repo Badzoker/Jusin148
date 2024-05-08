@@ -2,7 +2,7 @@
 #include "mynamespace.h"
 CMonster::CMonster()
 {
-	pInfo = nullptr;
+	m_pInfo = nullptr;
 }
 
 CMonster::~CMonster()
@@ -12,41 +12,41 @@ CMonster::~CMonster()
 
 void CMonster::Initialize(int _iChoose)
 {
-	if (!pInfo)
+	if (!m_pInfo)
 	{
-		pInfo = new INFO;
+		m_pInfo = new INFO;
 	}
 	switch (_iChoose)
 	{
 	case 1:
-		pInfo->iAttack = 3 * _iChoose;
-		pInfo->iMaxHp = 25 * _iChoose;
-		pInfo->iCurrentHp = pInfo->iMaxHp;
-		pInfo->iExp = pInfo->iMaxHp;
-		pInfo->iMaxMana = 10 * _iChoose;
-		pInfo->iCurrentMana = pInfo->iMaxMana;
-		pInfo->iMaxExp = 0;
-		strcpy_s(pInfo->szName, sizeof(pInfo->szName), "굼바");
+		m_pInfo->iAttack = 3 * _iChoose;
+		m_pInfo->iMaxHp = 25 * _iChoose;
+		m_pInfo->iCurrentHp = m_pInfo->iMaxHp;
+		m_pInfo->iExp = m_pInfo->iMaxHp;
+		m_pInfo->iMaxMana = 10 * _iChoose;
+		m_pInfo->iCurrentMana = m_pInfo->iMaxMana;
+		m_pInfo->iMaxExp = 0;
+		strcpy_s(m_pInfo->szName, sizeof(m_pInfo->szName), "굼바");
 		break;
 	case 2:
-		pInfo->iAttack = 3 * _iChoose;
-		pInfo->iMaxHp = 25 * _iChoose;
-		pInfo->iCurrentHp = pInfo->iMaxHp;
-		pInfo->iExp = pInfo->iMaxHp;
-		pInfo->iMaxMana = 10 * _iChoose;
-		pInfo->iCurrentMana = pInfo->iMaxMana;
-		pInfo->iMaxExp = 0;
-		strcpy_s(pInfo->szName, sizeof(pInfo->szName), "부끄부끄");
+		m_pInfo->iAttack = 3 * _iChoose;
+		m_pInfo->iMaxHp = 25 * _iChoose;
+		m_pInfo->iCurrentHp = m_pInfo->iMaxHp;
+		m_pInfo->iExp = m_pInfo->iMaxHp;
+		m_pInfo->iMaxMana = 10 * _iChoose;
+		m_pInfo->iCurrentMana = m_pInfo->iMaxMana;
+		m_pInfo->iMaxExp = 0;
+		strcpy_s(m_pInfo->szName, sizeof(m_pInfo->szName), "부끄부끄");
 		break;
 	case 3:
-		pInfo->iAttack = 3 * _iChoose;
-		pInfo->iMaxHp = 25 * _iChoose;
-		pInfo->iCurrentHp = pInfo->iMaxHp;
-		pInfo->iExp = pInfo->iMaxHp;
-		pInfo->iMaxMana = 10 * _iChoose;
-		pInfo->iCurrentMana = pInfo->iMaxMana;
-		pInfo->iMaxExp = 0;
-		strcpy_s(pInfo->szName, sizeof(pInfo->szName), "쿠파");
+		m_pInfo->iAttack = 3 * _iChoose;
+		m_pInfo->iMaxHp = 25 * _iChoose;
+		m_pInfo->iCurrentHp = m_pInfo->iMaxHp;
+		m_pInfo->iExp = m_pInfo->iMaxHp;
+		m_pInfo->iMaxMana = 10 * _iChoose;
+		m_pInfo->iCurrentMana = m_pInfo->iMaxMana;
+		m_pInfo->iMaxExp = 0;
+		strcpy_s(m_pInfo->szName, sizeof(m_pInfo->szName), "쿠파");
 		break;
 	
 	default:
@@ -57,19 +57,19 @@ void CMonster::Initialize(int _iChoose)
 
 void CMonster::Update()
 {
-	cout << "\n+++++++++++++\n괴물 : " << pInfo->szName << "\n체력 : " << pInfo->iCurrentHp << "\n마나 : " << pInfo->iCurrentMana << "\t  공격력 : " << pInfo->iAttack << endl;
+	cout << "\n+++++++++++++\n괴물 : " << m_pInfo->szName << "\n체력 : " << m_pInfo->iCurrentHp << "\n마나 : " << m_pInfo->iCurrentMana << "\t  공격력 : " << m_pInfo->iAttack << endl;
 }
 
 void CMonster::Release()
 {
 	cout << "몬스터 소멸자 호출" << endl;
-	SAFE_DELETE(pInfo);
+	SAFE_DELETE(m_pInfo);
 }
 
 void CMonster::Damaged(int _iDamage)
 {
-	pInfo->iCurrentHp -= _iDamage;
-	if (0 >= pInfo->iCurrentHp)
+	m_pInfo->iCurrentHp -= _iDamage;
+	if (0 >= m_pInfo->iCurrentHp)
 	{
 		cout << "몬스터가 " << _iDamage << " 만큼 피해를 입고 죽었다!\n******  Victory!!  ******" << endl;
 	}
