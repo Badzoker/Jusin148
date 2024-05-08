@@ -16,6 +16,11 @@ public:
 	void Release();
 	int Attack() {return pInfo->iAttack;}
 	void Damaged(int _iDamage);
-	void Level_Up(int _iExp);
+	void Level_Up();
 	void Load();
+	void Check_Equip();
+	void Respawn();
+	void Take_Reward(int _iReward);
+	INFO* Get_Info();
+	ITEM* Get_Item();
 };

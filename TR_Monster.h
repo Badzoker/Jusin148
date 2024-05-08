@@ -3,6 +3,8 @@
 
 class CMonster
 {
+private:
+	INFO* pInfo;
 public:
 	CMonster();
 	~CMonster();
@@ -11,6 +13,6 @@ public:
 	void Release();
 	int Attack() { return pInfo->iAttack; }
 	void Damaged(int _iDamage);
-private:
-	INFO* pInfo;
+	int Reward() { return pInfo->iMaxHp; }
+	INFO* Get_Info() { return pInfo; }
 };

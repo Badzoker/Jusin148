@@ -2,13 +2,8 @@
 
 CPlayer::CPlayer()
 {
-	pInfo->iLevel = 1;
-	pInfo->iExp = 0;
-	pInfo->iMaxExp = 100;
-	pItem->bMain_Item = false;
-	pItem->bSub_Item = false;
-	pItem->iPotion = 0;
-	pItem->iManaPotion = 0;
+	pInfo = nullptr;
+	pItem = nullptr;
 }
 
 CPlayer::~CPlayer()
@@ -28,19 +23,23 @@ void CPlayer::Damaged(int _iDamage)
 	
 }
 
-void CPlayer::Level_Up(int _iExp)
+void CPlayer::Level_Up()
 {
 	pInfo->iMaxExp += 50;
+	pInfo->iExp = 0;
 	pInfo->iLevel += 1;
 	pInfo->iAttack += 10;
 	pInfo->iMaxHp += 10;
 	pInfo->iMaxMana += 10;
 	pInfo->iCurrentHp = pInfo->iMaxHp;
 	pInfo->iCurrentMana = pInfo->iMaxMana;
+	cout << "Level up!" << endl;
 }
 
 void CPlayer::Load()
 {
+	pInfo = new INFO;
+	pItem = new ITEM;
 	FILE* pFileJob = NULL;
 	FILE* pFileItem = NULL;
 	errno_t errReadJob = 0;
@@ -63,32 +62,102 @@ void CPlayer::Load()
 
 }
 
+void CPlayer::Check_Equip()
+{
+	char cTemp[32] = {};
+	if (pItem->bMain_Item)
+		strcpy_s(cTemp, sizeof(cTemp), "착용중");
+	else
+		strcpy_s(cTemp, sizeof(cTemp), "없음");
+	cout << "주장비 : " << cTemp << endl;
+
+	if (pItem->bSub_Item)
+		strcpy_s(cTemp, sizeof(cTemp), "착용중");
+	else
+		strcpy_s(cTemp, sizeof(cTemp), "없음");
+	cout << "보조장비 : " << cTemp << endl;
+
+	cout << "체력포션 : " << pItem->iPotion << " 개" << endl;
+	cout << "마나포션 : " << pItem->iManaPotion << " 개" << endl;
+}
+
+void CPlayer::Respawn()
+{
+	cout << "부활! 체력과 마나가 가득 채워졌다!" << endl;
+	pInfo->iCurrentHp = pInfo->iMaxHp;
+	pInfo->iCurrentMana = pInfo->iMaxMana;
+	system("pause");
+}
+
+void CPlayer::Take_Reward(int _iReward)
+{
+	pInfo->iExp += _iReward;
+	if (pInfo->iMaxExp <= pInfo->iExp)
+	{
+		Level_Up();
+	}
+	system("pause");
+}
+
+INFO* CPlayer::Get_Info()
+{
+	return pInfo;
+}
+
+ITEM* CPlayer::Get_Item()
+{
+	return pItem;
+}
+
 void CPlayer::Initialize(int _iChoose)
 {
+	pInfo = new INFO;
+	pItem = new ITEM;
 	switch (_iChoose)
 	{
 	case 1:
 		pInfo->iAttack = 10;
-		pInfo->iCurrentHp = 10;
-		pInfo->iCurrentMana = 10;
-		pInfo->iMaxHp = 10;
-		pInfo->iMaxMana = 10;
+		pInfo->iMaxHp = 100;
+		pInfo->iCurrentHp = pInfo->iMaxHp;
+		pInfo->iMaxMana = 20;
+		pInfo->iCurrentMana = pInfo->iMaxMana;
+		pInfo->iLevel = 1;
+		pInfo->iExp = 0;
+		pInfo->iMaxExp = 100;
+		pItem->bMain_Item = false;
+		pItem->bSub_Item = false;
+		pItem->iPotion = 0;
+		pItem->iManaPotion = 0;
 		strcpy_s(pInfo->szName, sizeof(pInfo->szName), "전사");
 		break;
 	case 2:
 		pInfo->iAttack = 20;
-		pInfo->iCurrentHp = 20;
-		pInfo->iCurrentMana = 20;
-		pInfo->iMaxHp = 20;
-		pInfo->iMaxMana = 20;
+		pInfo->iMaxHp = 50;
+		pInfo->iCurrentHp = pInfo->iMaxHp;
+		pInfo->iMaxMana = 50;
+		pInfo->iCurrentMana = pInfo->iMaxMana;
+		pInfo->iLevel = 1;
+		pInfo->iExp = 0;
+		pInfo->iMaxExp = 100;
+		pItem->bMain_Item = false;
+		pItem->bSub_Item = false;
+		pItem->iPotion = 0;
+		pItem->iManaPotion = 0;
 		strcpy_s(pInfo->szName, sizeof(pInfo->szName), "마법사");
 		break;
 	case 3:
-		pInfo->iAttack = 30;
-		pInfo->iCurrentHp = 30;
-		pInfo->iCurrentMana = 30;
-		pInfo->iMaxHp = 30;
-		pInfo->iMaxMana = 30;
+		pInfo->iAttack = 15;
+		pInfo->iMaxHp = 75;
+		pInfo->iCurrentHp = pInfo->iMaxHp;
+		pInfo->iMaxMana = 35;
+		pInfo->iCurrentMana = pInfo->iMaxMana;
+		pInfo->iLevel = 1;
+		pInfo->iExp = 0;
+		pInfo->iMaxExp = 100;
+		pItem->bMain_Item = false;
+		pItem->bSub_Item = false;
+		pItem->iPotion = 0;
+		pItem->iManaPotion = 0;
 		strcpy_s(pInfo->szName, sizeof(pInfo->szName), "도적");
 		break;
 	default:
@@ -108,5 +177,7 @@ void CPlayer::Update()
 
 void CPlayer::Release()
 {
-	cout << "플레이어 릴리즈->소멸자 호출" << endl;
+	cout << "플레이어 소멸자 호출" << endl;
+	SAFE_DELETE(pInfo);
+	SAFE_DELETE(pItem);
 }

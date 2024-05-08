@@ -1,6 +1,6 @@
 #pragma once
 #include "0507Student.h"
-class CMainGame
+class CMainGame2
 {
 private:
 	int m_iCurrentCount = 0;
