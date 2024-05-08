@@ -1,13 +1,10 @@
 #include "0507Student.h"
 #include <iostream>
 
-
-
 char* CStudent::Get_Name()
 {
 	return m_szName;
 }
-
 
 void CStudent::Set_Name(char _szName[])
 {

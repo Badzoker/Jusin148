@@ -1,39 +1,7 @@
 #include "mynamespace.h"
+#include "TR_Enum.h"
+#include "TR_Struct.h"
 
-typedef struct tInfo // 아마 소지금 및 보상도 계획해야할듯
-{
-	char szName[32];
-	int iCurrentHp;
-	int iMaxHp;
-	int iCurrentMana;
-	int iMaxMana;
-	int iAttack;
-	int iLevel;
-	int iExp;
-	int iMaxExp;
-}INFO;
-typedef struct tItem
-{
-	bool bMain_Item;
-	bool bSub_Item;
-	int iPotion;
-	int iManaPotion;
-}ITEM;
-
-enum JOB
-{
-	WARRIOR = 1,
-	WIZARD,
-	THIEF,
-	LOAD,
-	END
-};
-enum EQUIP
-{
-	WEAPON = 1,
-	SUBWEAPON,
-	//END//HAHA
-};
 
 #pragma region 함수선언부
 
@@ -61,7 +29,7 @@ int main()
 {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	TextRpg_Menu();
-	
+
 	return 0;
 }
 
@@ -93,7 +61,7 @@ void TextRpg_Menu()
 		tPlayer = Choose_Char(iInput);
 		tItem = Item_Start();
 		break;
-	case LOAD: 
+	case LOAD:
 		errReadJob = fopen_s(&pFileJob, "./Data/Info/Job.txt", "rb");
 		errReadItem = fopen_s(&pFileItem, "./Data/Info/Item.txt", "rb");
 		if (0 == errReadJob && 0 == errReadItem)
@@ -134,7 +102,7 @@ INFO* Choose_Char(int _iInput)
 	{
 	case 1:
 		tTemp = Create_Object("전사", 100, 20, 10);
-		
+
 		break;
 	case 2:
 		tTemp = Create_Object("마법사", 50, 100, 20);
@@ -158,11 +126,11 @@ void Print_Char(INFO* _pPlayer)
 void TextRpg_Home(INFO* _pPlayer, ITEM* _pItem)
 {
 	int iInput(0), iTemp(0);
-	
+
 	FILE* pFileJob = NULL;
 	FILE* pFileItem = NULL;
 	errno_t errWriteJob = 0;
-	errno_t errWriteItem = 0; 
+	errno_t errWriteItem = 0;
 	char cTemp[32] = {};
 	while (true)
 	{
@@ -246,7 +214,7 @@ void TextRpg_Hunt(INFO* _pPlayer, ITEM* _pItem)
 		switch (iInput)
 		{
 		case 1:
-			tMonster = Create_Object("초급", 30 * iInput, 10 * iInput,3 * iInput);
+			tMonster = Create_Object("초급", 30 * iInput, 10 * iInput, 3 * iInput);
 			tMonster->iExp = tMonster->iMaxHp;
 			TextRpg_Fight(_pPlayer, _pItem, tMonster);
 			break;
@@ -319,7 +287,7 @@ void TextRpg_Market_Equip(INFO* _pPlayer, ITEM* _pItem)
 		{
 			cout << "1. 뾰족한 단검\t2. 작은 단검\t3. 돌아가기" << endl;
 		}
-		
+
 		cin >> iInput;
 		switch (iInput)
 		{
@@ -424,7 +392,7 @@ void TextRpg_Fight(INFO* _pPlayer, ITEM* _pItem, INFO* _pMonster)
 			system("cls");
 			cout << "================\n직업 : " << _pPlayer->szName << "\n체력 : " << 0 << "\t  공격력 : " << _pPlayer->iAttack << endl;
 			_pPlayer->iCurrentHp = _pPlayer->iMaxHp;
-			
+
 			Print_Monster(_pMonster);
 			cout << "죽음" << endl;
 			system("pause");
@@ -534,7 +502,7 @@ void TextRpg_Skill(INFO* _pPlayer, ITEM* _pItem, INFO* _pMonster)
 		}
 		system("pause");
 	}
-	
+
 }
 void TextRpg_Tool(INFO* _pPlayer, ITEM* _pItem)
 {
@@ -556,58 +524,6 @@ void TextRpg_Tool(INFO* _pPlayer, ITEM* _pItem)
 				{
 					_pPlayer->iCurrentHp = _pPlayer->iMaxHp;
 				}
-				//if (!strcmp(_pPlayer->szName, "전사")) // 이거 구분하는 법 좀더 쉽게 할 수 있도록 생각해보기
-				//{
-				//	if (_pItem->bSub_Item)
-				//	{
-				//		if (150 < _pPlayer->iCurrentHp)
-				//		{
-				//			_pPlayer->iCurrentHp = 150;
-				//		}
-				//	}
-				//	else
-				//	{
-				//		if (_pPlayer->iMaxHp <= _pPlayer->iCurrentHp)
-				//		{
-				//			_pPlayer->iCurrentHp = _pPlayer->iMaxHp;
-				//		}
-				//	}
-				//}
-				//else if (!strcmp(_pPlayer->szName, "마법사"))
-				//{
-				//	if (_pItem->bSub_Item)
-				//	{
-				//		if (100 < _pPlayer->iCurrentHp)
-				//		{
-				//			_pPlayer->iCurrentHp = 100;
-				//		}
-				//	}
-				//	else
-				//	{
-				//		if (50 < _pPlayer->iCurrentHp)
-				//		{
-				//			_pPlayer->iCurrentHp = 50;
-				//		}
-				//	}
-				//}
-				//else//(!strcmp(_pPlayer->szName, "도적"))
-				//{
-				//	if (_pItem->bSub_Item)
-				//	{
-				//		if (125 < _pPlayer->iCurrentHp)
-				//		{
-				//			_pPlayer->iCurrentHp = 125;
-				//		}
-				//	}
-				//	else
-				//	{
-				//		if (75 < _pPlayer->iCurrentHp)
-				//		{
-				//			_pPlayer->iCurrentHp = 75;
-				//		}
-				//	}
-				//	
-				//}
 				system("pause");
 				return;
 			}
@@ -623,27 +539,6 @@ void TextRpg_Tool(INFO* _pPlayer, ITEM* _pItem)
 				{
 					_pPlayer->iCurrentMana = _pPlayer->iMaxMana;
 				}
-				//if (!strcmp(_pPlayer->szName, "전사")) // 이거 구분하는 법 좀더 쉽게 할 수 있도록 생각해보기
-				//{
-				//	if (_pPlayer->iMaxMana <= _pPlayer->iCurrentMana)
-				//	{
-				//		_pPlayer->iCurrentMana = _pPlayer->iMaxMana;
-				//	}
-				//}
-				//else if (!strcmp(_pPlayer->szName, "마법사"))
-				//{
-				//	if (100 < _pPlayer->iMana)
-				//	{
-				//		_pPlayer->iMana = 100;
-				//	}
-				//}
-				//else//(!strcmp(_pPlayer->szName, "도적"))
-				//{
-				//	if (50 < _pPlayer->iMana)
-				//	{
-				//		_pPlayer->iMana = 50;
-				//	}
-				//}
 				system("pause");
 				return;
 			}

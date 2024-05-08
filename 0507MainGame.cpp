@@ -2,7 +2,6 @@
 #include "0507MainGame.h"
 #include <iostream>
 
-
 void CMainGame::Copy_Array(CStudent _cStu[], CStudent _cMax[])// 기존과 신규
 {
 	for (int i = 0; i < m_iCurrentCount; i++)
@@ -14,8 +13,8 @@ void CMainGame::Copy_Array(CStudent _cStu[], CStudent _cMax[])// 기존과 신규
 		_cMax[m_iMaxCount - m_iCurrentCount + i].Set_Total(_cStu[i].Get_Total());
 	}
 	//pStu = cStu_Max;
-
 }
+
 void CMainGame::Set_StudentInfo(CStudent _cStu[], CStudent _cMax[])// 입력
 {
 	char szTemp[32] = {};
@@ -63,6 +62,7 @@ void CMainGame::Set_Count(CStudent _cMax[]) // 숫자 입력 및 증가
 	m_iMaxCount += m_iCurrentCount;
 	Set_Array(_cMax);
 }
+
 void CMainGame::Printing_Grade(CStudent _cMax[])// 출력
 {
 	system("cls");
@@ -78,7 +78,6 @@ void CMainGame::Printing_Grade(CStudent _cMax[])// 출력
 	std::cout << "출력완료" << std::endl;
 	system("pause");
 }
-
 
 void CMainGame::Free()
 {

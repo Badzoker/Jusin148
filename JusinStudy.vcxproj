@@ -202,6 +202,10 @@
     <ClCompile Include="TextRpg.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="TextRpg_ForClass.cpp" />
+    <ClCompile Include="TR_Monster.cpp" />
+    <ClCompile Include="TR_Player.cpp" />
+    <ClCompile Include="TR_Struct.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="0507MainGame.h" />
@@ -210,6 +214,11 @@
     <ClInclude Include="BackUp.h" />
     <ClInclude Include="HomeStudent.h" />
     <ClInclude Include="HomeWork.h" />
+    <ClInclude Include="mynamespace.h" />
+    <ClInclude Include="TR_Enum.h" />
+    <ClInclude Include="TR_Monster.h" />
+    <ClInclude Include="TR_Player.h" />
+    <ClInclude Include="TR_Struct.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -111,10 +111,22 @@
     <ClCompile Include="Test.cpp">
       <Filter>소스 파일\2405\Class</Filter>
     </ClCompile>
+    <ClCompile Include="HomeStudent.cpp">
+      <Filter>소스 파일\Personal</Filter>
+    </ClCompile>
     <ClCompile Include="HomeWork.cpp">
+      <Filter>소스 파일\Personal</Filter>
+    </ClCompile>
+    <ClCompile Include="TextRpg_ForClass.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="HomeStudent.cpp">
+    <ClCompile Include="TR_Player.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="TR_Monster.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="TR_Struct.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -135,6 +147,21 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="HomeStudent.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="mynamespace.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="TR_Struct.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="TR_Enum.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="TR_Player.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="TR_Monster.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
