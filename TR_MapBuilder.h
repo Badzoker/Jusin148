@@ -7,15 +7,16 @@ class CMapBuilder
 {
 private:
 	CBattle* m_pBattle;
+	CMonster* m_pMonster;
 public:
 	CMapBuilder();
 	~CMapBuilder();
 	void Initialize();
 	void Update();
 	void Release();
-	void Map_Home();
-	void Map_Shop();
-	void Map_Shop_Equip();
-	void Map_Shop_Consumable();
-	void Map_Dungeon();
+	void Map_Home(CPlayer* _pPlayer);
+	void Map_Shop(CPlayer* _pPlayer);
+	void Map_Shop_Equip(CPlayer* _pPlayer);
+	void Map_Shop_Consumable(CPlayer* _pPlayer);
+	void Map_Dungeon(CPlayer* _pPlayer);
 };

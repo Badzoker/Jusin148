@@ -1,11 +1,12 @@
 #pragma once
 #include "TR_Battle.h"
+#include "TR_MapBuilder.h"
 class CMainGame
 {
 private:
 	CMonster* m_pMonster;
 	CPlayer* m_pPlayer;
-	CBattle* m_pBattle;
+	CMapBuilder* m_pMapBuilder;
 public:
 	CMainGame();
 	~CMainGame();

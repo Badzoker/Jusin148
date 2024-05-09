@@ -4,7 +4,7 @@ CMainGame::CMainGame()
 {
 	m_pMonster = nullptr;
 	m_pPlayer = nullptr;
-	m_pBattle = nullptr;
+	m_pMapBuilder = nullptr;
 }
 
 CMainGame::~CMainGame()
@@ -16,7 +16,7 @@ void CMainGame::Initialize()
 {
 	m_pMonster = new CMonster;
 	m_pPlayer = new CPlayer;
-	m_pBattle = new CBattle;
+	m_pMapBuilder = new CMapBuilder;
 }
 
 void CMainGame::Update()
@@ -28,7 +28,7 @@ void CMainGame::Release()
 {
 	SAFE_DELETE(m_pMonster);
 	SAFE_DELETE(m_pPlayer);
-	SAFE_DELETE(m_pBattle);
+	SAFE_DELETE(m_pMapBuilder);
 }
 
 void CMainGame::Menu()
@@ -46,11 +46,11 @@ void CMainGame::Menu()
 			cout << "직업을 선택하시오.(1. 전사 , 2. 마법사 , 3. 도적) :" << endl;
 			cin >> iInput;
 			m_pPlayer->Initialize(iInput);
-			Home();
+			m_pMapBuilder->Map_Home(m_pPlayer);
 			break;
 		case 2:
 			m_pPlayer->Load();
-			Home();
+			m_pMapBuilder->Map_Home(m_pPlayer);
 			break;
 		case 3:
 			return;
@@ -242,5 +242,5 @@ void CMainGame::Dungeon()
 
 void CMainGame::Fight()
 {
-	m_pBattle->Battle_Map(m_pPlayer, m_pMonster);
+	//m_pBattle->Battle_Map(m_pPlayer, m_pMonster);
 }
