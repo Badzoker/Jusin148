@@ -205,7 +205,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="TextRpg_ForClass.cpp" />
+    <ClCompile Include="TR_Battle.cpp" />
     <ClCompile Include="TR_MainGame.cpp" />
+    <ClCompile Include="TR_MapBuilder.cpp" />
     <ClCompile Include="TR_Monster.cpp" />
     <ClCompile Include="TR_Player.cpp" />
     <ClCompile Include="TR_Struct.cpp" />
@@ -218,8 +220,10 @@
     <ClInclude Include="HomeStudent.h" />
     <ClInclude Include="HomeWork.h" />
     <ClInclude Include="mynamespace.h" />
+    <ClInclude Include="TR_Battle.h" />
     <ClInclude Include="TR_Enum.h" />
     <ClInclude Include="TR_MainGame.h" />
+    <ClInclude Include="TR_MapBuilder.h" />
     <ClInclude Include="TR_Monster.h" />
     <ClInclude Include="TR_Player.h" />
     <ClInclude Include="TR_Struct.h" />

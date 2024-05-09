@@ -18,6 +18,7 @@ public:
 	void Damaged(int _iDamage);
 	void Level_Up();
 	void Load();
+	void Save();
 	void Check_Equip();
 	void Respawn();
 	void Take_Reward(int _iReward);

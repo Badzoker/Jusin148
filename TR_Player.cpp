@@ -18,7 +18,7 @@ void CPlayer::Damaged(int _iDamage)
 
 	if (0 >= m_pInfo->iCurrentHp)
 	{
-		cout << "플레이어가 " << _iDamage << " 만큼 피해를 입고 죽었다!" << endl;
+		cout << "플레이어가 죽었다!" << endl;
 	}
 	
 }
@@ -60,6 +60,29 @@ void CPlayer::Load()
 	}
 	cout << "불러오기 성공" << endl;
 
+}
+
+void CPlayer::Save()
+{
+	FILE* pFileJob = NULL;
+	FILE* pFileItem = NULL;
+	errno_t errWriteJob = 0;
+	errno_t errWriteItem = 0;
+	errWriteJob = fopen_s(&pFileJob, "./Data/Info/Job.txt", "wb");
+	errWriteItem = fopen_s(&pFileItem, "./Data/Info/Item.txt", "wb");
+	if (0 == errWriteJob && 0 == errWriteItem)
+	{
+		cout << "저장됨" << endl;
+		fwrite(m_pInfo, sizeof(INFO), 1, pFileJob);
+		fwrite(m_pItem, sizeof(ITEM), 1, pFileItem);
+		fclose(pFileJob);
+		fclose(pFileItem);
+	}
+	else
+	{
+		cout << "게임저장에러" << endl;
+	}
+	system("pause");
 }
 
 void CPlayer::Check_Equip()

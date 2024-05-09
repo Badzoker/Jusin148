@@ -1,19 +1,17 @@
 #pragma once
-#include "mynamespace.h"
-#include "TR_Player.h"
-#include "TR_Monster.h"
+#include "TR_Battle.h"
 class CMainGame
 {
 private:
 	CMonster* m_pMonster;
 	CPlayer* m_pPlayer;
+	CBattle* m_pBattle;
 public:
 	CMainGame();
 	~CMainGame();
 	void Initialize();
 	void Update();
 	void Release();
-	void Save();
 	void Menu();
 	void Home();
 	void Shop();

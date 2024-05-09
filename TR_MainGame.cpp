@@ -4,6 +4,7 @@ CMainGame::CMainGame()
 {
 	m_pMonster = nullptr;
 	m_pPlayer = nullptr;
+	m_pBattle = nullptr;
 }
 
 CMainGame::~CMainGame()
@@ -15,6 +16,7 @@ void CMainGame::Initialize()
 {
 	m_pMonster = new CMonster;
 	m_pPlayer = new CPlayer;
+	m_pBattle = new CBattle;
 }
 
 void CMainGame::Update()
@@ -26,29 +28,7 @@ void CMainGame::Release()
 {
 	SAFE_DELETE(m_pMonster);
 	SAFE_DELETE(m_pPlayer);
-}
-
-void CMainGame::Save()
-{
-	FILE* pFileJob = NULL;
-	FILE* pFileItem = NULL;
-	errno_t errWriteJob = 0;
-	errno_t errWriteItem = 0;
-	errWriteJob = fopen_s(&pFileJob, "./Data/Info/Job.txt", "wb");
-	errWriteItem = fopen_s(&pFileItem, "./Data/Info/Item.txt", "wb");
-	if (0 == errWriteJob && 0 == errWriteItem)
-	{
-		cout << "job저장됨" << endl;
-		fwrite(m_pPlayer->Get_Info(), sizeof(INFO), 1, pFileJob);
-		fwrite(m_pPlayer->Get_Item(), sizeof(ITEM), 1, pFileItem);
-		fclose(pFileJob);
-		fclose(pFileItem);
-	}
-	else
-	{
-		cout << "job게임저장에러" << endl;
-	}
-	system("pause");
+	SAFE_DELETE(m_pBattle);
 }
 
 void CMainGame::Menu()
@@ -103,7 +83,7 @@ void CMainGame::Home()
 			system("pause");
 			break;
 		case 4:
-			Save();
+			m_pPlayer->Save();
 			return;
 		case 5:
 			return;
@@ -262,56 +242,5 @@ void CMainGame::Dungeon()
 
 void CMainGame::Fight()
 {
-	int iInput(0);
-	while (true)
-	{
-		m_pPlayer->Update();
-		cout << "===============  v    s  ===============" << endl;
-		m_pMonster->Update();
-		cout << "1. 공격    2. 스킬    3. 도구    4. 도망" << endl;
-		cin >> iInput;
-		switch (iInput)
-		{
-		case 1:
-			m_pMonster->Damaged(m_pPlayer->Attack());
-			if (0 >= m_pMonster->Get_Info()->iCurrentHp)
-			{
-				m_pPlayer->Take_Reward(m_pMonster->Reward());
-				return;
-			}
-			m_pPlayer->Damaged(m_pMonster->Attack());
-			if (0 >= m_pPlayer->Get_Info()->iCurrentHp)
-			{
-				m_pPlayer->Respawn();
-				return;
-			}
-			system("pause");
-			break;
-		case 2:
-			if (0 != m_pPlayer->Skill())
-			{
-				m_pMonster->Damaged(m_pPlayer->Skill());
-				if (0 >= m_pMonster->Get_Info()->iCurrentHp)
-				{
-					m_pPlayer->Take_Reward(m_pMonster->Reward());
-					return;
-				}
-				m_pPlayer->Damaged(m_pMonster->Attack());
-				if (0 >= m_pPlayer->Get_Info()->iCurrentHp)
-				{
-					m_pPlayer->Respawn();
-					return;
-				}
-				system("pause");
-			}
-			break;
-		case 3:
-			m_pPlayer->Using_Tools();
-			break;
-		case 4:
-			return;
-		default:
-			break;
-		}
-	}
+	m_pBattle->Battle_Map(m_pPlayer, m_pMonster);
 }
