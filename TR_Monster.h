@@ -13,7 +13,7 @@ public:
 	//void Update();
 	void Release();
 	int Attack() { return m_pInfo->iAttack; }
-	void Damaged(int _iDamage);
+	void Damaged(int _iDamage, ATTACK_TYPE _eAttack_Type);
 	int Reward() { return m_pInfo->iMaxHp; }
 	INFOMON* Get_Info() { return m_pInfo; }
 };

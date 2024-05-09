@@ -54,7 +54,7 @@ void CMonster::Release()
 	SAFE_DELETE(m_pInfo);
 }
 
-void CMonster::Damaged(int _iDamage)
+void CMonster::Damaged(int _iDamage, ATTACK_TYPE _eAttack_Type)
 {
 	m_pInfo->iCurrentHp -= _iDamage;
 	if (0 >= m_pInfo->iCurrentHp)

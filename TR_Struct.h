@@ -1,4 +1,5 @@
 #pragma once
+#include "TR_Enum.h"
 typedef struct tagInfo
 {
 	tagInfo();
@@ -13,6 +14,8 @@ typedef struct tagInfo
 	int iLevel;
 	int iExp;
 	int iMaxExp;
+	ATTACK_TYPE eAttack_Type;
+	ARMOR_TYPE eArmor_Type;
 }INFO;
 
 typedef struct tagInfo_Mon
@@ -28,6 +31,8 @@ typedef struct tagInfo_Mon
 	int iCritical_Percent;
 	int iExp;
 	int iGold;
+	ATTACK_TYPE eAttack_Type;
+	ARMOR_TYPE eArmor_Type;
 }INFOMON;
 
 typedef struct tagItem
@@ -40,4 +45,3 @@ typedef struct tagItem
 	int iManaPotion;
 	int iGold;
 }ITEM;
-

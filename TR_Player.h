@@ -1,7 +1,6 @@
 #pragma once
 #include "mynamespace.h"
 #include "TR_Struct.h"
-#include "TR_Enum.h"
 
 class CPlayer
 {
@@ -16,7 +15,7 @@ public:
 	void Render();
 	void Release();
 	int Attack() {return m_pInfo->iAttack;}
-	void Damaged(int _iDamage);
+	void Damaged(int _iDamage, ATTACK_TYPE _eAttack_Type);
 	void Level_Up();
 	void Load();
 	void Save();

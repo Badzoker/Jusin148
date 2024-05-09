@@ -111,12 +111,26 @@ void CMapBuilder::Map_Shop_Equip()
 		case 1:
 			if (!(m_pPlayer->Get_Item()->bMain_Item))
 			{
-				if (1000 <= m_pPlayer->Get_Item()->iGold)
+				
+				if (WEAPON <= m_pPlayer->Get_Item()->iGold)
 				{
 					m_pPlayer->Get_Item()->iGold -= 1000;
 					cout << "주장비 구매완료!" << endl;
 					m_pPlayer->Get_Item()->bMain_Item = true;
-					m_pPlayer->Get_Info()->iAttack += 10; //그냥 구현만 함
+					if (!strcmp(m_pPlayer->Get_Info()->szName, "전사"))
+					{
+						m_pPlayer->Get_Info()->iAttack += 15; //전사는 공격력 +++
+					}
+					else if (!strcmp(m_pPlayer->Get_Info()->szName, "마법사"))
+					{
+						m_pPlayer->Get_Info()->iAttack += 10; //마법사는 공격력++ 
+						m_pPlayer->Get_Info()->iCritical_Percent += 5; //치명타+
+					}
+					else//(!strcmp(m_pPlayer->Get_Info()->szName, "도적"))
+					{
+						m_pPlayer->Get_Info()->iAttack += 5; //도적은 공격력+
+						m_pPlayer->Get_Info()->iCritical_Percent += 10; //치명타++
+					}
 				}
 				else
 				{
@@ -132,13 +146,26 @@ void CMapBuilder::Map_Shop_Equip()
 		case 2:
 			if (!(m_pPlayer->Get_Item()->bSub_Item))
 			{
-				if (1500 <= m_pPlayer->Get_Item()->iGold)
+				if (SUB_WEAPON <= m_pPlayer->Get_Item()->iGold)
 				{
 					m_pPlayer->Get_Item()->iGold -= 1500;
 					cout << "보조장비 구매완료!" << endl;
 					m_pPlayer->Get_Item()->bSub_Item = true;
-					m_pPlayer->Get_Info()->iMaxHp += 50;//그냥 구현만 함
-					m_pPlayer->Get_Info()->iCurrentHp += 50;
+					if (!strcmp(m_pPlayer->Get_Info()->szName, "전사"))
+					{
+						m_pPlayer->Get_Info()->iMaxHp += 50; // 전사는 체력+
+						m_pPlayer->Get_Info()->iCurrentHp += 50;
+					}
+					else if (!strcmp(m_pPlayer->Get_Info()->szName, "마법사"))
+					{
+						m_pPlayer->Get_Info()->iMaxMana += 50; // 마법사는 마나+
+						m_pPlayer->Get_Info()->iCurrentMana += 50;
+					}
+					else//(!strcmp(m_pPlayer->Get_Info()->szName, "도적"))
+					{
+						m_pPlayer->Get_Info()->iCritical_Percent += 10; //도적은 치명타+
+					}
+					
 				}
 				else
 				{
@@ -171,7 +198,7 @@ void CMapBuilder::Map_Shop_Consumable()
 		switch (iInput)
 		{
 		case 1:
-			if (100 <= m_pPlayer->Get_Item()->iGold)
+			if (HEAL_POTION <= m_pPlayer->Get_Item()->iGold)
 			{
 				m_pPlayer->Get_Item()->iGold -= 100;
 				m_pPlayer->Get_Item()->iPotion += 1;
@@ -186,7 +213,7 @@ void CMapBuilder::Map_Shop_Consumable()
 			system("pause");
 			break;
 		case 2:
-			if (150 <= m_pPlayer->Get_Item()->iGold)
+			if (MANA_POTION <= m_pPlayer->Get_Item()->iGold)
 			{
 				m_pPlayer->Get_Item()->iGold -= 150;
 				m_pPlayer->Get_Item()->iManaPotion += 1;

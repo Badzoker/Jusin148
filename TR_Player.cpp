@@ -11,7 +11,7 @@ CPlayer::~CPlayer()
 	Release();
 }
 
-void CPlayer::Damaged(int _iDamage)
+void CPlayer::Damaged(int _iDamage, ATTACK_TYPE _eAttack_Type)
 {
 	m_pInfo->iCurrentHp -= _iDamage;
 	cout << "플레이어가 " << _iDamage << " 만큼 피해를 입었다!" << endl;
@@ -235,8 +235,9 @@ void CPlayer::Initialize(int _iChoose)
 		m_pInfo->iAttack = 10;
 		m_pInfo->iMaxHp = 100;
 		m_pInfo->iMaxMana = 20;
-		
 		m_pInfo->iCritical_Percent = 20;
+		m_pInfo->eAttack_Type = ATTACK_NORMAL;
+		m_pInfo->eArmor_Type = ARMOR_HEAVY;
 		strcpy_s(m_pInfo->szName, sizeof(m_pInfo->szName), "전사");
 		break;
 	case 2:
@@ -244,6 +245,8 @@ void CPlayer::Initialize(int _iChoose)
 		m_pInfo->iMaxHp = 50;
 		m_pInfo->iMaxMana = 50;
 		m_pInfo->iCritical_Percent = 20;
+		m_pInfo->eAttack_Type = ATTACK_MAGIC;
+		m_pInfo->eArmor_Type = ARMOR_LIGHT;
 		strcpy_s(m_pInfo->szName, sizeof(m_pInfo->szName), "마법사");
 		break;
 	case 3:
@@ -251,6 +254,8 @@ void CPlayer::Initialize(int _iChoose)
 		m_pInfo->iMaxHp = 75;
 		m_pInfo->iMaxMana = 35;
 		m_pInfo->iCritical_Percent = 30;
+		m_pInfo->eAttack_Type = ATTACK_LIGHT;
+		m_pInfo->eArmor_Type = ARMOR_MEDIUM;
 		strcpy_s(m_pInfo->szName, sizeof(m_pInfo->szName), "도적");
 		break;
 	default:
