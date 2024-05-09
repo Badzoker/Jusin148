@@ -102,6 +102,7 @@ void CPlayer::Check_Equip()
 
 	cout << "체력포션 : " << m_pItem->iPotion << " 개" << endl;
 	cout << "마나포션 : " << m_pItem->iManaPotion << " 개" << endl;
+	cout << "소지 골드 : " << m_pItem->iGold << " G" << endl;
 }
 
 void CPlayer::Respawn()
@@ -112,7 +113,7 @@ void CPlayer::Respawn()
 	system("pause");
 }
 
-void CPlayer::Take_Reward(int _iReward)
+void CPlayer::Take_Reward(int _iReward, int _iGold)
 {
 	m_pInfo->iExp += _iReward;
 	if (m_pInfo->iMaxExp <= m_pInfo->iExp)
@@ -120,6 +121,7 @@ void CPlayer::Take_Reward(int _iReward)
 		Level_Up();
 	}
 	system("pause");
+	m_pItem->iGold += _iGold;
 }
 
 int CPlayer::Skill()
@@ -223,64 +225,47 @@ void CPlayer::Initialize(int _iChoose)
 {
 	m_pInfo = new INFO;
 	m_pItem = new ITEM;
+	memset(m_pInfo, 0, sizeof(INFO));
+	memset(m_pItem, 0, sizeof(ITEM));
+	m_pInfo->iLevel = 1;
+	m_pInfo->iMaxExp = 100;
 	switch (_iChoose)
 	{
 	case 1:
 		m_pInfo->iAttack = 10;
 		m_pInfo->iMaxHp = 100;
-		m_pInfo->iCurrentHp = m_pInfo->iMaxHp;
 		m_pInfo->iMaxMana = 20;
-		m_pInfo->iCurrentMana = m_pInfo->iMaxMana;
-		m_pInfo->iLevel = 1;
-		m_pInfo->iExp = 0;
-		m_pInfo->iMaxExp = 100;
-		m_pItem->bMain_Item = false;
-		m_pItem->bSub_Item = false;
-		m_pItem->iPotion = 0;
-		m_pItem->iManaPotion = 0;
+		
+		m_pInfo->iCritical_Percent = 20;
 		strcpy_s(m_pInfo->szName, sizeof(m_pInfo->szName), "전사");
 		break;
 	case 2:
 		m_pInfo->iAttack = 20;
 		m_pInfo->iMaxHp = 50;
-		m_pInfo->iCurrentHp = m_pInfo->iMaxHp;
 		m_pInfo->iMaxMana = 50;
-		m_pInfo->iCurrentMana = m_pInfo->iMaxMana;
-		m_pInfo->iLevel = 1;
-		m_pInfo->iExp = 0;
-		m_pInfo->iMaxExp = 100;
-		m_pItem->bMain_Item = false;
-		m_pItem->bSub_Item = false;
-		m_pItem->iPotion = 0;
-		m_pItem->iManaPotion = 0;
+		m_pInfo->iCritical_Percent = 20;
 		strcpy_s(m_pInfo->szName, sizeof(m_pInfo->szName), "마법사");
 		break;
 	case 3:
 		m_pInfo->iAttack = 15;
 		m_pInfo->iMaxHp = 75;
-		m_pInfo->iCurrentHp = m_pInfo->iMaxHp;
 		m_pInfo->iMaxMana = 35;
-		m_pInfo->iCurrentMana = m_pInfo->iMaxMana;
-		m_pInfo->iLevel = 1;
-		m_pInfo->iExp = 0;
-		m_pInfo->iMaxExp = 100;
-		m_pItem->bMain_Item = false;
-		m_pItem->bSub_Item = false;
-		m_pItem->iPotion = 0;
-		m_pItem->iManaPotion = 0;
+		m_pInfo->iCritical_Percent = 30;
 		strcpy_s(m_pInfo->szName, sizeof(m_pInfo->szName), "도적");
 		break;
 	default:
 		break;
 	}
+	m_pInfo->iCurrentHp = m_pInfo->iMaxHp;
+	m_pInfo->iCurrentMana = m_pInfo->iMaxMana;
 }
 
-void CPlayer::Update()
+void CPlayer::Render()
 {
 	system("cls");
 	cout << "================\n직업 : " << m_pInfo->szName << endl;
 	cout << "체력 : " << m_pInfo->iCurrentHp << " / " << m_pInfo->iMaxHp << endl;
-	cout << "마나 : " << m_pInfo->iCurrentMana << " / " << m_pInfo->iMaxMana << "\t  공격력 : " << m_pInfo->iAttack << endl;
+	cout << "마나 : " << m_pInfo->iCurrentMana << " / " << m_pInfo->iMaxMana << "\t  공격력 : " << m_pInfo->iAttack << "\t  치명타 확률 : " << m_pInfo->iCritical_Percent << " %" << endl;
 	cout << "경험치 : " << m_pInfo->iExp << " / " << m_pInfo->iMaxExp << endl;
 	cout << "레벨 : " << m_pInfo->iLevel << endl;
 }

@@ -12,7 +12,8 @@ public:
 	CPlayer();
 	~CPlayer();
 	void Initialize(int _iChoose);
-	void Update();
+	//void Update();
+	void Render();
 	void Release();
 	int Attack() {return m_pInfo->iAttack;}
 	void Damaged(int _iDamage);
@@ -21,7 +22,7 @@ public:
 	void Save();
 	void Check_Equip();
 	void Respawn();
-	void Take_Reward(int _iReward);
+	void Take_Reward(int _iReward, int _iGold);
 	int Skill();
 	void Using_Tools();
 	INFO* Get_Info();

@@ -18,16 +18,16 @@ void HW4_Multi(int* _pArray[]);
 void HW4_PlayerBingo(int* _pArray[]);
 void HW4_ComputerBingo(int* _pArray[]);
 
-int main()
-{
-	srand(unsigned(time(NULL)));
-
-	//HW1();
-	//HW2();
-	//HW3();
-	//HW4();
-	return 0;
-}
+//int main()
+//{
+//	srand(unsigned(time(NULL)));
+//
+//	//HW1();
+//	//HW2();
+//	//HW3();
+//	//HW4();
+//	return 0;
+//}
 void Test()
 {
 	int iArray_A[10], iArray_B[10], iArray_C[10], iArray_D[10];

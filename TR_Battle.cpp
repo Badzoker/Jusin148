@@ -2,6 +2,10 @@
 
 CBattle::CBattle()
 {
+	m_pPlayer = nullptr;
+	m_pMonster = nullptr;
+	srand(unsigned(time(NULL)));
+
 }
 
 CBattle::~CBattle()
@@ -10,7 +14,7 @@ CBattle::~CBattle()
 
 void CBattle::Initialize()
 {
-	
+
 }
 
 void CBattle::Update()
@@ -21,48 +25,48 @@ void CBattle::Release()
 {
 }
 
-void CBattle::Battle_Map(CPlayer* _pPlayer, CMonster* _pMonster)
+void CBattle::Battle_Map()
 {
 	int iInput(0);
 	while (true)
 	{
-		_pPlayer->Update();
+		m_pPlayer->Render();
 		cout << "===============  v    s  ===============" << endl;
-		_pMonster->Update();
+		m_pMonster->Render();
 		cout << "1. 공격    2. 스킬    3. 도구    4. 도망" << endl;
 		cin >> iInput;
 		switch (iInput)
 		{
 		case 1:
-			Battle_Normal(_pPlayer, _pMonster);
-			if (0 >= _pMonster->Get_Info()->iCurrentHp)
+			Battle_Normal();
+			if (0 >= m_pMonster->Get_Info()->iCurrentHp)
 			{
-				_pPlayer->Take_Reward(_pMonster->Reward());
+				m_pPlayer->Take_Reward(m_pMonster->Reward(), m_pMonster->Get_Info()->iGold);
 				return;
 			}
-			else if (0 >= _pPlayer->Get_Info()->iCurrentHp)
+			else if (0 >= m_pPlayer->Get_Info()->iCurrentHp)
 			{
-				_pPlayer->Respawn();
+				m_pPlayer->Respawn();
 				return;
 			}
 			system("pause");
 			break;
 		case 2:
-			Battle_Skill(_pPlayer, _pMonster);
-			if (0 >= _pMonster->Get_Info()->iCurrentHp)
+			Battle_Skill();
+			if (0 >= m_pMonster->Get_Info()->iCurrentHp)
 			{
-				_pPlayer->Take_Reward(_pMonster->Reward());
+				m_pPlayer->Take_Reward(m_pMonster->Reward(), m_pMonster->Get_Info()->iGold);
 				return;
 			}
-			else if (0 >= _pPlayer->Get_Info()->iCurrentHp)
+			else if (0 >= m_pPlayer->Get_Info()->iCurrentHp)
 			{
-				_pPlayer->Respawn();
+				m_pPlayer->Respawn();
 				return;
 			}
 			system("pause");
 			break;
 		case 3:
-			_pPlayer->Using_Tools();
+			m_pPlayer->Using_Tools();
 			system("pause");
 			break;
 		case 4:
@@ -73,31 +77,48 @@ void CBattle::Battle_Map(CPlayer* _pPlayer, CMonster* _pMonster)
 	}
 }
 
-void CBattle::Battle_Normal(CPlayer* _pPlayer, CMonster* _pMonster)
+void CBattle::Battle_Normal()
 {
-
-	_pMonster->Damaged(_pPlayer->Attack());
-	if (0 >= _pMonster->Get_Info()->iCurrentHp)
+	iRandom = (rand() % 100) + 1;
+	if (0 < iRandom - (m_pPlayer->Get_Info()->iCritical_Percent))
+	{
+		m_pMonster->Damaged(m_pPlayer->Attack());//iRandom 이 20보다 클때 즉, (100 - 크리티컬 확률) 일때
+	}
+	else
+	{
+		cout << "------플레이어의 크리티컬공격!------" << endl;
+		m_pMonster->Damaged((m_pPlayer->Attack()) * 2); // 크리티컬
+	}
+	if (0 >= m_pMonster->Get_Info()->iCurrentHp)
 		return;
-	_pPlayer->Damaged(_pMonster->Attack());
-	if (0 >= _pPlayer->Get_Info()->iCurrentHp)
+	iRandom = (rand() % 100) + 1;
+	if (0 < iRandom - (m_pMonster->Get_Info()->iCritical_Percent))
+	{
+		m_pPlayer->Damaged(m_pMonster->Attack());;//iRandom 이 20보다 클때 즉, (100 - 크리티컬 확률) 일때
+	}
+	else
+	{
+		cout << "++++++몬스터의 크리티컬공격!++++++" << endl;
+		m_pPlayer->Damaged((m_pMonster->Attack()) * 2); // 크리티컬
+	}
+	if (0 >= m_pPlayer->Get_Info()->iCurrentHp)
 		return;
 }
 
-void CBattle::Battle_Skill(CPlayer* _pPlayer, CMonster* _pMonster)
+void CBattle::Battle_Skill()
 {
-	if (0 != _pPlayer->Skill())
+	if (0 != m_pPlayer->Skill())
 	{
-		_pMonster->Damaged(_pPlayer->Skill());
-		if (0 >= _pMonster->Get_Info()->iCurrentHp)
+		m_pMonster->Damaged(m_pPlayer->Skill());
+		if (0 >= m_pMonster->Get_Info()->iCurrentHp)
 		{
-			_pPlayer->Take_Reward(_pMonster->Reward());
+			m_pPlayer->Take_Reward(m_pMonster->Reward(), m_pMonster->Get_Info()->iGold);
 			return;
 		}
-		_pPlayer->Damaged(_pMonster->Attack());
-		if (0 >= _pPlayer->Get_Info()->iCurrentHp)
+		m_pPlayer->Damaged(m_pMonster->Attack());
+		if (0 >= m_pPlayer->Get_Info()->iCurrentHp)
 		{
-			_pPlayer->Respawn();
+			m_pPlayer->Respawn();
 			return;
 		}
 		system("pause");
@@ -108,25 +129,26 @@ void CBattle::Battle_Skill(CPlayer* _pPlayer, CMonster* _pMonster)
 	}
 }
 
-void CBattle::Battle_UsingTools(CPlayer* _pPlayer)
+void CBattle::Battle_UsingTools()
 {
 	int iInput(0);
 	cout << "\n=====TOOL=====\n" << "1. 체력포션(+15)\t\t2. 마나포션(+15)\t\t3. 돌아가기\n";
 	while (true)
 	{
+		
 		cout << "선택하시오." << endl;
 		cin >> iInput;
 		switch (iInput)
 		{
 		case 1:
-			if (1 <= _pPlayer->Get_Item()->iPotion)
+			if (1 <= m_pPlayer->Get_Item()->iPotion)
 			{
 				cout << "포션 사용!" << endl;
-				_pPlayer->Get_Item()->iPotion -= 1;
-				_pPlayer->Get_Info()->iCurrentHp += 15;
-				if (_pPlayer->Get_Info()->iMaxHp <= _pPlayer->Get_Info()->iCurrentHp)
+				m_pPlayer->Get_Item()->iPotion -= 1;
+				m_pPlayer->Get_Info()->iCurrentHp += 15;
+				if (m_pPlayer->Get_Info()->iMaxHp <= m_pPlayer->Get_Info()->iCurrentHp)
 				{
-					_pPlayer->Get_Info()->iCurrentHp = _pPlayer->Get_Info()->iMaxHp;
+					m_pPlayer->Get_Info()->iCurrentHp = m_pPlayer->Get_Info()->iMaxHp;
 				}
 				system("pause");
 				return;
@@ -134,14 +156,14 @@ void CBattle::Battle_UsingTools(CPlayer* _pPlayer)
 			cout << "포션 갯수 부족!" << endl;
 			break;
 		case 2:
-			if (1 <= _pPlayer->Get_Item()->iManaPotion)
+			if (1 <= m_pPlayer->Get_Item()->iManaPotion)
 			{
 				cout << "마나포션 사용!" << endl;
-				_pPlayer->Get_Item()->iManaPotion -= 1;
-				_pPlayer->Get_Info()->iCurrentMana += 15;
-				if (_pPlayer->Get_Info()->iMaxMana <= _pPlayer->Get_Info()->iCurrentMana)
+				m_pPlayer->Get_Item()->iManaPotion -= 1;
+				m_pPlayer->Get_Info()->iCurrentMana += 15;
+				if (m_pPlayer->Get_Info()->iMaxMana <= m_pPlayer->Get_Info()->iCurrentMana)
 				{
-					_pPlayer->Get_Info()->iCurrentMana = _pPlayer->Get_Info()->iMaxMana;
+					m_pPlayer->Get_Info()->iCurrentMana = m_pPlayer->Get_Info()->iMaxMana;
 				}
 				system("pause");
 				return;
@@ -156,4 +178,14 @@ void CBattle::Battle_UsingTools(CPlayer* _pPlayer)
 		}
 		system("pause");
 	}
+}
+
+void CBattle::Set_Player(CPlayer* _pPlayer)
+{
+	m_pPlayer = _pPlayer;
+}
+
+void CBattle::Set_Monster(CMonster* _pMonster)
+{
+	m_pMonster = _pMonster;
 }

@@ -34,6 +34,9 @@
     <Filter Include="소스 파일\Personal\Class">
       <UniqueIdentifier>{bebeda1b-caab-418b-9d89-29d58a8117bf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TextRpg">
+      <UniqueIdentifier>{321e64e3-844d-4953-a45f-068f6ddc83c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="240409.cpp">
@@ -118,25 +121,25 @@
       <Filter>소스 파일\Personal</Filter>
     </ClCompile>
     <ClCompile Include="TextRpg_ForClass.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="TR_Player.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="TR_Monster.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="TR_Struct.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="TR_MainGame.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>TextRpg</Filter>
     </ClCompile>
     <ClCompile Include="TR_Battle.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>TextRpg</Filter>
+    </ClCompile>
+    <ClCompile Include="TR_MainGame.cpp">
+      <Filter>TextRpg</Filter>
     </ClCompile>
     <ClCompile Include="TR_MapBuilder.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>TextRpg</Filter>
+    </ClCompile>
+    <ClCompile Include="TR_Monster.cpp">
+      <Filter>TextRpg</Filter>
+    </ClCompile>
+    <ClCompile Include="TR_Player.cpp">
+      <Filter>TextRpg</Filter>
+    </ClCompile>
+    <ClCompile Include="TR_Struct.cpp">
+      <Filter>TextRpg</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -159,28 +162,28 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="mynamespace.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="TR_Struct.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="TR_Enum.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="TR_Player.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="TR_Monster.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="TR_MainGame.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>TextRpg</Filter>
     </ClInclude>
     <ClInclude Include="TR_Battle.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>TextRpg</Filter>
+    </ClInclude>
+    <ClInclude Include="TR_Enum.h">
+      <Filter>TextRpg</Filter>
+    </ClInclude>
+    <ClInclude Include="TR_MainGame.h">
+      <Filter>TextRpg</Filter>
     </ClInclude>
     <ClInclude Include="TR_MapBuilder.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>TextRpg</Filter>
+    </ClInclude>
+    <ClInclude Include="TR_Monster.h">
+      <Filter>TextRpg</Filter>
+    </ClInclude>
+    <ClInclude Include="TR_Player.h">
+      <Filter>TextRpg</Filter>
+    </ClInclude>
+    <ClInclude Include="TR_Struct.h">
+      <Filter>TextRpg</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
