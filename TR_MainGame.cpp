@@ -14,7 +14,7 @@ CMainGame::~CMainGame()
 void CMainGame::Initialize()
 {
 	m_pMapBuilder = new CMapBuilder;
-	m_pMapBuilder->Initialize();
+	//m_pMapBuilder->Initialize();
 }
 
 void CMainGame::Update()
@@ -24,7 +24,7 @@ void CMainGame::Update()
 
 void CMainGame::Release()
 {
-	SAFE_DELETE(m_pPlayer);
+	//SAFE_DELETE(m_pPlayer);
 	SAFE_DELETE(m_pMapBuilder);
 }
 

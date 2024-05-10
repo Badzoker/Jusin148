@@ -24,10 +24,10 @@ void CMapBuilder::Update()
 
 void CMapBuilder::Release()
 {
-	SAFE_DELETE(m_pBattle);
 	SAFE_DELETE(m_pMonster);
-	//SAFE_DELETE(m_pPlayer);
+	SAFE_DELETE(m_pBattle);
 	SAFE_DELETE(m_pCToString);
+	SAFE_DELETE(m_pPlayer);
 }
 
 void CMapBuilder::Map_Home()
@@ -257,7 +257,6 @@ void CMapBuilder::Map_Dungeon()
 		m_pMonster = new CMonster;
 		m_pBattle->Set_Monster(m_pMonster);
 		m_pMonster->Set_CToString(m_pCToString);
-
 	}
 	while (true)
 	{

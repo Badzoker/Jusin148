@@ -323,5 +323,5 @@ void CPlayer::Release()
 	cout << "플레이어 소멸자 호출" << endl;
 	SAFE_DELETE(m_pInfo);
 	SAFE_DELETE(m_pItem);
-	SAFE_DELETE(m_pCToString);
+	//SAFE_DELETE(m_pCToString);
 }
