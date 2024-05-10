@@ -2,6 +2,7 @@
 #include "TR_Monster.h"
 #include "TR_Player.h"
 #include "TR_Battle.h"
+#include "mynamespace.h"
 
 class CMapBuilder
 {
@@ -9,6 +10,8 @@ private:
 	CBattle* m_pBattle;
 	CMonster* m_pMonster;
 	CPlayer* m_pPlayer;
+	CToString* m_pCToString;
+
 public:
 	CMapBuilder();
 	~CMapBuilder();

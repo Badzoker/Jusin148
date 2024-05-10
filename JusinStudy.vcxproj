@@ -184,6 +184,7 @@
     <ClCompile Include="BackUp.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="CToString.cpp" />
     <ClCompile Include="example.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -217,6 +218,7 @@
     <ClInclude Include="0507Student.h" />
     <ClInclude Include="240421Function.h" />
     <ClInclude Include="BackUp.h" />
+    <ClInclude Include="CToString.h" />
     <ClInclude Include="HomeStudent.h" />
     <ClInclude Include="HomeWork.h" />
     <ClInclude Include="mynamespace.h" />

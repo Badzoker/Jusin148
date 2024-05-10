@@ -5,6 +5,7 @@ CMapBuilder::CMapBuilder()
 	m_pPlayer = nullptr;
 	m_pBattle = nullptr;
 	m_pMonster = nullptr;
+	m_pCToString = nullptr;
 }
 
 CMapBuilder::~CMapBuilder()
@@ -14,7 +15,7 @@ CMapBuilder::~CMapBuilder()
 
 void CMapBuilder::Initialize()
 {
-	m_pBattle = new CBattle;
+	
 }
 
 void CMapBuilder::Update()
@@ -25,11 +26,18 @@ void CMapBuilder::Release()
 {
 	SAFE_DELETE(m_pBattle);
 	SAFE_DELETE(m_pMonster);
+	//SAFE_DELETE(m_pPlayer);
+	SAFE_DELETE(m_pCToString);
 }
 
 void CMapBuilder::Map_Home()
 {
 	int iInput(0);
+	if (!m_pCToString)
+	{
+		m_pCToString = new CToString;
+		m_pPlayer->Set_CToString(m_pCToString);
+	}
 	while (true)
 	{
 		system("cls");
@@ -239,11 +247,17 @@ void CMapBuilder::Map_Shop_Consumable()
 void CMapBuilder::Map_Dungeon()
 {
 	int iInput(0);
+	if (!m_pBattle)
+	{
+		m_pBattle = new CBattle;
+		m_pBattle->Set_Player(m_pPlayer);
+	}
 	if (!m_pMonster)
 	{
 		m_pMonster = new CMonster;
-		m_pBattle->Set_Player(m_pPlayer);
 		m_pBattle->Set_Monster(m_pMonster);
+		m_pMonster->Set_CToString(m_pCToString);
+
 	}
 	while (true)
 	{

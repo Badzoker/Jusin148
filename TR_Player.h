@@ -7,6 +7,7 @@ class CPlayer
 private:
 	INFO* m_pInfo;
 	ITEM* m_pItem;
+	CToString* m_pCToString;
 public:
 	CPlayer();
 	~CPlayer();
@@ -15,7 +16,7 @@ public:
 	void Render();
 	void Release();
 	int Attack() {return m_pInfo->iAttack;}
-	void Damaged(int _iDamage, ATTACK_TYPE _eAttack_Type);
+	void Damaged(int _iDamage, ATTACK_TYPE _eAttacked_Type, ARMOR_TYPE _eMyArmor_Type);
 	void Level_Up();
 	void Load();
 	void Save();
@@ -26,4 +27,5 @@ public:
 	void Using_Tools();
 	INFO* Get_Info();
 	ITEM* Get_Item();
+	void Set_CToString(CToString* _pCToString) { m_pCToString = _pCToString; }
 };

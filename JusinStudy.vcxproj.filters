@@ -141,6 +141,9 @@
     <ClCompile Include="TR_Struct.cpp">
       <Filter>TextRpg</Filter>
     </ClCompile>
+    <ClCompile Include="CToString.cpp">
+      <Filter>TextRpg</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="0507MainGame.h">
@@ -183,6 +186,9 @@
       <Filter>TextRpg</Filter>
     </ClInclude>
     <ClInclude Include="TR_Struct.h">
+      <Filter>TextRpg</Filter>
+    </ClInclude>
+    <ClInclude Include="CToString.h">
       <Filter>TextRpg</Filter>
     </ClInclude>
   </ItemGroup>

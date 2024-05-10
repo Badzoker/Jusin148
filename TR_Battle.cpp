@@ -5,11 +5,12 @@ CBattle::CBattle()
 	m_pPlayer = nullptr;
 	m_pMonster = nullptr;
 	srand(unsigned(time(NULL)));
-
+	iRandom = 0;
 }
 
 CBattle::~CBattle()
 {
+	Release();
 }
 
 void CBattle::Initialize()
@@ -79,27 +80,28 @@ void CBattle::Battle_Map()
 
 void CBattle::Battle_Normal()
 {
+	
 	iRandom = (rand() % 100) + 1;
 	if (0 < iRandom - (m_pPlayer->Get_Info()->iCritical_Percent))
 	{
-		m_pMonster->Damaged(m_pPlayer->Attack(), m_pPlayer->Get_Info()->eAttack_Type);//iRandom 이 20보다 클때 즉, (100 - 크리티컬 확률) 일때
+		m_pMonster->Damaged(m_pPlayer->Attack(), m_pPlayer->Get_Info()->eAttack_Type, m_pMonster->Get_Info()->eArmor_Type);//iRandom 이 20보다 클때 즉, (100 - 크리티컬 확률) 일때
 	}
 	else
 	{
 		cout << "------플레이어의 크리티컬공격!------" << endl;
-		m_pMonster->Damaged((m_pPlayer->Attack()) * 2, m_pPlayer->Get_Info()->eAttack_Type); // 크리티컬
+		m_pMonster->Damaged((m_pPlayer->Attack()) * 2, m_pPlayer->Get_Info()->eAttack_Type, m_pMonster->Get_Info()->eArmor_Type); // 크리티컬
 	}
 	if (0 >= m_pMonster->Get_Info()->iCurrentHp)
 		return;
 	iRandom = (rand() % 100) + 1;
 	if (0 < iRandom - (m_pMonster->Get_Info()->iCritical_Percent))
 	{
-		m_pPlayer->Damaged(m_pMonster->Attack(), m_pMonster->Get_Info()->eAttack_Type);;//iRandom 이 20보다 클때 즉, (100 - 크리티컬 확률) 일때
+		m_pPlayer->Damaged(m_pMonster->Attack(), m_pMonster->Get_Info()->eAttack_Type, m_pPlayer->Get_Info()->eArmor_Type);;//iRandom 이 20보다 클때 즉, (100 - 크리티컬 확률) 일때
 	}
 	else
 	{
 		cout << "++++++몬스터의 크리티컬공격!++++++" << endl;
-		m_pPlayer->Damaged((m_pMonster->Attack()) * 2, m_pMonster->Get_Info()->eAttack_Type); // 크리티컬
+		m_pPlayer->Damaged((m_pMonster->Attack()) * 2, m_pMonster->Get_Info()->eAttack_Type, m_pPlayer->Get_Info()->eArmor_Type); // 크리티컬
 	}
 	if (0 >= m_pPlayer->Get_Info()->iCurrentHp)
 		return;
@@ -107,15 +109,16 @@ void CBattle::Battle_Normal()
 
 void CBattle::Battle_Skill()
 {
+	
 	if (0 != m_pPlayer->Skill())
 	{
-		m_pMonster->Damaged(m_pPlayer->Skill(), m_pPlayer->Get_Info()->eAttack_Type);
+		m_pMonster->Damaged(m_pPlayer->Skill(), m_pPlayer->Get_Info()->eAttack_Type, m_pMonster->Get_Info()->eArmor_Type);
 		if (0 >= m_pMonster->Get_Info()->iCurrentHp)
 		{
 			m_pPlayer->Take_Reward(m_pMonster->Reward(), m_pMonster->Get_Info()->iGold);
 			return;
 		}
-		m_pPlayer->Damaged(m_pMonster->Attack(), m_pMonster->Get_Info()->eAttack_Type);
+		m_pPlayer->Damaged(m_pMonster->Attack(), m_pMonster->Get_Info()->eAttack_Type, m_pPlayer->Get_Info()->eArmor_Type);
 		if (0 >= m_pPlayer->Get_Info()->iCurrentHp)
 		{
 			m_pPlayer->Respawn();

@@ -13,7 +13,6 @@ CMainGame::~CMainGame()
 
 void CMainGame::Initialize()
 {
-	m_pPlayer = new CPlayer;
 	m_pMapBuilder = new CMapBuilder;
 	m_pMapBuilder->Initialize();
 }
@@ -31,13 +30,17 @@ void CMainGame::Release()
 
 void CMainGame::Menu()
 {
-	m_pMapBuilder->Set_Player(m_pPlayer);
 	int iInput(0);
 	while (true)
 	{
 		system("cls");
 		cout << "1. 게임시작\t2. 불러오기\t3. 종료" << endl;
 		cin >> iInput;
+		if (!m_pPlayer)
+		{
+			m_pPlayer = new CPlayer;
+			m_pMapBuilder->Set_Player(m_pPlayer);
+		}
 		switch (iInput)
 		{
 		case 1:

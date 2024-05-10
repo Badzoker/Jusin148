@@ -4,6 +4,7 @@ CPlayer::CPlayer()
 {
 	m_pInfo = nullptr;
 	m_pItem = nullptr;
+	m_pCToString = nullptr;
 }
 
 CPlayer::~CPlayer()
@@ -11,10 +12,39 @@ CPlayer::~CPlayer()
 	Release();
 }
 
-void CPlayer::Damaged(int _iDamage, ATTACK_TYPE _eAttack_Type)
+void CPlayer::Damaged(int _iDamage, ATTACK_TYPE _eAttacked_Type, ARMOR_TYPE _eMyArmor_Type)
 {
-	m_pInfo->iCurrentHp -= _iDamage;
-	cout << "플레이어가 " << _iDamage << " 만큼 피해를 입었다!" << endl;
+	int iDamage_Final = _iDamage;
+	switch (_eAttacked_Type)
+	{
+	case ATTACK_NORMAL:
+		if (ARMOR_MEDIUM == _eMyArmor_Type)
+			iDamage_Final = _iDamage * 2;
+		else if (ARMOR_LIGHT == _eMyArmor_Type)
+			iDamage_Final = (int)(_iDamage / 2);
+		break;
+	case ATTACK_MAGIC:
+		if (ARMOR_HEAVY == _eMyArmor_Type)
+			iDamage_Final = _iDamage * 2;
+		else if (ARMOR_MEDIUM == _eMyArmor_Type)
+			iDamage_Final = (int)(_iDamage / 2);
+		break;
+	case ATTACK_LIGHT:
+		if (ARMOR_LIGHT == _eMyArmor_Type)
+			iDamage_Final = _iDamage * 2;
+		else if (ARMOR_HEAVY == _eMyArmor_Type)
+			iDamage_Final = (int)(_iDamage / 2);
+		break;
+	case ATTACK_CHAOS:
+		iDamage_Final = (int)((float)_iDamage * 1.2f);
+		break;
+	case ATTACK_TYPE_END:
+		break;
+	default:
+		break;
+	}
+	m_pInfo->iCurrentHp -= iDamage_Final;
+	cout << "플레이어가 " << iDamage_Final << " 만큼 피해를 입었다!" << endl;
 
 	if (0 >= m_pInfo->iCurrentHp)
 	{
@@ -223,8 +253,10 @@ ITEM* CPlayer::Get_Item()
 
 void CPlayer::Initialize(int _iChoose)
 {
-	m_pInfo = new INFO;
-	m_pItem = new ITEM;
+	if (!m_pInfo)
+		m_pInfo = new INFO;
+	if (!m_pItem)
+		m_pItem = new ITEM;
 	memset(m_pInfo, 0, sizeof(INFO));
 	memset(m_pItem, 0, sizeof(ITEM));
 	m_pInfo->iLevel = 1;
@@ -267,12 +299,23 @@ void CPlayer::Initialize(int _iChoose)
 
 void CPlayer::Render()
 {
+	/*if (!m_pCToString)
+	{
+		m_pCToString = new CToString;
+	}*/
+	//m_pCToString->Enum_ToString((ATTACK_TYPE)m_pInfo->eAttack_Type);
 	system("cls");
 	cout << "================\n직업 : " << m_pInfo->szName << endl;
 	cout << "체력 : " << m_pInfo->iCurrentHp << " / " << m_pInfo->iMaxHp << endl;
-	cout << "마나 : " << m_pInfo->iCurrentMana << " / " << m_pInfo->iMaxMana << "\t  공격력 : " << m_pInfo->iAttack << "\t  치명타 확률 : " << m_pInfo->iCritical_Percent << " %" << endl;
+	cout << "마나 : " << m_pInfo->iCurrentMana << " / " << m_pInfo->iMaxMana << endl;
+	cout << "공격력 : " << m_pInfo->iAttack << "\t  치명타 확률 : " << m_pInfo->iCritical_Percent << " %" << endl;
+	m_pCToString->Attack_ToString(m_pInfo->eAttack_Type);
+	cout << "공격타입 : " << m_pCToString->Get_cToString() << endl;
+	m_pCToString->Armor_ToString(m_pInfo->eArmor_Type);
+	cout << "방어타입 : " << m_pCToString->Get_cToString() << endl;
 	cout << "경험치 : " << m_pInfo->iExp << " / " << m_pInfo->iMaxExp << endl;
 	cout << "레벨 : " << m_pInfo->iLevel << endl;
+	
 }
 
 void CPlayer::Release()
@@ -280,4 +323,5 @@ void CPlayer::Release()
 	cout << "플레이어 소멸자 호출" << endl;
 	SAFE_DELETE(m_pInfo);
 	SAFE_DELETE(m_pItem);
+	SAFE_DELETE(m_pCToString);
 }
