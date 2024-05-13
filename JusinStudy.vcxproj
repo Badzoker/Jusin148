@@ -184,6 +184,8 @@
     <ClCompile Include="BackUp.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="CTest1.cpp" />
+    <ClCompile Include="CTest2.cpp" />
     <ClCompile Include="CToString.cpp" />
     <ClCompile Include="example.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
@@ -202,10 +204,13 @@
     <ClCompile Include="Test.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="TestMain.cpp" />
     <ClCompile Include="TextRpg.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="TextRpg_ForClass.cpp" />
+    <ClCompile Include="TextRpg_ForClass.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="TR_Battle.cpp" />
     <ClCompile Include="TR_MainGame.cpp" />
     <ClCompile Include="TR_MapBuilder.cpp" />
@@ -218,10 +223,13 @@
     <ClInclude Include="0507Student.h" />
     <ClInclude Include="240421Function.h" />
     <ClInclude Include="BackUp.h" />
+    <ClInclude Include="CTest1.h" />
+    <ClInclude Include="CTest2.h" />
     <ClInclude Include="CToString.h" />
     <ClInclude Include="HomeStudent.h" />
     <ClInclude Include="HomeWork.h" />
     <ClInclude Include="mynamespace.h" />
+    <ClInclude Include="TestStruct.h" />
     <ClInclude Include="TR_Battle.h" />
     <ClInclude Include="TR_Enum.h" />
     <ClInclude Include="TR_MainGame.h" />

@@ -45,3 +45,4 @@ typedef struct tagItem
 	int iManaPotion;
 	int iGold;
 }ITEM;
+
