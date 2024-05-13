@@ -267,15 +267,15 @@ void CMapBuilder::Map_Dungeon()
 		{
 		case 1:
 			m_pMonster->Initialize(iInput);
-			m_pBattle->Battle_Map();
+			m_pBattle->Update();
 			break;
 		case 2:
 			m_pMonster->Initialize(iInput);
-			m_pBattle->Battle_Map();
+			m_pBattle->Update();
 			break;
 		case 3:
 			m_pMonster->Initialize(iInput);
-			m_pBattle->Battle_Map();
+			m_pBattle->Update();
 			break;
 		case 4:
 			return;

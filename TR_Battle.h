@@ -16,7 +16,6 @@ public:
 	void Initialize();
 	void Update();
 	void Release();
-	void Battle_Map();
 	void Battle_Normal();
 	void Battle_Skill();
 	void Battle_UsingTools();

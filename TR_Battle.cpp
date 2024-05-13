@@ -20,14 +20,6 @@ void CBattle::Initialize()
 
 void CBattle::Update()
 {
-}
-
-void CBattle::Release()
-{
-}
-
-void CBattle::Battle_Map()
-{
 	int iInput(0);
 	while (true)
 	{
@@ -76,6 +68,10 @@ void CBattle::Battle_Map()
 			break;
 		}
 	}
+}
+
+void CBattle::Release()
+{
 }
 
 void CBattle::Battle_Normal()
