@@ -16,17 +16,8 @@
     <Filter Include="소스 파일\Personal">
       <UniqueIdentifier>{189129f6-7622-407b-ad83-00fa27cb7ae5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\2404">
-      <UniqueIdentifier>{18318418-0e2b-498a-b8e9-342d3b28cfaa}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\2405">
       <UniqueIdentifier>{1d18bc94-a35e-4db4-a3e4-13279f016e45}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\2404\Class">
-      <UniqueIdentifier>{95a8bd38-0562-4d86-88b9-3bf88f647939}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\2404\Header">
-      <UniqueIdentifier>{e2a3c965-001b-4496-9808-13d3d9664304}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\2405\Class">
       <UniqueIdentifier>{f6d5de37-3f22-4969-bc57-62dac6e2a127}</UniqueIdentifier>
@@ -51,61 +42,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="240409.cpp">
-      <Filter>소스 파일\2404\Class</Filter>
-    </ClCompile>
-    <ClCompile Include="240411.cpp">
-      <Filter>소스 파일\2404\Class</Filter>
-    </ClCompile>
-    <ClCompile Include="240412.cpp">
-      <Filter>소스 파일\2404\Class</Filter>
-    </ClCompile>
-    <ClCompile Include="240415.cpp">
-      <Filter>소스 파일\2404\Class</Filter>
-    </ClCompile>
-    <ClCompile Include="240416.cpp">
-      <Filter>소스 파일\2404\Class</Filter>
-    </ClCompile>
-    <ClCompile Include="240417.cpp">
-      <Filter>소스 파일\2404\Class</Filter>
-    </ClCompile>
-    <ClCompile Include="240419.cpp">
-      <Filter>소스 파일\2404\Class</Filter>
-    </ClCompile>
-    <ClCompile Include="240422.cpp">
-      <Filter>소스 파일\2404\Class</Filter>
-    </ClCompile>
-    <ClCompile Include="240423.cpp">
-      <Filter>소스 파일\2404\Class</Filter>
-    </ClCompile>
-    <ClCompile Include="240424.cpp">
-      <Filter>소스 파일\2404\Class</Filter>
-    </ClCompile>
-    <ClCompile Include="2404textrpg.cpp">
-      <Filter>소스 파일\2404\Class</Filter>
-    </ClCompile>
-    <ClCompile Include="240425.cpp">
-      <Filter>소스 파일\2404\Class</Filter>
-    </ClCompile>
-    <ClCompile Include="memoryDebug.cpp">
-      <Filter>소스 파일\2404\Class</Filter>
-    </ClCompile>
-    <ClCompile Include="240426.cpp">
-      <Filter>소스 파일\2404\Class</Filter>
-    </ClCompile>
-    <ClCompile Include="TextRpg.cpp">
-      <Filter>소스 파일\2404\Class</Filter>
-    </ClCompile>
-    <ClCompile Include="240429.cpp">
-      <Filter>소스 파일\2404\Class</Filter>
-    </ClCompile>
     <ClCompile Include="240507.cpp">
       <Filter>소스 파일\2405\Class</Filter>
     </ClCompile>
     <ClCompile Include="BackUp.cpp">
-      <Filter>소스 파일\Personal\Class</Filter>
-    </ClCompile>
-    <ClCompile Include="240421Function.cpp">
       <Filter>소스 파일\Personal\Class</Filter>
     </ClCompile>
     <ClCompile Include="example.cpp">
@@ -177,9 +117,6 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="HomeWork.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="240421Function.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="BackUp.h">
