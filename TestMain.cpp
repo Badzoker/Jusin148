@@ -1,10 +1,10 @@
 #include "CTest1.h"
 #include "CTest2.h"
-
+//#include "MyTest.h"
 int main()
 {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	CTest1 ct;
+	/*CTest1 ct;
 	CTest2 ct2;
 	ct.Initialize(4);
 	ct.Print();
@@ -27,6 +27,6 @@ int main()
 	ct2.Put(5, 3);
 	ct2.Print();
 	ct2.Pop(4);
-	ct2.Print();
+	ct2.Print();*/
 	return 0;
 }

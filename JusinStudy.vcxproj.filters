@@ -40,6 +40,15 @@
     <Filter Include="ArrayToList">
       <UniqueIdentifier>{1d92b6f7-60cd-4bd7-ae2e-677090c35b33}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Test">
+      <UniqueIdentifier>{00e32afe-f167-4cce-bc3f-bc4505da7b7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Class">
+      <UniqueIdentifier>{e0391324-5b3c-4ad6-a26e-1c05f38d002e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Header">
+      <UniqueIdentifier>{9e37693b-fe9f-4386-837e-e04b4c54e082}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="240409.cpp">
@@ -156,6 +165,9 @@
     <ClCompile Include="CTest2.cpp">
       <Filter>ArrayToList</Filter>
     </ClCompile>
+    <ClCompile Include="MyTest.cpp">
+      <Filter>Test\Class</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="0507MainGame.h">
@@ -211,6 +223,9 @@
     </ClInclude>
     <ClInclude Include="TestStruct.h">
       <Filter>ArrayToList</Filter>
+    </ClInclude>
+    <ClInclude Include="MyTest.h">
+      <Filter>Test\Header</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

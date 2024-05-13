@@ -198,6 +198,7 @@
     <ClCompile Include="memoryDebug.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="MyTest.cpp" />
     <ClCompile Include="Practice.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -229,6 +230,7 @@
     <ClInclude Include="HomeStudent.h" />
     <ClInclude Include="HomeWork.h" />
     <ClInclude Include="mynamespace.h" />
+    <ClInclude Include="MyTest.h" />
     <ClInclude Include="TestStruct.h" />
     <ClInclude Include="TR_Battle.h" />
     <ClInclude Include="TR_Enum.h" />
