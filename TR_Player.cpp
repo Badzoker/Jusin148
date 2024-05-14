@@ -44,7 +44,7 @@ void CPlayer::Damaged(int _iDamage, ATTACK_TYPE _eAttacked_Type, ARMOR_TYPE _eMy
 		break;
 	}
 	m_pInfo->iCurrentHp -= iDamage_Final;
-	cout << "플레이어가 " << iDamage_Final << " 만큼 피해를 입었다!" << endl;
+	cout << m_pInfo->szName <<" 가 " << iDamage_Final << " 만큼 피해를 입었다!" << endl;
 
 	if (0 >= m_pInfo->iCurrentHp)
 	{

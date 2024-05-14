@@ -165,6 +165,7 @@
     <ClCompile Include="TR_MainGame.cpp" />
     <ClCompile Include="TR_MapBuilder.cpp" />
     <ClCompile Include="TR_Monster.cpp" />
+    <ClCompile Include="TR_OBJ.CPP" />
     <ClCompile Include="TR_Player.cpp" />
     <ClCompile Include="TR_Struct.cpp" />
   </ItemGroup>
@@ -172,6 +173,7 @@
     <ClInclude Include="0507MainGame.h" />
     <ClInclude Include="0507Student.h" />
     <ClInclude Include="BackUp.h" />
+    <ClInclude Include="TR_Obj.h" />
     <ClInclude Include="CTest1.h" />
     <ClInclude Include="CTest2.h" />
     <ClInclude Include="CToString.h" />

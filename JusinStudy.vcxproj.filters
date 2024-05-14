@@ -108,6 +108,9 @@
     <ClCompile Include="MyTest.cpp">
       <Filter>Test\Class</Filter>
     </ClCompile>
+    <ClCompile Include="TR_OBJ.CPP">
+      <Filter>TextRpg</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="0507MainGame.h">
@@ -163,6 +166,9 @@
     </ClInclude>
     <ClInclude Include="MyTest.h">
       <Filter>Test\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="TR_Obj.h">
+      <Filter>TextRpg</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
