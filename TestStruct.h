@@ -1,8 +1,7 @@
 #pragma once
 
-typedef struct tagList
+struct tagList
 {
 	int iValue;
-	int* pPrevious_Index;
-	int* pNext_Index;
-}MYLIST;
+	tagList* Next_Index;
+};

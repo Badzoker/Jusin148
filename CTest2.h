@@ -1,13 +1,12 @@
 #pragma once
 #include "mynamespace.h"
 #include "TestStruct.h"
-
 class CTest2
 {
 public:
 	CTest2();
 	~CTest2();
-	void Initialize(int _iLength);
+	void Initialize();
 	void Update();
 	void Release();
 	void Pop(int _iIndex);
@@ -19,7 +18,8 @@ public:
 	void Erase();
 	void Print();
 private:
-	MYLIST* tMylist;
+	tagList* tMylist;
+	//MYPOINTER* pCurrent;
 	int iLength;
+	tagList* pCur;
 };
-
