@@ -80,7 +80,7 @@ void CBattle::Battle_Normal()
 	iRandom = (rand() % 100) + 1;
 	if (0 < iRandom - (m_pPlayer->Get_Info()->iCritical_Percent))
 	{
-		m_pMonster->Damaged(m_pPlayer->Attack(m_pPlayer->Get_Info()->iAttack), m_pPlayer->Get_Info()->eAttack_Type, m_pMonster->Get_Info()->eArmor_Type, m_pMonster->Get_Info());//iRandom 이 20보다 클때 즉, (100 - 크리티컬 확률) 일때
+		m_pMonster->Damaged(m_pPlayer->Get_Info()->iAttack, m_pPlayer->Get_Info()->eAttack_Type, m_pMonster->Get_Info()->eArmor_Type, m_pMonster->Get_Info());//iRandom 이 20보다 클때 즉, (100 - 크리티컬 확률) 일때
 	}
 	else
 	{

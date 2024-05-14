@@ -5,10 +5,24 @@ class CObj
 {
 public:
 	INFO* m_Info;
+	//char szName[32];
+	//int iCurrentHp;
+	//int iMaxHp;
+	//int iCurrentMana;
+	//int iMaxMana;
+	//int iAttack;
+	//int iCritical_Percent;
+	//int iLevel;//
+	//int iExp;
+	//int iMaxExp;//
+	//int iGold;
+
+	//ATTACK_TYPE eAttack_Type;
+	//ARMOR_TYPE eArmor_Type;
 public:
 	CObj();
 	~CObj();
-	void Damaged(int _iDamage, ATTACK_TYPE _eAttacked_Type, ARMOR_TYPE _eMyArmor_Type, INFO* _tTarget);
+	void Damaged(CObj* _Attacker);
 	int Attack(int _iAttack_Damage);
 };
 
