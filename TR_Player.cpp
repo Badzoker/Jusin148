@@ -2,7 +2,7 @@
 
 CPlayer::CPlayer()
 {
-	m_pInfo = nullptr;
+	m_Info = nullptr;
 	m_pItem = nullptr;
 	m_pCToString = nullptr;
 }
@@ -12,63 +12,63 @@ CPlayer::~CPlayer()
 	Release();
 }
 
-void CPlayer::Damaged(int _iDamage, ATTACK_TYPE _eAttacked_Type, ARMOR_TYPE _eMyArmor_Type)
-{
-	int iDamage_Final = _iDamage;
-	switch (_eAttacked_Type)
-	{
-	case ATTACK_NORMAL:
-		if (ARMOR_MEDIUM == _eMyArmor_Type)
-			iDamage_Final = _iDamage * 2;
-		else if (ARMOR_LIGHT == _eMyArmor_Type)
-			iDamage_Final = (int)(_iDamage / 2);
-		break;
-	case ATTACK_MAGIC:
-		if (ARMOR_HEAVY == _eMyArmor_Type)
-			iDamage_Final = _iDamage * 2;
-		else if (ARMOR_MEDIUM == _eMyArmor_Type)
-			iDamage_Final = (int)(_iDamage / 2);
-		break;
-	case ATTACK_LIGHT:
-		if (ARMOR_LIGHT == _eMyArmor_Type)
-			iDamage_Final = _iDamage * 2;
-		else if (ARMOR_HEAVY == _eMyArmor_Type)
-			iDamage_Final = (int)(_iDamage / 2);
-		break;
-	case ATTACK_CHAOS:
-		iDamage_Final = (int)((float)_iDamage * 1.2f);
-		break;
-	case ATTACK_TYPE_END:
-		break;
-	default:
-		break;
-	}
-	m_pInfo->iCurrentHp -= iDamage_Final;
-	cout << m_pInfo->szName <<" 가 " << iDamage_Final << " 만큼 피해를 입었다!" << endl;
-
-	if (0 >= m_pInfo->iCurrentHp)
-	{
-		cout << "플레이어가 죽었다!" << endl;
-	}
-	
-}
+//void CPlayer::Damaged(int _iDamage, ATTACK_TYPE _eAttacked_Type, ARMOR_TYPE _eMyArmor_Type)
+//{
+//	int iDamage_Final = _iDamage;
+//	switch (_eAttacked_Type)
+//	{
+//	case ATTACK_NORMAL:
+//		if (ARMOR_MEDIUM == _eMyArmor_Type)
+//			iDamage_Final = _iDamage * 2;
+//		else if (ARMOR_LIGHT == _eMyArmor_Type)
+//			iDamage_Final = (int)(_iDamage / 2);
+//		break;
+//	case ATTACK_MAGIC:
+//		if (ARMOR_HEAVY == _eMyArmor_Type)
+//			iDamage_Final = _iDamage * 2;
+//		else if (ARMOR_MEDIUM == _eMyArmor_Type)
+//			iDamage_Final = (int)(_iDamage / 2);
+//		break;
+//	case ATTACK_LIGHT:
+//		if (ARMOR_LIGHT == _eMyArmor_Type)
+//			iDamage_Final = _iDamage * 2;
+//		else if (ARMOR_HEAVY == _eMyArmor_Type)
+//			iDamage_Final = (int)(_iDamage / 2);
+//		break;
+//	case ATTACK_CHAOS:
+//		iDamage_Final = (int)((float)_iDamage * 1.2f);
+//		break;
+//	case ATTACK_TYPE_END:
+//		break;
+//	default:
+//		break;
+//	}
+//	m_Info->iCurrentHp -= iDamage_Final;
+//	cout << m_Info->szName <<" 가 " << iDamage_Final << " 만큼 피해를 입었다!" << endl;
+//
+//	if (0 >= m_Info->iCurrentHp)
+//	{
+//		cout << "플레이어가 죽었다!" << endl;
+//	}
+//	
+//}
 
 void CPlayer::Level_Up()
 {
-	m_pInfo->iMaxExp += 50;
-	m_pInfo->iExp = 0;
-	m_pInfo->iLevel += 1;
-	m_pInfo->iAttack += 10;
-	m_pInfo->iMaxHp += 10;
-	m_pInfo->iMaxMana += 10;
-	m_pInfo->iCurrentHp = m_pInfo->iMaxHp;
-	m_pInfo->iCurrentMana = m_pInfo->iMaxMana;
+	m_Info->iMaxExp += 50;
+	m_Info->iExp = 0;
+	m_Info->iLevel += 1;
+	m_Info->iAttack += 10;
+	m_Info->iMaxHp += 10;
+	m_Info->iMaxMana += 10;
+	m_Info->iCurrentHp = m_Info->iMaxHp;
+	m_Info->iCurrentMana = m_Info->iMaxMana;
 	cout << "Level up!" << endl;
 }
 
 void CPlayer::Load()
 {
-	m_pInfo = new INFO;
+	m_Info = new INFO;
 	m_pItem = new ITEM;
 	FILE* pFileJob = NULL;
 	FILE* pFileItem = NULL;
@@ -78,7 +78,7 @@ void CPlayer::Load()
 	errReadItem = fopen_s(&pFileItem, "./Data/Info/Item.txt", "rb");
 	if (0 == errReadJob && 0 == errReadItem)
 	{
-		fread(m_pInfo, sizeof(INFO), 1, pFileJob);
+		fread(m_Info, sizeof(INFO), 1, pFileJob);
 		fread(m_pItem, sizeof(ITEM), 1, pFileItem);
 		fclose(pFileJob);
 		fclose(pFileItem);
@@ -103,7 +103,7 @@ void CPlayer::Save()
 	if (0 == errWriteJob && 0 == errWriteItem)
 	{
 		cout << "저장됨" << endl;
-		fwrite(m_pInfo, sizeof(INFO), 1, pFileJob);
+		fwrite(m_Info, sizeof(INFO), 1, pFileJob);
 		fwrite(m_pItem, sizeof(ITEM), 1, pFileItem);
 		fclose(pFileJob);
 		fclose(pFileItem);
@@ -132,26 +132,26 @@ void CPlayer::Check_Equip()
 
 	cout << "체력포션 : " << m_pItem->iPotion << " 개" << endl;
 	cout << "마나포션 : " << m_pItem->iManaPotion << " 개" << endl;
-	cout << "소지 골드 : " << m_pItem->iGold << " G" << endl;
+	cout << "소지 골드 : " << m_Info->iGold << " G" << endl;
 }
 
 void CPlayer::Respawn()
 {
 	cout << "부활! 체력과 마나가 가득 채워졌다!" << endl;
-	m_pInfo->iCurrentHp = m_pInfo->iMaxHp;
-	m_pInfo->iCurrentMana = m_pInfo->iMaxMana;
+	m_Info->iCurrentHp = m_Info->iMaxHp;
+	m_Info->iCurrentMana = m_Info->iMaxMana;
 	system("pause");
 }
 
 void CPlayer::Take_Reward(int _iReward, int _iGold)
 {
-	m_pInfo->iExp += _iReward;
-	if (m_pInfo->iMaxExp <= m_pInfo->iExp)
+	m_Info->iExp += _iReward;
+	if (m_Info->iMaxExp <= m_Info->iExp)
 	{
 		Level_Up();
 	}
 	system("pause");
-	m_pItem->iGold += _iGold;
+	m_Info->iGold += _iGold;
 }
 
 int CPlayer::Skill()
@@ -165,20 +165,20 @@ int CPlayer::Skill()
 		switch (iInput)
 		{
 		case 1:
-			if (5 <= m_pInfo->iCurrentMana)
+			if (5 <= m_Info->iCurrentMana)
 			{
 				cout << "기본 스킬 사용!" << endl;
-				m_pInfo->iCurrentMana -= 5;
-				return m_pInfo->iAttack + 5;
+				m_Info->iCurrentMana -= 5;
+				return m_Info->iAttack + 5;
 			}
 			cout << "마나 부족!" << endl;
 			break;
 		case 2:
-			if (20 <= m_pInfo->iCurrentMana)
+			if (20 <= m_Info->iCurrentMana)
 			{
 				cout << "기본 스킬 사용!" << endl;
-				m_pInfo->iCurrentMana -= 20;
-				return m_pInfo->iAttack + 20;
+				m_Info->iCurrentMana -= 20;
+				return m_Info->iAttack + 20;
 			}
 			cout << "마나 부족!" << endl;
 			break;
@@ -206,10 +206,10 @@ void CPlayer::Using_Tools()
 			{
 				cout << "포션 사용!" << endl;
 				m_pItem->iPotion -= 1;
-				m_pInfo->iCurrentHp += 15;
-				if (m_pInfo->iMaxHp <= m_pInfo->iCurrentHp)
+				m_Info->iCurrentHp += 15;
+				if (m_Info->iMaxHp <= m_Info->iCurrentHp)
 				{
-					m_pInfo->iCurrentHp = m_pInfo->iMaxHp;
+					m_Info->iCurrentHp = m_Info->iMaxHp;
 				}
 				system("pause");
 				return;
@@ -221,10 +221,10 @@ void CPlayer::Using_Tools()
 			{
 				cout << "마나포션 사용!" << endl;
 				m_pItem->iManaPotion -= 1;
-				m_pInfo->iCurrentMana += 15;
-				if (m_pInfo->iMaxMana <= m_pInfo->iCurrentMana)
+				m_Info->iCurrentMana += 15;
+				if (m_Info->iMaxMana <= m_Info->iCurrentMana)
 				{
-					m_pInfo->iCurrentMana = m_pInfo->iMaxMana;
+					m_Info->iCurrentMana = m_Info->iMaxMana;
 				}
 				system("pause");
 				return;
@@ -243,7 +243,7 @@ void CPlayer::Using_Tools()
 
 INFO* CPlayer::Get_Info()
 {
-	return m_pInfo;
+	return m_Info;
 }
 
 ITEM* CPlayer::Get_Item()
@@ -253,48 +253,48 @@ ITEM* CPlayer::Get_Item()
 
 void CPlayer::Initialize(int _iChoose)
 {
-	if (!m_pInfo)
-		m_pInfo = new INFO;
+	if (!m_Info)
+		m_Info = new INFO;
 	if (!m_pItem)
 		m_pItem = new ITEM;
-	memset(m_pInfo, 0, sizeof(INFO));
+	memset(m_Info, 0, sizeof(INFO));
 	memset(m_pItem, 0, sizeof(ITEM));
-	m_pInfo->iLevel = 1;
-	m_pInfo->iMaxExp = 100;
+	m_Info->iLevel = 1;
+	m_Info->iMaxExp = 100;
 	switch (_iChoose)
 	{
 	case 1:
-		m_pInfo->iAttack = 10;
-		m_pInfo->iMaxHp = 100;
-		m_pInfo->iMaxMana = 20;
-		m_pInfo->iCritical_Percent = 20;
-		m_pInfo->eAttack_Type = ATTACK_NORMAL;
-		m_pInfo->eArmor_Type = ARMOR_HEAVY;
-		strcpy_s(m_pInfo->szName, sizeof(m_pInfo->szName), "전사");
+		m_Info->iAttack = 10;
+		m_Info->iMaxHp = 100;
+		m_Info->iMaxMana = 20;
+		m_Info->iCritical_Percent = 20;
+		m_Info->eAttack_Type = ATTACK_NORMAL;
+		m_Info->eArmor_Type = ARMOR_HEAVY;
+		strcpy_s(m_Info->szName, sizeof(m_Info->szName), "전사");
 		break;
 	case 2:
-		m_pInfo->iAttack = 20;
-		m_pInfo->iMaxHp = 50;
-		m_pInfo->iMaxMana = 50;
-		m_pInfo->iCritical_Percent = 20;
-		m_pInfo->eAttack_Type = ATTACK_MAGIC;
-		m_pInfo->eArmor_Type = ARMOR_LIGHT;
-		strcpy_s(m_pInfo->szName, sizeof(m_pInfo->szName), "마법사");
+		m_Info->iAttack = 20;
+		m_Info->iMaxHp = 50;
+		m_Info->iMaxMana = 50;
+		m_Info->iCritical_Percent = 20;
+		m_Info->eAttack_Type = ATTACK_MAGIC;
+		m_Info->eArmor_Type = ARMOR_LIGHT;
+		strcpy_s(m_Info->szName, sizeof(m_Info->szName), "마법사");
 		break;
 	case 3:
-		m_pInfo->iAttack = 15;
-		m_pInfo->iMaxHp = 75;
-		m_pInfo->iMaxMana = 35;
-		m_pInfo->iCritical_Percent = 30;
-		m_pInfo->eAttack_Type = ATTACK_LIGHT;
-		m_pInfo->eArmor_Type = ARMOR_MEDIUM;
-		strcpy_s(m_pInfo->szName, sizeof(m_pInfo->szName), "도적");
+		m_Info->iAttack = 15;
+		m_Info->iMaxHp = 75;
+		m_Info->iMaxMana = 35;
+		m_Info->iCritical_Percent = 30;
+		m_Info->eAttack_Type = ATTACK_LIGHT;
+		m_Info->eArmor_Type = ARMOR_MEDIUM;
+		strcpy_s(m_Info->szName, sizeof(m_Info->szName), "도적");
 		break;
 	default:
 		break;
 	}
-	m_pInfo->iCurrentHp = m_pInfo->iMaxHp;
-	m_pInfo->iCurrentMana = m_pInfo->iMaxMana;
+	m_Info->iCurrentHp = m_Info->iMaxHp;
+	m_Info->iCurrentMana = m_Info->iMaxMana;
 }
 
 void CPlayer::Render()
@@ -303,25 +303,25 @@ void CPlayer::Render()
 	{
 		m_pCToString = new CToString;
 	}*/
-	//m_pCToString->Enum_ToString((ATTACK_TYPE)m_pInfo->eAttack_Type);
+	//m_pCToString->Enum_ToString((ATTACK_TYPE)m_Info->eAttack_Type);
 	system("cls");
-	cout << "================\n직업 : " << m_pInfo->szName << endl;
-	cout << "체력 : " << m_pInfo->iCurrentHp << " / " << m_pInfo->iMaxHp << endl;
-	cout << "마나 : " << m_pInfo->iCurrentMana << " / " << m_pInfo->iMaxMana << endl;
-	cout << "공격력 : " << m_pInfo->iAttack << "\t  치명타 확률 : " << m_pInfo->iCritical_Percent << " %" << endl;
-	m_pCToString->Attack_ToString(m_pInfo->eAttack_Type);
+	cout << "================\n직업 : " << m_Info->szName << endl;
+	cout << "체력 : " << m_Info->iCurrentHp << " / " << m_Info->iMaxHp << endl;
+	cout << "마나 : " << m_Info->iCurrentMana << " / " << m_Info->iMaxMana << endl;
+	cout << "공격력 : " << m_Info->iAttack << "\t  치명타 확률 : " << m_Info->iCritical_Percent << " %" << endl;
+	m_pCToString->Attack_ToString(m_Info->eAttack_Type);
 	cout << "공격타입 : " << m_pCToString->Get_cToString() << endl;
-	m_pCToString->Armor_ToString(m_pInfo->eArmor_Type);
+	m_pCToString->Armor_ToString(m_Info->eArmor_Type);
 	cout << "방어타입 : " << m_pCToString->Get_cToString() << endl;
-	cout << "경험치 : " << m_pInfo->iExp << " / " << m_pInfo->iMaxExp << endl;
-	cout << "레벨 : " << m_pInfo->iLevel << endl;
+	cout << "경험치 : " << m_Info->iExp << " / " << m_Info->iMaxExp << endl;
+	cout << "레벨 : " << m_Info->iLevel << endl;
 	
 }
 
 void CPlayer::Release()
 {
 	cout << "플레이어 소멸자 호출" << endl;
-	SAFE_DELETE(m_pInfo);
+	SAFE_DELETE(m_Info);
 	SAFE_DELETE(m_pItem);
 	//SAFE_DELETE(m_pCToString);
 }

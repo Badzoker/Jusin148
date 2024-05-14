@@ -11,9 +11,11 @@ typedef struct tagInfo
 	int iMaxMana;
 	int iAttack;
 	int iCritical_Percent;
-	int iLevel;
+	int iLevel;//
 	int iExp;
-	int iMaxExp;
+	int iMaxExp;//
+	int iGold;
+
 	ATTACK_TYPE eAttack_Type;
 	ARMOR_TYPE eArmor_Type;
 }INFO;
@@ -43,6 +45,5 @@ typedef struct tagItem
 	bool bSub_Item;
 	int iPotion;
 	int iManaPotion;
-	int iGold;
 }ITEM;
 

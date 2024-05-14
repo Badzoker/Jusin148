@@ -1,11 +1,11 @@
 #pragma once
 #include "mynamespace.h"
 #include "TR_Struct.h"
-
-class CPlayer
+#include "TR_Obj.h"
+class CPlayer : public CObj
 {
 private:
-	INFO* m_pInfo;
+	//INFO* m_pInfo;
 	ITEM* m_pItem;
 	CToString* m_pCToString;
 public:
@@ -15,8 +15,8 @@ public:
 	//void Update();
 	void Render();
 	void Release();
-	int Attack() {return m_pInfo->iAttack;}
-	void Damaged(int _iDamage, ATTACK_TYPE _eAttacked_Type, ARMOR_TYPE _eMyArmor_Type);
+	//int Attack() {return m_Info->iAttack;}
+	//void Damaged(int _iDamage, ATTACK_TYPE _eAttacked_Type, ARMOR_TYPE _eMyArmor_Type);
 	void Level_Up();
 	void Load();
 	void Save();
