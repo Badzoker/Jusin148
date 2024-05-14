@@ -11,7 +11,7 @@ private:
 	CMonster* m_pMonster;
 	CPlayer* m_pPlayer;
 	CToString* m_pCToString;
-
+	
 public:
 	CMapBuilder();
 	~CMapBuilder();

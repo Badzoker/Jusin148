@@ -1,6 +1,7 @@
 #pragma once
 #include "mynamespace.h"
 #include "TR_Struct.h"
+#include "TR_ToString.h"
 
 class CPlayer
 {

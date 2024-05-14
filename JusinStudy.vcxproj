@@ -139,9 +139,10 @@
     <ClCompile Include="BackUp.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="TR_Obj.cpp" />
     <ClCompile Include="CTest1.cpp" />
     <ClCompile Include="CTest2.cpp" />
-    <ClCompile Include="CToString.cpp" />
+    <ClCompile Include="CTest3.cpp" />
     <ClCompile Include="example.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -157,9 +158,11 @@
     <ClCompile Include="Test.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="TestMain.cpp" />
-    <ClCompile Include="TextRpg_ForClass.cpp">
+    <ClCompile Include="TestMain.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="TextRpg_ForClass.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="TR_Battle.cpp" />
     <ClCompile Include="TR_MainGame.cpp" />
@@ -167,14 +170,16 @@
     <ClCompile Include="TR_Monster.cpp" />
     <ClCompile Include="TR_Player.cpp" />
     <ClCompile Include="TR_Struct.cpp" />
+    <ClCompile Include="TR_ToString.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="0507MainGame.h" />
     <ClInclude Include="0507Student.h" />
     <ClInclude Include="BackUp.h" />
+    <ClInclude Include="TR_Obj.h" />
     <ClInclude Include="CTest1.h" />
     <ClInclude Include="CTest2.h" />
-    <ClInclude Include="CToString.h" />
+    <ClInclude Include="CTest3.h" />
     <ClInclude Include="HomeStudent.h" />
     <ClInclude Include="HomeWork.h" />
     <ClInclude Include="mynamespace.h" />
@@ -187,6 +192,7 @@
     <ClInclude Include="TR_Monster.h" />
     <ClInclude Include="TR_Player.h" />
     <ClInclude Include="TR_Struct.h" />
+    <ClInclude Include="TR_ToString.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
