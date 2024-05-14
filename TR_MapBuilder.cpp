@@ -15,7 +15,7 @@ CMapBuilder::~CMapBuilder()
 
 void CMapBuilder::Initialize()
 {
-
+	
 }
 
 void CMapBuilder::Update()

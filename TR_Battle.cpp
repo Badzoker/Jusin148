@@ -10,7 +10,7 @@ CBattle::CBattle()
 
 CBattle::~CBattle()
 {
-	//Release();
+	Release();
 }
 
 void CBattle::Initialize()
@@ -181,7 +181,7 @@ void CBattle::Battle_UsingTools()
 
 void CBattle::Set_Player(CPlayer* _pPlayer)
 {
-m_pPlayer = _pPlayer;
+	m_pPlayer = _pPlayer;
 }
 
 void CBattle::Set_Monster(CMonster* _pMonster)

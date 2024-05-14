@@ -1,4 +1,4 @@
-#include "TR_ToString.h"
+#include "CToString.h"
 
 CToString::CToString()
 {

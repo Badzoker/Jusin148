@@ -28,6 +28,9 @@
     <Filter Include="TextRpg">
       <UniqueIdentifier>{321e64e3-844d-4953-a45f-068f6ddc83c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ArrayToList">
+      <UniqueIdentifier>{1d92b6f7-60cd-4bd7-ae2e-677090c35b33}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Test">
       <UniqueIdentifier>{00e32afe-f167-4cce-bc3f-bc4505da7b7c}</UniqueIdentifier>
     </Filter>
@@ -36,9 +39,6 @@
     </Filter>
     <Filter Include="Test\Header">
       <UniqueIdentifier>{9e37693b-fe9f-4386-837e-e04b4c54e082}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Test\ArrayToList">
-      <UniqueIdentifier>{1d92b6f7-60cd-4bd7-ae2e-677090c35b33}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -93,26 +93,20 @@
     <ClCompile Include="TR_Struct.cpp">
       <Filter>TextRpg</Filter>
     </ClCompile>
+    <ClCompile Include="CToString.cpp">
+      <Filter>TextRpg</Filter>
+    </ClCompile>
     <ClCompile Include="CTest1.cpp">
-      <Filter>Test\ArrayToList</Filter>
+      <Filter>ArrayToList</Filter>
     </ClCompile>
     <ClCompile Include="TestMain.cpp">
-      <Filter>Test\ArrayToList</Filter>
+      <Filter>ArrayToList</Filter>
     </ClCompile>
     <ClCompile Include="CTest2.cpp">
-      <Filter>Test\ArrayToList</Filter>
+      <Filter>ArrayToList</Filter>
     </ClCompile>
     <ClCompile Include="MyTest.cpp">
       <Filter>Test\Class</Filter>
-    </ClCompile>
-    <ClCompile Include="CTest3.cpp">
-      <Filter>Test\ArrayToList</Filter>
-    </ClCompile>
-    <ClCompile Include="TR_ToString.cpp">
-      <Filter>TextRpg</Filter>
-    </ClCompile>
-    <ClCompile Include="TR_Obj.cpp">
-      <Filter>TextRpg</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -155,26 +149,20 @@
     <ClInclude Include="TR_Struct.h">
       <Filter>TextRpg</Filter>
     </ClInclude>
+    <ClInclude Include="CToString.h">
+      <Filter>TextRpg</Filter>
+    </ClInclude>
     <ClInclude Include="CTest1.h">
-      <Filter>Test\ArrayToList</Filter>
+      <Filter>ArrayToList</Filter>
     </ClInclude>
     <ClInclude Include="CTest2.h">
-      <Filter>Test\ArrayToList</Filter>
+      <Filter>ArrayToList</Filter>
     </ClInclude>
     <ClInclude Include="TestStruct.h">
-      <Filter>Test\ArrayToList</Filter>
+      <Filter>ArrayToList</Filter>
     </ClInclude>
     <ClInclude Include="MyTest.h">
       <Filter>Test\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="CTest3.h">
-      <Filter>Test\ArrayToList</Filter>
-    </ClInclude>
-    <ClInclude Include="TR_ToString.h">
-      <Filter>TextRpg</Filter>
-    </ClInclude>
-    <ClInclude Include="TR_Obj.h">
-      <Filter>TextRpg</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
