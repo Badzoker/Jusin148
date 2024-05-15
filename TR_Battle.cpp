@@ -32,12 +32,12 @@ void CBattle::Update()
 		{
 		case 1:
 			Battle_Normal();
-			if (0 >= m_pMonster->Get_Info()->iCurrentHp)
+			if (0 >= MONSTER->iCurrentHp)
 			{
-				m_pPlayer->Take_Reward(m_pMonster->Reward(), m_pMonster->Get_Info()->iGold);
+				m_pPlayer->Take_Reward(m_pMonster->Reward(), MONSTER->iGold);
 				return;
 			}
-			else if (0 >= m_pPlayer->Get_Info()->iCurrentHp)
+			else if (0 >= PLAYER->iCurrentHp)
 			{
 				m_pPlayer->Respawn();
 				return;
@@ -46,12 +46,12 @@ void CBattle::Update()
 			break;
 		case 2:
 			Battle_Skill();
-			if (0 >= m_pMonster->Get_Info()->iCurrentHp)
+			if (0 >= MONSTER->iCurrentHp)
 			{
-				m_pPlayer->Take_Reward(m_pMonster->Reward(), m_pMonster->Get_Info()->iGold);
+				m_pPlayer->Take_Reward(m_pMonster->Reward(), MONSTER->iGold);
 				return;
 			}
-			else if (0 >= m_pPlayer->Get_Info()->iCurrentHp)
+			else if (0 >= PLAYER->iCurrentHp)
 			{
 				m_pPlayer->Respawn();
 				return;
@@ -78,49 +78,48 @@ void CBattle::Battle_Normal()
 {
 	
 	iRandom = (rand() % 100) + 1;
-	if (0 < iRandom - (m_pPlayer->Get_Info()->iCritical_Percent))
+	if (0 < iRandom - (PLAYER->iCritical_Percent))
 	{
-		m_pMonster->Damaged(m_pPlayer->Get_Info()->iAttack, m_pPlayer->Get_Info()->eAttack_Type, m_pMonster->Get_Info()->eArmor_Type, m_pMonster->Get_Info());//iRandom 이 20보다 클때 즉, (100 - 크리티컬 확률) 일때
+		m_pMonster->Damaged(m_pPlayer, m_pPlayer->Attack());//iRandom 이 20보다 클때 즉, (100 - 크리티컬 확률) 일때
 	}
 	else
 	{
 		cout << "------플레이어의 크리티컬공격!------" << endl;
-		m_pMonster->Damaged((m_pPlayer->Attack(m_pPlayer->Get_Info()->iAttack)) * 2, m_pPlayer->Get_Info()->eAttack_Type, m_pMonster->Get_Info()->eArmor_Type, m_pMonster->Get_Info()); // 크리티컬
+		m_pMonster->Damaged(m_pPlayer, m_pPlayer->Attack()); // 크리티컬
 	}
-	if (0 >= m_pMonster->Get_Info()->iCurrentHp)
+	if (0 >= MONSTER->iCurrentHp)
 		return;
 	iRandom = (rand() % 100) + 1;
-	if (0 < iRandom - (m_pMonster->Get_Info()->iCritical_Percent))
+	if (0 < iRandom - (MONSTER->iCritical_Percent))
 	{
-		m_pPlayer->Damaged(m_pMonster->Attack(m_pMonster->Get_Info()->iAttack), m_pMonster->Get_Info()->eAttack_Type, m_pPlayer->Get_Info()->eArmor_Type, m_pPlayer->Get_Info());;//iRandom 이 20보다 클때 즉, (100 - 크리티컬 확률) 일때
+		m_pPlayer->Damaged(m_pMonster, m_pMonster->Attack());//iRandom 이 20보다 클때 즉, (100 - 크리티컬 확률) 일때
 	}
 	else
 	{
 		cout << "++++++몬스터의 크리티컬공격!++++++" << endl;
-		m_pPlayer->Damaged((m_pMonster->Attack(m_pMonster->Get_Info()->iAttack)) * 2, m_pMonster->Get_Info()->eAttack_Type, m_pPlayer->Get_Info()->eArmor_Type, m_pPlayer->Get_Info()); // 크리티컬
+		m_pPlayer->Damaged(m_pMonster, m_pMonster->Attack()); // 크리티컬
 	}
-	if (0 >= m_pPlayer->Get_Info()->iCurrentHp)
+	if (0 >= PLAYER->iCurrentHp)
 		return;
 }
 
 void CBattle::Battle_Skill()
 {
 	
-	if (0 != m_pPlayer->Skill())
+	if (0 != PLAYER->iCurrentMana)
 	{
-		m_pMonster->Damaged(m_pPlayer->Skill(), m_pPlayer->Get_Info()->eAttack_Type, m_pMonster->Get_Info()->eArmor_Type, m_pMonster->Get_Info());
-		if (0 >= m_pMonster->Get_Info()->iCurrentHp)
+		m_pMonster->Damaged(m_pPlayer, m_pPlayer->Skill());
+		if (0 >= MONSTER->iCurrentHp)
 		{
-			m_pPlayer->Take_Reward(m_pMonster->Reward(), m_pMonster->Get_Info()->iGold);
+			m_pPlayer->Take_Reward(m_pMonster->Reward(), MONSTER->iGold);
 			return;
 		}
-		m_pPlayer->Damaged(m_pMonster->Attack(m_pMonster->Get_Info()->iAttack), m_pMonster->Get_Info()->eAttack_Type, m_pPlayer->Get_Info()->eArmor_Type, m_pPlayer->Get_Info());
-		if (0 >= m_pPlayer->Get_Info()->iCurrentHp)
+		m_pPlayer->Damaged(m_pMonster, m_pMonster->Attack());
+		if (0 >= PLAYER->iCurrentHp)
 		{
 			m_pPlayer->Respawn();
 			return;
 		}
-		system("pause");
 	}
 	else
 	{
@@ -144,10 +143,10 @@ void CBattle::Battle_UsingTools()
 			{
 				cout << "포션 사용!" << endl;
 				m_pPlayer->Get_Item()->iPotion -= 1;
-				m_pPlayer->Get_Info()->iCurrentHp += 15;
-				if (m_pPlayer->Get_Info()->iMaxHp <= m_pPlayer->Get_Info()->iCurrentHp)
+				PLAYER->iCurrentHp += 15;
+				if (PLAYER->iMaxHp <= PLAYER->iCurrentHp)
 				{
-					m_pPlayer->Get_Info()->iCurrentHp = m_pPlayer->Get_Info()->iMaxHp;
+					PLAYER->iCurrentHp = PLAYER->iMaxHp;
 				}
 				system("pause");
 				return;
@@ -159,10 +158,10 @@ void CBattle::Battle_UsingTools()
 			{
 				cout << "마나포션 사용!" << endl;
 				m_pPlayer->Get_Item()->iManaPotion -= 1;
-				m_pPlayer->Get_Info()->iCurrentMana += 15;
-				if (m_pPlayer->Get_Info()->iMaxMana <= m_pPlayer->Get_Info()->iCurrentMana)
+				PLAYER->iCurrentMana += 15;
+				if (PLAYER->iMaxMana <= PLAYER->iCurrentMana)
 				{
-					m_pPlayer->Get_Info()->iCurrentMana = m_pPlayer->Get_Info()->iMaxMana;
+					PLAYER->iCurrentMana = PLAYER->iMaxMana;
 				}
 				system("pause");
 				return;

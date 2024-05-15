@@ -22,7 +22,7 @@ public:
 public:
 	CObj();
 	~CObj();
-	void Damaged(CObj* _Attacker);
-	int Attack(int _iAttack_Damage);
+	void Damaged(CObj* _Attacker, int _iDamage);
+	int Attack();
 };
 
