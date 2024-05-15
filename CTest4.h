@@ -7,13 +7,13 @@ public:
 	CTest4();
 	~CTest4();
 	void Initialize();
-	//void Update();
+	void Update();
 	void Release();
 	void Push_front(int _iValue);
 	void Push_back(int _iValue);
 	void Pop(int _iValue);
-	void Pop_front();
-	void Pop_back();
+	int Pop_front();
+	int Pop_back();
 	void Print();
 	void Erase();
 

@@ -11,8 +11,7 @@ CTest4::CTest4()
 CTest4::~CTest4()
 {
 	cout << "소멸자 호출" << endl;
-	//Release();
-	cout << "문제?" << endl;
+	Release();
 }
 
 void CTest4::Initialize()
@@ -24,9 +23,55 @@ void CTest4::Initialize()
 	pTail = tMylist;
 }
 
-//void CTest4::Update()
-//{
-//}
+void CTest4::Update()
+{
+	Initialize();
+	int iInput(0), iValue(0);
+	while (true)
+	{
+		system("cls");
+		cout << "1. 추가(앞) 2. 추가(뒤) 3. 삭제(앞) 4. 삭제(뒤) 5. 삭제(특정 값) 6. End" << endl;
+		cin >> iInput;
+		switch (iInput)
+		{
+		case 1:
+			cout << "무슨 값?" << endl;
+			cin >> iValue;
+			Push_front(iValue);
+			cout << "앞에 " << iValue << " 추가완료" << endl;
+			break;
+		case 2:
+			cout << "무슨 값?" << endl;
+			cin >> iValue;
+			Push_back(iValue);
+			cout << "뒤에 " << iValue << " 추가완료" << endl;
+			break;
+		case 3:
+			
+			cout << "앞 에 " << Pop_front() <<" 삭제완료" << endl;
+			break;
+		case 4:
+			cout << "뒤 에 " << Pop_back() << " 삭제완료" << endl;
+			break;
+		case 5:
+			cout << "무슨 값?" << endl;
+			cin >> iValue;
+			Pop(iValue);
+			cout <<  iValue << " 값 삭제완료" << endl;
+			break;
+		case 6:
+			Erase();
+			return;
+			break;
+		
+		default:
+			cout << "wrong" << endl;
+			break;
+		}
+		Print();
+		system("pause");
+	}
+}
 
 void CTest4::Release()
 {
@@ -35,6 +80,7 @@ void CTest4::Release()
 		SAFE_DELETE(tMylist);
 	}
 }
+
 
 void CTest4::Push_front(int _iValue)
 {
@@ -71,7 +117,8 @@ void CTest4::Pop(int _iValue)
 	//this will _iValue == iValue
 	if (pTail == pTemp)
 	{
-		pSour->Next_Index = pHead;
+		if (nullptr != pSour)
+			pSour->Next_Index = pHead;
 		pTail = pSour;
 	}
 	else if (pHead == pTemp)
@@ -89,18 +136,22 @@ void CTest4::Pop(int _iValue)
 	cout << _iValue << " : Target Eliminated" << endl;
 }
 
-void CTest4::Pop_front()
+int CTest4::Pop_front()
 {
+	int iTemp(0);
 	tagList* pTemp = pHead;
 	pTail->Next_Index = pHead->Next_Index;
 	pHead = pHead->Next_Index;
+	iTemp = pTemp->iValue;
 	pTemp->iValue = 0;
 	pTemp->Next_Index = nullptr;
 	SAFE_DELETE(pTemp);
+	return iTemp;
 }
 
-void CTest4::Pop_back()
+int CTest4::Pop_back()
 {
+	int iTemp(0);
 	tagList* pTemp = pHead;
 	while (pTail != pTemp->Next_Index)
 	{
@@ -108,21 +159,26 @@ void CTest4::Pop_back()
 	}
 	pTail = pTemp;
 	pTemp = pTail->Next_Index;
+	iTemp = pTemp->iValue;
 	pTemp->iValue = 0;
 	pTemp->Next_Index = nullptr;
 	pTail->Next_Index = pHead;
 	SAFE_DELETE(pTemp);
+	return iTemp;
 }
 
 void CTest4::Print()
 {
-	tagList* pTemp = pHead;
-	while (pHead != pTemp->Next_Index)
+	if (nullptr != pHead)
 	{
-		cout << "[ " << pTemp->iValue << " ] ";
-		pTemp = pTemp->Next_Index;
+		tagList* pTemp = pHead;
+		while (pHead != pTemp->Next_Index)
+		{
+			cout << "[ " << pTemp->iValue << " ] ";
+			pTemp = pTemp->Next_Index;
+		}
+		cout << "[ " << pTemp->iValue << " ] " << endl;
 	}
-	cout << "[ " << pTemp->iValue << " ] " << endl;
 }
 
 void CTest4::Erase()
@@ -139,5 +195,5 @@ void CTest4::Erase()
 		pTemp = pSour;
 	}
 	pTemp->iValue = 0;
-	SAFE_DELETE(pTail);//왜지?
+	tMylist = pTail;
 }

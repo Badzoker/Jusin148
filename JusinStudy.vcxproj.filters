@@ -36,22 +36,10 @@
     <ClCompile Include="240507.cpp">
       <Filter>소스 파일\2405\Class</Filter>
     </ClCompile>
-    <ClCompile Include="BackUp.cpp">
-      <Filter>소스 파일\Personal\Class</Filter>
-    </ClCompile>
     <ClCompile Include="example.cpp">
       <Filter>소스 파일\Personal\Class</Filter>
     </ClCompile>
-    <ClCompile Include="JusinStudy.cpp">
-      <Filter>소스 파일\Personal\Class</Filter>
-    </ClCompile>
-    <ClCompile Include="Practice.cpp">
-      <Filter>소스 파일\Personal\Class</Filter>
-    </ClCompile>
     <ClCompile Include="0507Student.cpp">
-      <Filter>소스 파일\2405\Class</Filter>
-    </ClCompile>
-    <ClCompile Include="0507MainGame.cpp">
       <Filter>소스 파일\2405\Class</Filter>
     </ClCompile>
     <ClCompile Include="Test.cpp">
@@ -107,16 +95,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="0507MainGame.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="0507Student.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="HomeWork.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="BackUp.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="HomeStudent.h">

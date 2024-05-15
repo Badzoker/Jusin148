@@ -26,17 +26,6 @@ int main()
 	ct.Print();
 	ct.Erase();*/
 	CTest4 ct;
-	ct.Initialize();
-	ct.Push_front(3);
-	ct.Push_back(2);
-	ct.Push_back(7);
-	ct.Push_front(13);
-	ct.Push_back(22);
-	ct.Push_back(42);
-	ct.Print();
-	ct.Pop(7);
-	ct.Pop_back();
-	ct.Print();
-	ct.Erase();
+	ct.Update();
 	return 0;
 }

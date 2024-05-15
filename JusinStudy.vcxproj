@@ -127,16 +127,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="0507MainGame.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="0507Student.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="240507.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="BackUp.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="CTest1.cpp" />
@@ -149,12 +143,6 @@
     </ClCompile>
     <ClCompile Include="HomeStudent.cpp" />
     <ClCompile Include="HomeWork.cpp" />
-    <ClCompile Include="JusinStudy.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Practice.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="Test.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -173,9 +161,7 @@
     <ClCompile Include="TR_Struct.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="0507MainGame.h" />
     <ClInclude Include="0507Student.h" />
-    <ClInclude Include="BackUp.h" />
     <ClInclude Include="CTest3.h" />
     <ClInclude Include="CTest4.h" />
     <ClInclude Include="TR_Obj.h" />
