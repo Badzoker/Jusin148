@@ -6,6 +6,8 @@ CMapBuilder::CMapBuilder()
 	m_pBattle = nullptr;
 	m_pMonster_GameManager = nullptr;
 	m_pCToString = nullptr;
+	cout << "mapbuilder creator" << endl;
+	system("pause");
 }
 
 CMapBuilder::~CMapBuilder()

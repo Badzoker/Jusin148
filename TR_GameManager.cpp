@@ -7,11 +7,14 @@ CGameManager::CGameManager()
 	iRandom = 0;
 	m_pBattle = nullptr;
 	m_pCToString = nullptr;
+	cout << "gamemanager creator" << endl;
+	system("pause");
 }
 
 CGameManager::~CGameManager()
 {
 	Release();
+	system("pause");
 }
 
 void CGameManager::Update()
@@ -34,6 +37,7 @@ void CGameManager::Release()
 {
 	SAFE_DELETE(m_pBattle);
 	SAFE_DELETE(m_pCToString);
+	cout << "gamemanager eliminated" << endl;
 }
 
 void CGameManager::Map_Home()

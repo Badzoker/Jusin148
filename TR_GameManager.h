@@ -16,7 +16,7 @@ public:
 	CToString* m_pCToString;
 public:
 	CGameManager();
-	~CGameManager();
+	virtual ~CGameManager();
 	void Set_Player(CObj* _pPlayer) { m_pPlayer_GameManager = _pPlayer; }//		°ø
 	void Set_Monster(CObj* _pMonster) { m_pMonster_GameManager = _pMonster; }// ¿ë
 	//Battle========
