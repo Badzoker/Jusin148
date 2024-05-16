@@ -147,12 +147,15 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="TestMain.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="TextRpg_ForClass.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="TextRpg_ForClass.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="TR_Battle.cpp" />
+    <ClCompile Include="TR_GameManager.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="TR_MainGame.cpp" />
     <ClCompile Include="TR_MapBuilder.cpp" />
     <ClCompile Include="TR_Monster.cpp" />
@@ -164,6 +167,9 @@
     <ClInclude Include="0507Student.h" />
     <ClInclude Include="CTest3.h" />
     <ClInclude Include="CTest4.h" />
+    <ClInclude Include="TR_GameManager.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="TR_Obj.h" />
     <ClInclude Include="CTest1.h" />
     <ClInclude Include="CTest2.h" />

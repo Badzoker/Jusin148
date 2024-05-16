@@ -2,64 +2,68 @@
 
 CBattle::CBattle()
 {
-	m_pPlayer = nullptr;
-	m_pMonster = nullptr;
+	m_pPlayer_GameManager = nullptr;
+	m_pMonster_GameManager = nullptr;
 	srand(unsigned(time(NULL)));
 	iRandom = 0;
 }
 
 CBattle::~CBattle()
 {
-	Release();
+	//Release();
 }
 
-void CBattle::Initialize()
-{
-
-}
+//void CBattle::Initialize()
+//{
+//
+//}
+// 
+//void CBattle::Release()
+//{
+//}
 
 void CBattle::Update()
 {
 	int iInput(0);
 	while (true)
 	{
-		m_pPlayer->Render();
+		m_pPlayer_GameManager->Render();
 		cout << "===============  v    s  ===============" << endl;
-		m_pMonster->Render();
+		m_pMonster_GameManager->Render();
 		cout << "1. 공격    2. 스킬    3. 도구    4. 도망" << endl;
 		cin >> iInput;
 		switch (iInput)
 		{
 		case 1:
 			Battle_Normal();
-			if (0 >= MONSTER->iCurrentHp)
+			if (0 >= MONSTER_G->iCurrentHp)
 			{
-				m_pPlayer->Take_Reward(m_pMonster->Reward(), MONSTER->iGold);
+				m_pPlayer_GameManager->Take_Reward(m_pMonster_GameManager->Reward(), MONSTER_G->iGold);
 				return;
 			}
-			else if (0 >= PLAYER->iCurrentHp)
+			else if (0 >= PLAYER_G->iCurrentHp)
 			{
-				m_pPlayer->Respawn();
+				m_pPlayer_GameManager->Respawn();
 				return;
 			}
 			system("pause");
 			break;
 		case 2:
 			Battle_Skill();
-			if (0 >= MONSTER->iCurrentHp)
+			if (0 >= MONSTER_G->iCurrentHp)
 			{
-				m_pPlayer->Take_Reward(m_pMonster->Reward(), MONSTER->iGold);
+				m_pPlayer_GameManager->Take_Reward(m_pMonster_GameManager->Reward(), MONSTER_G->iGold);
 				return;
 			}
-			else if (0 >= PLAYER->iCurrentHp)
+			else if (0 >= PLAYER_G->iCurrentHp)
 			{
-				m_pPlayer->Respawn();
+				m_pPlayer_GameManager->Respawn();
 				return;
 			}
 			system("pause");
 			break;
 		case 3:
-			m_pPlayer->Using_Tools();
+			m_pPlayer_GameManager->Using_Tools();
 			system("pause");
 			break;
 		case 4:
@@ -70,54 +74,50 @@ void CBattle::Update()
 	}
 }
 
-void CBattle::Release()
-{
-}
-
 void CBattle::Battle_Normal()
 {
 	
 	iRandom = (rand() % 100) + 1;
-	if (0 < iRandom - (PLAYER->iCritical_Percent))
+	if (0 < iRandom - (PLAYER_G->iCritical_Percent))
 	{
-		m_pMonster->Damaged(m_pPlayer, m_pPlayer->Attack());//iRandom 이 20보다 클때 즉, (100 - 크리티컬 확률) 일때
+		m_pMonster_GameManager->Damaged(m_pPlayer_GameManager, m_pPlayer_GameManager->Attack());//iRandom 이 20보다 클때 즉, (100 - 크리티컬 확률) 일때
 	}
 	else
 	{
 		cout << "------플레이어의 크리티컬공격!------" << endl;
-		m_pMonster->Damaged(m_pPlayer, m_pPlayer->Attack()); // 크리티컬
+		m_pMonster_GameManager->Damaged(m_pPlayer_GameManager, m_pPlayer_GameManager->Attack()); // 크리티컬
 	}
-	if (0 >= MONSTER->iCurrentHp)
+	if (0 >= MONSTER_G->iCurrentHp)
 		return;
 	iRandom = (rand() % 100) + 1;
-	if (0 < iRandom - (MONSTER->iCritical_Percent))
+	if (0 < iRandom - (MONSTER_G->iCritical_Percent))
 	{
-		m_pPlayer->Damaged(m_pMonster, m_pMonster->Attack());//iRandom 이 20보다 클때 즉, (100 - 크리티컬 확률) 일때
+		m_pPlayer_GameManager->Damaged(m_pMonster_GameManager, m_pMonster_GameManager->Attack());//iRandom 이 20보다 클때 즉, (100 - 크리티컬 확률) 일때
 	}
 	else
 	{
 		cout << "++++++몬스터의 크리티컬공격!++++++" << endl;
-		m_pPlayer->Damaged(m_pMonster, m_pMonster->Attack()); // 크리티컬
+		m_pPlayer_GameManager->Damaged(m_pMonster_GameManager, m_pMonster_GameManager->Attack()); // 크리티컬
 	}
-	if (0 >= PLAYER->iCurrentHp)
+	if (0 >= PLAYER_G->iCurrentHp)
 		return;
 }
 
 void CBattle::Battle_Skill()
 {
 	
-	if (0 != PLAYER->iCurrentMana)
+	if (0 != PLAYER_G->iCurrentMana)
 	{
-		m_pMonster->Damaged(m_pPlayer, m_pPlayer->Skill());
-		if (0 >= MONSTER->iCurrentHp)
+		m_pMonster_GameManager->Damaged(m_pPlayer_GameManager, m_pPlayer_GameManager->Skill());
+		if (0 >= MONSTER_G->iCurrentHp)
 		{
-			m_pPlayer->Take_Reward(m_pMonster->Reward(), MONSTER->iGold);
+			m_pPlayer_GameManager->Take_Reward(m_pMonster_GameManager->Reward(), MONSTER_G->iGold);
 			return;
 		}
-		m_pPlayer->Damaged(m_pMonster, m_pMonster->Attack());
-		if (0 >= PLAYER->iCurrentHp)
+		m_pPlayer_GameManager->Damaged(m_pMonster_GameManager, m_pMonster_GameManager->Attack());
+		if (0 >= PLAYER_G->iCurrentHp)
 		{
-			m_pPlayer->Respawn();
+			m_pPlayer_GameManager->Respawn();
 			return;
 		}
 	}
@@ -139,14 +139,14 @@ void CBattle::Battle_UsingTools()
 		switch (iInput)
 		{
 		case 1:
-			if (1 <= m_pPlayer->Get_Item()->iPotion)
+			if (1 <= PLAYER_G_ITEM->iPotion)
 			{
 				cout << "포션 사용!" << endl;
-				m_pPlayer->Get_Item()->iPotion -= 1;
-				PLAYER->iCurrentHp += 15;
-				if (PLAYER->iMaxHp <= PLAYER->iCurrentHp)
+				PLAYER_G_ITEM->iPotion -= 1;
+				PLAYER_G->iCurrentHp += 15;
+				if (PLAYER_G->iMaxHp <= PLAYER_G->iCurrentHp)
 				{
-					PLAYER->iCurrentHp = PLAYER->iMaxHp;
+					PLAYER_G->iCurrentHp = PLAYER_G->iMaxHp;
 				}
 				system("pause");
 				return;
@@ -154,14 +154,14 @@ void CBattle::Battle_UsingTools()
 			cout << "포션 갯수 부족!" << endl;
 			break;
 		case 2:
-			if (1 <= m_pPlayer->Get_Item()->iManaPotion)
+			if (1 <= PLAYER_G_ITEM->iManaPotion)
 			{
 				cout << "마나포션 사용!" << endl;
-				m_pPlayer->Get_Item()->iManaPotion -= 1;
-				PLAYER->iCurrentMana += 15;
-				if (PLAYER->iMaxMana <= PLAYER->iCurrentMana)
+				PLAYER_G_ITEM->iManaPotion -= 1;
+				PLAYER_G->iCurrentMana += 15;
+				if (PLAYER_G->iMaxMana <= PLAYER_G->iCurrentMana)
 				{
-					PLAYER->iCurrentMana = PLAYER->iMaxMana;
+					PLAYER_G->iCurrentMana = PLAYER_G->iMaxMana;
 				}
 				system("pause");
 				return;
@@ -176,14 +176,4 @@ void CBattle::Battle_UsingTools()
 		}
 		system("pause");
 	}
-}
-
-void CBattle::Set_Player(CPlayer* _pPlayer)
-{
-	m_pPlayer = _pPlayer;
-}
-
-void CBattle::Set_Monster(CMonster* _pMonster)
-{
-	m_pMonster = _pMonster;
 }

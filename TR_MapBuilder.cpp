@@ -13,14 +13,14 @@ CMapBuilder::~CMapBuilder()
 	Release();
 }
 
-void CMapBuilder::Initialize()
-{
-	
-}
-
-void CMapBuilder::Update()
-{
-}
+//void CMapBuilder::Initialize()
+//{
+//	
+//}
+//
+//void CMapBuilder::Update()
+//{
+//}
 
 void CMapBuilder::Release()
 {
@@ -101,15 +101,15 @@ void CMapBuilder::Map_Shop_Equip()
 	{
 		system("cls");
 		m_pPlayer->Check_Equip();
-		if (!strcmp(m_pPlayer->Get_Info()->szName, "전사"))
+		if (!strcmp(PLAYER->szName, "전사"))
 		{
 			cout << "1. 장검(1000G)\t2. 방패(1500G)\t3. 돌아가기" << endl;
 		}
-		else if (!strcmp(m_pPlayer->Get_Info()->szName, "마법사"))
+		else if (!strcmp(PLAYER->szName, "마법사"))
 		{
 			cout << "1. 지팡이(1000G)\t2. 마법책(1500G)\t3. 돌아가기" << endl;
 		}
-		else//(!strcmp(m_pPlayer->Get_Info()->szName, "도적"))
+		else//(!strcmp(PLAYER_G->szName, "도적"))
 		{
 			cout << "1. 뾰족한 단검(1000G)\t2. 날쌘 장갑(1500G)\t3. 돌아가기" << endl;
 		}
@@ -117,27 +117,27 @@ void CMapBuilder::Map_Shop_Equip()
 		switch (iInput)
 		{
 		case 1:
-			if (!(m_pPlayer->Get_Item()->bMain_Item))
+			if (!(PLAYER_ITEM->bMain_Item))
 			{
 				
-				if (WEAPON <= m_pPlayer->Get_Info()->iGold)
+				if (WEAPON <= PLAYER->iGold)
 				{
-					m_pPlayer->Get_Info()->iGold -= 1000;
+					PLAYER->iGold -= 1000;
 					cout << "주장비 구매완료!" << endl;
-					m_pPlayer->Get_Item()->bMain_Item = true;
-					if (!strcmp(m_pPlayer->Get_Info()->szName, "전사"))
+					PLAYER_ITEM->bMain_Item = true;
+					if (!strcmp(PLAYER->szName, "전사"))
 					{
-						m_pPlayer->Get_Info()->iAttack += 15; //전사는 공격력 +++
+						PLAYER->iAttack += 15; //전사는 공격력 +++
 					}
-					else if (!strcmp(m_pPlayer->Get_Info()->szName, "마법사"))
+					else if (!strcmp(PLAYER->szName, "마법사"))
 					{
-						m_pPlayer->Get_Info()->iAttack += 10; //마법사는 공격력++ 
-						m_pPlayer->Get_Info()->iCritical_Percent += 5; //치명타+
+						PLAYER->iAttack += 10; //마법사는 공격력++ 
+						PLAYER->iCritical_Percent += 5; //치명타+
 					}
-					else//(!strcmp(m_pPlayer->Get_Info()->szName, "도적"))
+					else//(!strcmp(PLAYER_G->szName, "도적"))
 					{
-						m_pPlayer->Get_Info()->iAttack += 5; //도적은 공격력+
-						m_pPlayer->Get_Info()->iCritical_Percent += 10; //치명타++
+						PLAYER->iAttack += 5; //도적은 공격력+
+						PLAYER->iCritical_Percent += 10; //치명타++
 					}
 				}
 				else
@@ -152,26 +152,26 @@ void CMapBuilder::Map_Shop_Equip()
 			system("pause");
 			break;
 		case 2:
-			if (!(m_pPlayer->Get_Item()->bSub_Item))
+			if (!(PLAYER_ITEM->bSub_Item))
 			{
-				if (SUB_WEAPON <= m_pPlayer->Get_Info()->iGold)
+				if (SUB_WEAPON <= PLAYER->iGold)
 				{
-					m_pPlayer->Get_Info()->iGold -= 1500;
+					PLAYER->iGold -= 1500;
 					cout << "보조장비 구매완료!" << endl;
-					m_pPlayer->Get_Item()->bSub_Item = true;
-					if (!strcmp(m_pPlayer->Get_Info()->szName, "전사"))
+					PLAYER_ITEM->bSub_Item = true;
+					if (!strcmp(PLAYER->szName, "전사"))
 					{
-						m_pPlayer->Get_Info()->iMaxHp += 50; // 전사는 체력+
-						m_pPlayer->Get_Info()->iCurrentHp += 50;
+						PLAYER->iMaxHp += 50; // 전사는 체력+
+						PLAYER->iCurrentHp += 50;
 					}
-					else if (!strcmp(m_pPlayer->Get_Info()->szName, "마법사"))
+					else if (!strcmp(PLAYER->szName, "마법사"))
 					{
-						m_pPlayer->Get_Info()->iMaxMana += 50; // 마법사는 마나+
-						m_pPlayer->Get_Info()->iCurrentMana += 50;
+						PLAYER->iMaxMana += 50; // 마법사는 마나+
+						PLAYER->iCurrentMana += 50;
 					}
-					else//(!strcmp(m_pPlayer->Get_Info()->szName, "도적"))
+					else//(!strcmp(PLAYER_G->szName, "도적"))
 					{
-						m_pPlayer->Get_Info()->iCritical_Percent += 10; //도적은 치명타+
+						PLAYER->iCritical_Percent += 10; //도적은 치명타+
 					}
 					
 				}
@@ -206,12 +206,12 @@ void CMapBuilder::Map_Shop_Consumable()
 		switch (iInput)
 		{
 		case 1:
-			if (HEAL_POTION <= m_pPlayer->Get_Info()->iGold)
+			if (HEAL_POTION <= PLAYER->iGold)
 			{
-				m_pPlayer->Get_Info()->iGold -= 100;
-				m_pPlayer->Get_Item()->iPotion += 1;
+				PLAYER->iGold -= 100;
+				PLAYER_ITEM->iPotion += 1;
 				cout << "체력포션 구매완료!" << endl;
-				cout << "현재 포션수 : " << m_pPlayer->Get_Item()->iPotion << " 개" << endl;
+				cout << "현재 포션수 : " << PLAYER_ITEM->iPotion << " 개" << endl;
 			}
 			else
 			{
@@ -221,12 +221,12 @@ void CMapBuilder::Map_Shop_Consumable()
 			system("pause");
 			break;
 		case 2:
-			if (MANA_POTION <= m_pPlayer->Get_Info()->iGold)
+			if (MANA_POTION <= PLAYER->iGold)
 			{
-				m_pPlayer->Get_Info()->iGold -= 150;
-				m_pPlayer->Get_Item()->iManaPotion += 1;
+				PLAYER->iGold -= 150;
+				PLAYER_ITEM->iManaPotion += 1;
 				cout << "마나포션 구매완료!" << endl;
-				cout << "현재 마나포션수 : " << m_pPlayer->Get_Item()->iManaPotion << " 개" << endl;
+				cout << "현재 마나포션수 : " << PLAYER_ITEM->iManaPotion << " 개" << endl;
 			}
 			else
 			{
@@ -284,9 +284,4 @@ void CMapBuilder::Map_Dungeon()
 			break;
 		}
 	}
-}
-
-void CMapBuilder::Set_Player(CPlayer* _pPlayer)
-{
-	m_pPlayer = _pPlayer;
 }

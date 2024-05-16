@@ -4,6 +4,7 @@ CMainGame::CMainGame()
 {
 	m_pPlayer = nullptr;
 	m_pMapBuilder = nullptr;
+	//m_pCToString = nullptr;
 }
 
 CMainGame::~CMainGame()
@@ -14,7 +15,7 @@ CMainGame::~CMainGame()
 void CMainGame::Initialize()
 {
 	m_pMapBuilder = new CMapBuilder;
-	//m_pMapBuilder->Initialize();
+	//m_pCToString = new CToString;
 }
 
 void CMainGame::Update()
@@ -24,7 +25,6 @@ void CMainGame::Update()
 
 void CMainGame::Release()
 {
-	//SAFE_DELETE(m_pPlayer);
 	SAFE_DELETE(m_pMapBuilder);
 }
 
@@ -39,7 +39,9 @@ void CMainGame::Menu()
 		if (!m_pPlayer)
 		{
 			m_pPlayer = new CPlayer;
+			//m_pPlayer->Set_CToString(m_pCToString);
 			m_pMapBuilder->Set_Player(m_pPlayer);
+			//m_pMapBuilder->Set_CToString(m_pCToString);
 		}
 		switch (iInput)
 		{
@@ -62,4 +64,3 @@ void CMainGame::Menu()
 		}
 	}
 }
-

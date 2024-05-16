@@ -5,6 +5,7 @@ CPlayer::CPlayer()
 	m_Info = nullptr;
 	m_pItem = nullptr;
 	m_pCToString = nullptr;
+	cout << "Player Create" << endl;
 }
 
 CPlayer::~CPlayer()
@@ -241,16 +242,6 @@ void CPlayer::Using_Tools()
 	}
 }
 
-INFO* CPlayer::Get_Info()
-{
-	return m_Info;
-}
-
-ITEM* CPlayer::Get_Item()
-{
-	return m_pItem;
-}
-
 void CPlayer::Initialize(int _iChoose)
 {
 	if (!m_Info)
@@ -302,8 +293,8 @@ void CPlayer::Render()
 	/*if (!m_pCToString)
 	{
 		m_pCToString = new CToString;
-	}*/
-	//m_pCToString->Enum_ToString((ATTACK_TYPE)m_Info->eAttack_Type);
+	}
+	m_pCToString->Enum_ToString((ATTACK_TYPE)m_Info->eAttack_Type);*/
 	system("cls");
 	cout << "================\n직업 : " << m_Info->szName << endl;
 	cout << "체력 : " << m_Info->iCurrentHp << " / " << m_Info->iMaxHp << endl;
@@ -323,5 +314,4 @@ void CPlayer::Release()
 	cout << "플레이어 소멸자 호출" << endl;
 	SAFE_DELETE(m_Info);
 	SAFE_DELETE(m_pItem);
-	//SAFE_DELETE(m_pCToString);
 }

@@ -4,6 +4,7 @@ CObj::CObj()
 {
 	cout << "부모생성자" << endl;
 	m_Info = nullptr;
+	m_pCToString = nullptr;
 	system("pause");
 }
 

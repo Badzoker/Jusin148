@@ -1,10 +1,11 @@
 #include "TR_Monster.h"
 #include "mynamespace.h"
+
 CMonster::CMonster()
 {
 	m_Info = nullptr;
 	srand(unsigned(time(NULL)));
-	iRandom = 0;
+	iRandom_Armor = 0;
 	m_pCToString = nullptr;
 }
 
@@ -27,23 +28,23 @@ void CMonster::Initialize(int _iChoose)
 	m_Info->iCurrentMana = m_Info->iMaxMana;
 	m_Info->iExp = m_Info->iMaxHp;//º¸
 	m_Info->iGold = 500 * _iChoose;//»ó
-	iRandom = rand() % 4;
+	iRandom_Armor = rand() % 4;
 	switch (_iChoose)
 	{
 	case 1:
 		strcpy_s(m_Info->szName, sizeof(m_Info->szName), "±À¹Ù");
 		m_Info->eArmor_Type = ARMOR_LIGHT;
-		m_Info->eAttack_Type = (ATTACK_TYPE)iRandom;
+		m_Info->eAttack_Type = (ATTACK_TYPE)iRandom_Armor;
 		break;
 	case 2:
 		strcpy_s(m_Info->szName, sizeof(m_Info->szName), "ºÎ²ôºÎ²ô");
 		m_Info->eArmor_Type = ARMOR_MEDIUM;
-		m_Info->eAttack_Type = (ATTACK_TYPE)iRandom;
+		m_Info->eAttack_Type = (ATTACK_TYPE)iRandom_Armor;
 		break;
 	case 3:
 		strcpy_s(m_Info->szName, sizeof(m_Info->szName), "ÄíÆÄ");
 		m_Info->eArmor_Type = ARMOR_HEAVY;
-		m_Info->eAttack_Type = (ATTACK_TYPE)iRandom;
+		m_Info->eAttack_Type = (ATTACK_TYPE)iRandom_Armor;
 		break;
 	
 	default:

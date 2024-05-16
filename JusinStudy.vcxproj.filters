@@ -93,6 +93,9 @@
     <ClCompile Include="CTest4.cpp">
       <Filter>ArrayToList</Filter>
     </ClCompile>
+    <ClCompile Include="TR_GameManager.cpp">
+      <Filter>TextRpg</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="0507Student.h">
@@ -148,6 +151,9 @@
     </ClInclude>
     <ClInclude Include="CTest4.h">
       <Filter>ArrayToList</Filter>
+    </ClInclude>
+    <ClInclude Include="TR_GameManager.h">
+      <Filter>TextRpg</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
