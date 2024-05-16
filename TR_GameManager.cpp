@@ -4,12 +4,58 @@ CGameManager::CGameManager()
 {
 	m_pMonster_GameManager = nullptr;
 	m_pPlayer_GameManager = nullptr;
-	cout << "GameManager 생성자 호출" << endl;
-	system("pause");
+	iRandom = 0;
+	m_pBattle = nullptr;
+	m_pCToString = nullptr;
 }
 
 CGameManager::~CGameManager()
 {
-	cout << "GameManager 소멸자 호출" << endl;
-	system("pause");
+	Release();
+}
+
+void CGameManager::Update()
+{
+}
+
+void CGameManager::Battle_Normal()
+{
+}
+
+void CGameManager::Battle_Skill()
+{
+}
+
+void CGameManager::Battle_UsingTools()
+{
+}
+
+void CGameManager::Release()
+{
+	SAFE_DELETE(m_pBattle);
+	SAFE_DELETE(m_pCToString);
+}
+
+void CGameManager::Map_Home()
+{
+}
+
+void CGameManager::Map_Shop()
+{
+}
+
+void CGameManager::Map_Shop_Equip()
+{
+}
+
+void CGameManager::Map_Shop_Consumable()
+{
+}
+
+void CGameManager::Map_Dungeon()
+{
+}
+
+void CGameManager::Set_CToString(CToString* _pCTostring)
+{
 }

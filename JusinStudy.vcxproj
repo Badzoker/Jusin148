@@ -127,28 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="0507Student.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="240507.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="CTest1.cpp" />
-    <ClCompile Include="CTest2.cpp" />
-    <ClCompile Include="CTest3.cpp" />
-    <ClCompile Include="CTest4.cpp" />
     <ClCompile Include="CToString.cpp" />
-    <ClCompile Include="example.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="HomeStudent.cpp" />
-    <ClCompile Include="HomeWork.cpp" />
-    <ClCompile Include="Test.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="TestMain.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="TextRpg_ForClass.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
@@ -164,20 +143,12 @@
     <ClCompile Include="TR_Struct.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="0507Student.h" />
-    <ClInclude Include="CTest3.h" />
-    <ClInclude Include="CTest4.h" />
     <ClInclude Include="TR_GameManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="TR_Obj.h" />
-    <ClInclude Include="CTest1.h" />
-    <ClInclude Include="CTest2.h" />
     <ClInclude Include="CToString.h" />
-    <ClInclude Include="HomeStudent.h" />
-    <ClInclude Include="HomeWork.h" />
     <ClInclude Include="mynamespace.h" />
-    <ClInclude Include="TestStruct.h" />
     <ClInclude Include="TR_Battle.h" />
     <ClInclude Include="TR_Enum.h" />
     <ClInclude Include="TR_MainGame.h" />

@@ -13,44 +13,11 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="소스 파일\Personal">
-      <UniqueIdentifier>{189129f6-7622-407b-ad83-00fa27cb7ae5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\2405">
-      <UniqueIdentifier>{1d18bc94-a35e-4db4-a3e4-13279f016e45}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\2405\Class">
-      <UniqueIdentifier>{f6d5de37-3f22-4969-bc57-62dac6e2a127}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\Personal\Class">
-      <UniqueIdentifier>{bebeda1b-caab-418b-9d89-29d58a8117bf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TextRpg">
       <UniqueIdentifier>{321e64e3-844d-4953-a45f-068f6ddc83c5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ArrayToList">
-      <UniqueIdentifier>{1d92b6f7-60cd-4bd7-ae2e-677090c35b33}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="240507.cpp">
-      <Filter>소스 파일\2405\Class</Filter>
-    </ClCompile>
-    <ClCompile Include="example.cpp">
-      <Filter>소스 파일\Personal\Class</Filter>
-    </ClCompile>
-    <ClCompile Include="0507Student.cpp">
-      <Filter>소스 파일\2405\Class</Filter>
-    </ClCompile>
-    <ClCompile Include="Test.cpp">
-      <Filter>소스 파일\2405\Class</Filter>
-    </ClCompile>
-    <ClCompile Include="HomeStudent.cpp">
-      <Filter>소스 파일\Personal</Filter>
-    </ClCompile>
-    <ClCompile Include="HomeWork.cpp">
-      <Filter>소스 파일\Personal</Filter>
-    </ClCompile>
     <ClCompile Include="TextRpg_ForClass.cpp">
       <Filter>TextRpg</Filter>
     </ClCompile>
@@ -75,38 +42,14 @@
     <ClCompile Include="CToString.cpp">
       <Filter>TextRpg</Filter>
     </ClCompile>
-    <ClCompile Include="CTest1.cpp">
-      <Filter>ArrayToList</Filter>
-    </ClCompile>
-    <ClCompile Include="TestMain.cpp">
-      <Filter>ArrayToList</Filter>
-    </ClCompile>
-    <ClCompile Include="CTest2.cpp">
-      <Filter>ArrayToList</Filter>
-    </ClCompile>
     <ClCompile Include="TR_OBJ.CPP">
       <Filter>TextRpg</Filter>
-    </ClCompile>
-    <ClCompile Include="CTest3.cpp">
-      <Filter>ArrayToList</Filter>
-    </ClCompile>
-    <ClCompile Include="CTest4.cpp">
-      <Filter>ArrayToList</Filter>
     </ClCompile>
     <ClCompile Include="TR_GameManager.cpp">
       <Filter>TextRpg</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="0507Student.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="HomeWork.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="HomeStudent.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="mynamespace.h">
       <Filter>TextRpg</Filter>
     </ClInclude>
@@ -134,23 +77,8 @@
     <ClInclude Include="CToString.h">
       <Filter>TextRpg</Filter>
     </ClInclude>
-    <ClInclude Include="CTest1.h">
-      <Filter>ArrayToList</Filter>
-    </ClInclude>
-    <ClInclude Include="CTest2.h">
-      <Filter>ArrayToList</Filter>
-    </ClInclude>
-    <ClInclude Include="TestStruct.h">
-      <Filter>ArrayToList</Filter>
-    </ClInclude>
     <ClInclude Include="TR_Obj.h">
       <Filter>TextRpg</Filter>
-    </ClInclude>
-    <ClInclude Include="CTest3.h">
-      <Filter>ArrayToList</Filter>
-    </ClInclude>
-    <ClInclude Include="CTest4.h">
-      <Filter>ArrayToList</Filter>
     </ClInclude>
     <ClInclude Include="TR_GameManager.h">
       <Filter>TextRpg</Filter>

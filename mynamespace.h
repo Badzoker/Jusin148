@@ -5,8 +5,8 @@
 
 using namespace std;
 
-#define SAFE_DELETE(p) if(p != nullptr){delete p;p = nullptr;}
-#define SAFE_DELETE_ARRAY(p) if(p != nullptr){delete[] p;p = nullptr;}
+#define SAFE_DELETE(p) if(p!=nullptr){delete p;p = nullptr;}
+#define SAFE_DELETE_ARRAY(p) if(p!=nullptr){delete[] p;p = nullptr;}
 #define PLAYER m_pPlayer->Get_Info()
 #define PLAYER_G m_pPlayer_GameManager->Get_Info()
 #define PLAYER_ITEM m_pPlayer->Get_Item()

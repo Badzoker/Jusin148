@@ -7,7 +7,7 @@ class CBattle : public CGameManager
 private:
 	//CPlayer* m_pPlayer;
 	//CMonster* m_pMonster;
-	int iRandom;
+	//int iRandom;
 public:
 	CBattle();
 	~CBattle();

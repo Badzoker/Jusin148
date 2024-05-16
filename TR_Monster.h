@@ -5,7 +5,7 @@ class CMonster : public CObj
 {
 private:
 	//CToString* m_pCToString;
-	int iRandom_Armor;
+	//int iRandom_Armor;
 public:
 	CMonster();
 	~CMonster();

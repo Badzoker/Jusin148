@@ -3,9 +3,8 @@
 CPlayer::CPlayer()
 {
 	m_Info = nullptr;
-	m_pItem = nullptr;
+	//m_Item = nullptr;
 	m_pCToString = nullptr;
-	cout << "Player Create" << endl;
 }
 
 CPlayer::~CPlayer()
@@ -70,7 +69,7 @@ void CPlayer::Level_Up()
 void CPlayer::Load()
 {
 	m_Info = new INFO;
-	m_pItem = new ITEM;
+	m_Item = new ITEM;
 	FILE* pFileJob = NULL;
 	FILE* pFileItem = NULL;
 	errno_t errReadJob = 0;
@@ -80,7 +79,7 @@ void CPlayer::Load()
 	if (0 == errReadJob && 0 == errReadItem)
 	{
 		fread(m_Info, sizeof(INFO), 1, pFileJob);
-		fread(m_pItem, sizeof(ITEM), 1, pFileItem);
+		fread(m_Item, sizeof(ITEM), 1, pFileItem);
 		fclose(pFileJob);
 		fclose(pFileItem);
 	}
@@ -105,7 +104,7 @@ void CPlayer::Save()
 	{
 		cout << "저장됨" << endl;
 		fwrite(m_Info, sizeof(INFO), 1, pFileJob);
-		fwrite(m_pItem, sizeof(ITEM), 1, pFileItem);
+		fwrite(m_Item, sizeof(ITEM), 1, pFileItem);
 		fclose(pFileJob);
 		fclose(pFileItem);
 	}
@@ -119,20 +118,20 @@ void CPlayer::Save()
 void CPlayer::Check_Equip()
 {
 	char cTemp[32] = {};
-	if (m_pItem->bMain_Item)
+	if (m_Item->bMain_Item)
 		strcpy_s(cTemp, sizeof(cTemp), "착용중");
 	else
 		strcpy_s(cTemp, sizeof(cTemp), "없음");
 	cout << "주장비 : " << cTemp << endl;
 
-	if (m_pItem->bSub_Item)
+	if (m_Item->bSub_Item)
 		strcpy_s(cTemp, sizeof(cTemp), "착용중");
 	else
 		strcpy_s(cTemp, sizeof(cTemp), "없음");
 	cout << "보조장비 : " << cTemp << endl;
 
-	cout << "체력포션 : " << m_pItem->iPotion << " 개" << endl;
-	cout << "마나포션 : " << m_pItem->iManaPotion << " 개" << endl;
+	cout << "체력포션 : " << m_Item->iPotion << " 개" << endl;
+	cout << "마나포션 : " << m_Item->iManaPotion << " 개" << endl;
 	cout << "소지 골드 : " << m_Info->iGold << " G" << endl;
 }
 
@@ -203,10 +202,10 @@ void CPlayer::Using_Tools()
 		switch (iInput)
 		{
 		case 1:
-			if (1 <= m_pItem->iPotion)
+			if (1 <= m_Item->iPotion)
 			{
 				cout << "포션 사용!" << endl;
-				m_pItem->iPotion -= 1;
+				m_Item->iPotion -= 1;
 				m_Info->iCurrentHp += 15;
 				if (m_Info->iMaxHp <= m_Info->iCurrentHp)
 				{
@@ -218,10 +217,10 @@ void CPlayer::Using_Tools()
 			cout << "포션 갯수 부족!" << endl;
 			break;
 		case 2:
-			if (1 <= m_pItem->iManaPotion)
+			if (1 <= m_Item->iManaPotion)
 			{
 				cout << "마나포션 사용!" << endl;
-				m_pItem->iManaPotion -= 1;
+				m_Item->iManaPotion -= 1;
 				m_Info->iCurrentMana += 15;
 				if (m_Info->iMaxMana <= m_Info->iCurrentMana)
 				{
@@ -246,10 +245,10 @@ void CPlayer::Initialize(int _iChoose)
 {
 	if (!m_Info)
 		m_Info = new INFO;
-	if (!m_pItem)
-		m_pItem = new ITEM;
+	if (!m_Item)
+		m_Item = new ITEM;
 	memset(m_Info, 0, sizeof(INFO));
-	memset(m_pItem, 0, sizeof(ITEM));
+	memset(m_Item, 0, sizeof(ITEM));
 	m_Info->iLevel = 1;
 	m_Info->iMaxExp = 100;
 	switch (_iChoose)
@@ -313,5 +312,5 @@ void CPlayer::Release()
 {
 	cout << "플레이어 소멸자 호출" << endl;
 	SAFE_DELETE(m_Info);
-	SAFE_DELETE(m_pItem);
+	SAFE_DELETE(m_Item);
 }

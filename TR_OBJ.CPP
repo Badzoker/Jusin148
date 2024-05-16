@@ -2,15 +2,16 @@
 
 CObj::CObj()
 {
-	cout << "부모생성자" << endl;
 	m_Info = nullptr;
 	m_pCToString = nullptr;
-	system("pause");
+	m_Item = nullptr;
+	iRandom_Armor = 0;
 }
 
 CObj::~CObj()
 {
-	cout << "부모소멸자" << endl;
+	cout << "parent eliminated" << endl;
+	Release();
 	system("pause");
 }
 
@@ -49,11 +50,9 @@ void CObj::Damaged(CObj* _Attacker, int _iDamage) // _Target
 	if (0 >= m_Info->iCurrentHp)
 	{
 		cout << m_Info->szName << " 가 " << iDamage_Final << " 만큼 피해를 입고 죽었다!" << endl;
-		cout << "부모의 데미지 함수" << endl;
 		return;
 	}
 	cout << m_Info->szName << " 가 " << iDamage_Final << " 만큼 피해를 입었다!" << endl;
-	cout << "부모의 데미지 함수" << endl;
 }
 //void CObj::Damaged(int _iDamage, ATTACK_TYPE _eAttacked_Type, ARMOR_TYPE _eMyArmor_Type, INFO* _tTarget)
 //{
@@ -99,6 +98,52 @@ void CObj::Damaged(CObj* _Attacker, int _iDamage) // _Target
 
 int CObj::Attack()
 {
-	cout << "부모의 공격 함수" << endl;
 	return m_Info->iAttack;
+}
+
+void CObj::Initialize(int _iChoose)
+{
+}
+
+void CObj::Render()
+{
+}
+
+void CObj::Release()
+{
+	SAFE_DELETE(m_Info);
+	SAFE_DELETE(m_Item);
+}
+
+void CObj::Level_Up()
+{
+}
+
+void CObj::Load()
+{
+}
+
+void CObj::Save()
+{
+}
+
+void CObj::Check_Equip()
+{
+}
+
+void CObj::Respawn()
+{
+}
+
+void CObj::Take_Reward(int _iReward, int _iGold)
+{
+}
+
+int CObj::Skill()
+{
+	return 0;
+}
+
+void CObj::Using_Tools()
+{
 }

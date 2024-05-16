@@ -1,5 +1,6 @@
 #pragma once
 #include "mynamespace.h"
+
 class CToString
 {
 private:

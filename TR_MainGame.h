@@ -4,8 +4,8 @@
 class CMainGame
 {
 private:
-	CPlayer* m_pPlayer;
-	CMapBuilder* m_pMapBuilder;
+	CObj* m_pPlayer;
+	CGameManager* m_pMapBuilder;
 	//CToString* m_pCToString;
 public:
 	CMainGame();
