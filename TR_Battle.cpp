@@ -10,6 +10,8 @@ CBattle::CBattle()
 
 CBattle::~CBattle()
 {
+	cout << "child battle Eliminated" << endl;
+	system("pause");
 	//Release();
 }
 
@@ -85,7 +87,7 @@ void CBattle::Battle_Normal()
 	else
 	{
 		cout << "------플레이어의 크리티컬공격!------" << endl;
-		m_pMonster_GameManager->Damaged(m_pPlayer_GameManager, m_pPlayer_GameManager->Attack()); // 크리티컬
+		m_pMonster_GameManager->Damaged(m_pPlayer_GameManager, (m_pPlayer_GameManager->Attack()) * 2); // 크리티컬
 	}
 	if (0 >= MONSTER_G->iCurrentHp)
 		return;
@@ -97,7 +99,7 @@ void CBattle::Battle_Normal()
 	else
 	{
 		cout << "++++++몬스터의 크리티컬공격!++++++" << endl;
-		m_pPlayer_GameManager->Damaged(m_pMonster_GameManager, m_pMonster_GameManager->Attack()); // 크리티컬
+		m_pPlayer_GameManager->Damaged(m_pMonster_GameManager, (m_pMonster_GameManager->Attack()) * 2); // 크리티컬
 	}
 	if (0 >= PLAYER_G->iCurrentHp)
 		return;
@@ -105,19 +107,32 @@ void CBattle::Battle_Normal()
 
 void CBattle::Battle_Skill()
 {
-	
+	iRandom = (rand() % 100) + 1;
 	if (0 != PLAYER_G->iCurrentMana)
 	{
-		m_pMonster_GameManager->Damaged(m_pPlayer_GameManager, m_pPlayer_GameManager->Skill());
+		if (0 < iRandom - (PLAYER_G->iCritical_Percent))
+		{
+			m_pMonster_GameManager->Damaged(m_pPlayer_GameManager, m_pPlayer_GameManager->Skill());
+		}
+		else
+		{
+			m_pMonster_GameManager->Damaged(m_pPlayer_GameManager, (m_pPlayer_GameManager->Skill()) * 2);
+		}
 		if (0 >= MONSTER_G->iCurrentHp)
 		{
-			m_pPlayer_GameManager->Take_Reward(m_pMonster_GameManager->Reward(), MONSTER_G->iGold);
 			return;
 		}
-		m_pPlayer_GameManager->Damaged(m_pMonster_GameManager, m_pMonster_GameManager->Attack());
+		if (0 < iRandom - (MONSTER_G->iCritical_Percent))
+		{
+			m_pPlayer_GameManager->Damaged(m_pMonster_GameManager, m_pMonster_GameManager->Attack());
+		}
+		else
+		{
+			m_pPlayer_GameManager->Damaged(m_pMonster_GameManager, (m_pMonster_GameManager->Attack())*2);
+		}
+		
 		if (0 >= PLAYER_G->iCurrentHp)
 		{
-			m_pPlayer_GameManager->Respawn();
 			return;
 		}
 	}

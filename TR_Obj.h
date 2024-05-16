@@ -12,10 +12,10 @@ public:
 public:
 	CObj();
 	~CObj();
-	void Damaged(CObj* _Attacker, int _iDamage);
+	void Damaged(CObj* _Attacker, int _iDamage);//  °ø
 	int Attack();
 	void Set_CToString(CToString* _pCToString) { m_pCToString = _pCToString; }
-	INFO* Get_Info() { return m_Info; }
+	INFO* Get_Info() { return m_Info; }//			¿ë
 	//====player
 	virtual void Initialize(int _iChoose);
 	virtual void Render();
@@ -28,7 +28,7 @@ public:
 	virtual void Take_Reward(int _iReward, int _iGold);
 	virtual int Skill();
 	virtual void Using_Tools();
-	ITEM* Get_Item() { return m_Item; }
+	ITEM* Get_Item() { return m_Item; }//player only
 	//====monster
 	virtual int Reward() { return m_Info->iMaxHp; }
 };

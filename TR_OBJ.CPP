@@ -17,29 +17,29 @@ CObj::~CObj()
 
 void CObj::Damaged(CObj* _Attacker, int _iDamage) // _Target
 {
-	int iDamage_Final = _Attacker->m_Info->iAttack;
+	int iDamage_Final = _iDamage;
 	switch (_Attacker->m_Info->eAttack_Type)
 	{
 	case ATTACK_NORMAL:
 		if (ARMOR_MEDIUM == m_Info->eArmor_Type)
-			iDamage_Final = _Attacker->m_Info->iAttack * 2;
+			iDamage_Final *= 2;
 		else if (ARMOR_LIGHT == m_Info->eArmor_Type)
-			iDamage_Final = (int)(_Attacker->m_Info->iAttack / 2);
+			iDamage_Final /= 2;
 		break;
 	case ATTACK_MAGIC:
 		if (ARMOR_HEAVY == m_Info->eArmor_Type)
-			iDamage_Final = _Attacker->m_Info->iAttack * 2;
+			iDamage_Final *= 2;
 		else if (ARMOR_MEDIUM == m_Info->eArmor_Type)
-			iDamage_Final = (int)(_Attacker->m_Info->iAttack / 2);
+			iDamage_Final /= 2;
 		break;
 	case ATTACK_LIGHT:
 		if (ARMOR_LIGHT == m_Info->eArmor_Type)
-			iDamage_Final = _Attacker->m_Info->iAttack * 2;
+			iDamage_Final *= 2;
 		else if (ARMOR_HEAVY == m_Info->eArmor_Type)
-			iDamage_Final = (int)(_Attacker->m_Info->iAttack / 2);
+			iDamage_Final /=2;
 		break;
 	case ATTACK_CHAOS:
-		iDamage_Final = (int)((float)_Attacker->m_Info->iAttack * 1.2f);
+		iDamage_Final *= 1.2f;
 		break;
 	case ATTACK_TYPE_END:
 		break;

@@ -9,6 +9,8 @@ CPlayer::CPlayer()
 
 CPlayer::~CPlayer()
 {
+	cout << "player child eliminated" << endl;
+	system("pause");
 	Release();
 }
 
@@ -169,7 +171,7 @@ int CPlayer::Skill()
 			{
 				cout << "기본 스킬 사용!" << endl;
 				m_Info->iCurrentMana -= 5;
-				return m_Info->iAttack + 5;
+				return (m_Info->iAttack + 5);
 			}
 			cout << "마나 부족!" << endl;
 			break;
@@ -178,7 +180,7 @@ int CPlayer::Skill()
 			{
 				cout << "기본 스킬 사용!" << endl;
 				m_Info->iCurrentMana -= 20;
-				return m_Info->iAttack + 20;
+				return (m_Info->iAttack + 20);
 			}
 			cout << "마나 부족!" << endl;
 			break;

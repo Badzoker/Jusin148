@@ -14,7 +14,7 @@ CMainGame::~CMainGame()
 
 void CMainGame::Initialize()
 {
-	m_pMapBuilder = new CMapBuilder;
+	m_pMapBuilder = new CMapBuilder; //여기서 할당하고 여기서 해제
 	//m_pCToString = new CToString;
 }
 

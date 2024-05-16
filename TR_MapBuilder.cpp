@@ -28,7 +28,8 @@ void CMapBuilder::Release()
 	SAFE_DELETE(m_pBattle);
 	SAFE_DELETE(m_pCToString);
 	SAFE_DELETE(m_pPlayer_GameManager);
-	cout << "mapbuilder eliminated" << endl;
+	cout << "mapbuilder eliminated" << endl; //¾ÈºÒ¸²..
+	system("pause");
 }
 
 void CMapBuilder::Map_Home()
