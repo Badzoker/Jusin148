@@ -11,7 +11,7 @@ public:
 	int iRandom_Armor;
 public:
 	CObj();
-	~CObj();
+	virtual ~CObj();
 	void Damaged(CObj* _Attacker, int _iDamage);//  °ø
 	int Attack();
 	void Set_CToString(CToString* _pCToString) { m_pCToString = _pCToString; }

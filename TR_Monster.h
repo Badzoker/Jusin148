@@ -8,7 +8,7 @@ private:
 	//int iRandom_Armor;
 public:
 	CMonster();
-	~CMonster();
+	virtual ~CMonster();
 	void Initialize(int _iChoose);
 	void Render();
 	//void Update();

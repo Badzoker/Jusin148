@@ -9,7 +9,7 @@ private:
 	//ITEM* m_pItem;
 public:
 	CPlayer();
-	~CPlayer();
+	virtual ~CPlayer();
 	void Initialize(int _iChoose);
 	//void Update();
 	void Render();

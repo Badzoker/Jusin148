@@ -13,7 +13,7 @@ private:
 
 public:
 	CMapBuilder();
-	~CMapBuilder();
+	virtual ~CMapBuilder();
 	//void Initialize();
 	//void Update();
 	void Release();
@@ -21,6 +21,9 @@ public:
 	void Map_Shop();
 	void Map_Shop_Equip();
 	void Map_Shop_Consumable();
+	void Map_Shop_Manager();
+	void Map_Shop_Save();
+	void Map_Shop_Load();
 	void Map_Dungeon();
 
 	//void Set_Player(CObj* _pPlayer) { m_pPlayer = _pPlayer; }

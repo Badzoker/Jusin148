@@ -48,6 +48,9 @@
     <ClCompile Include="TR_GameManager.cpp">
       <Filter>TextRpg</Filter>
     </ClCompile>
+    <ClCompile Include="TR_Shop.cpp">
+      <Filter>TextRpg</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mynamespace.h">
@@ -81,6 +84,9 @@
       <Filter>TextRpg</Filter>
     </ClInclude>
     <ClInclude Include="TR_GameManager.h">
+      <Filter>TextRpg</Filter>
+    </ClInclude>
+    <ClInclude Include="TR_Shop.h">
       <Filter>TextRpg</Filter>
     </ClInclude>
   </ItemGroup>

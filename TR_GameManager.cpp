@@ -7,14 +7,12 @@ CGameManager::CGameManager()
 	iRandom = 0;
 	m_pBattle = nullptr;
 	m_pCToString = nullptr;
-	cout << "gamemanager creator" << endl;
-	system("pause");
+	m_pShop = nullptr;
 }
 
 CGameManager::~CGameManager()
 {
 	Release();
-	system("pause");
 }
 
 void CGameManager::Update()
@@ -53,6 +51,18 @@ void CGameManager::Map_Shop_Equip()
 }
 
 void CGameManager::Map_Shop_Consumable()
+{
+}
+
+void CGameManager::Map_Shop_Manager()
+{
+}
+
+void CGameManager::Map_Shop_Save()
+{
+}
+
+void CGameManager::Map_Shop_Load()
 {
 }
 

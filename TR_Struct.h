@@ -31,6 +31,16 @@ typedef struct tagItem
 	int iManaPotion;
 }ITEM;
 
+typedef struct tagShop
+{
+	tagShop();
+	~tagShop();
+	bool bIs_Main; // mainÀÌ³Ä sub³Ä
+	char szName[32];
+	int iGold;
+	int iCount;
+}SHOP;
+
 //typedef struct tagInfo_Mon
 //{
 //	tagInfo_Mon();

@@ -9,8 +9,6 @@ CPlayer::CPlayer()
 
 CPlayer::~CPlayer()
 {
-	cout << "player child eliminated" << endl;
-	system("pause");
 	Release();
 }
 

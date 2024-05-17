@@ -10,7 +10,7 @@ private:
 	//int iRandom;
 public:
 	CBattle();
-	~CBattle();
+	virtual ~CBattle();
 	void Update();
 	//void Initialize();
 	//void Release();

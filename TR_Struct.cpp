@@ -28,3 +28,12 @@ tagItem::~tagItem()
 //tagInfo_Mon::~tagInfo_Mon()
 //{
 //}
+
+tagShop::tagShop()
+{
+	memset(this, 0, sizeof(SHOP));
+}
+
+tagShop::~tagShop()
+{
+}

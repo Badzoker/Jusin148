@@ -6,8 +6,6 @@ CMapBuilder::CMapBuilder()
 	m_pBattle = nullptr;
 	m_pMonster_GameManager = nullptr;
 	m_pCToString = nullptr;
-	cout << "mapbuilder creator" << endl;
-	system("pause");
 }
 
 CMapBuilder::~CMapBuilder()
@@ -81,7 +79,7 @@ void CMapBuilder::Map_Shop()
 	{
 		system("cls");
 		m_pPlayer_GameManager->Check_Equip();
-		cout << "1. 장비\t2. 도구\t3. 돌아가기" << endl;
+		cout << "1. 장비\t2. 도구\t3. 돌아가기     4.관리자" << endl;
 		cin >> iInput;
 		switch (iInput)
 		{
@@ -93,6 +91,9 @@ void CMapBuilder::Map_Shop()
 			break;
 		case 3:
 			return;
+		case 4:
+			Map_Shop_Manager();
+			break;
 		default:
 			cout << "wrong" << endl;
 			break;
@@ -247,6 +248,124 @@ void CMapBuilder::Map_Shop_Consumable()
 			cout << "잘못 입력했습니다." << endl;
 			break;
 		}
+	}
+}
+
+void CMapBuilder::Map_Shop_Manager()
+{
+	Map_Shop_Load();
+	char szTemp[32] = {};
+	int iInput(0);
+	if (!m_pShop)
+	{
+		m_pShop = new SHOP;
+	}
+	SHOP* tTemp = nullptr;
+	while (true)
+	{
+		system("cls");
+		cout << "1. 아이템 추가   2. 이전   3. 출력   4. 저장" << endl;
+		cin >> iInput;
+		switch (iInput)
+		{
+		case 1:
+			if (0 != m_pShop->iCount)
+			{
+				tTemp = new SHOP[(m_pShop->iCount) + 1];
+				memcpy(tTemp, m_pShop, sizeof(SHOP) * (m_pShop->iCount));
+				SAFE_DELETE_ARRAY(m_pShop);
+				m_pShop = tTemp;
+			}
+			cout << "주장비 입니까?  1. Y  2. N" << endl;
+			cin >> iInput;
+			if (1 == iInput)
+				m_pShop[m_pShop->iCount].bIs_Main = true;
+			else
+				m_pShop[m_pShop->iCount].bIs_Main = false;
+
+			cout << "아이템 이름이 뭡니까? :" << endl;
+			cin >> szTemp;
+			strcpy_s(m_pShop[m_pShop->iCount].szName, sizeof(szTemp), szTemp);
+			cout << "가격은 얼맙니까? :" << endl;
+			cin >> iInput;
+			m_pShop[m_pShop->iCount].iGold = iInput;
+			cout << "등록된 물품은\n주장비? : " << m_pShop[m_pShop->iCount].bIs_Main << "\n이름 : " << m_pShop[m_pShop->iCount].szName << "\n가격 : " << m_pShop[m_pShop->iCount].iGold << endl;
+			m_pShop->iCount += 1;
+			cout << "등록된 물품은 총 " << m_pShop->iCount << "개 입니다." << endl;
+			break;
+		case 2:
+			SAFE_DELETE_ARRAY(m_pShop);
+			return;
+		case 3:
+			for (int i = 0; i < m_pShop->iCount; i++)
+			{
+				cout << "등록된 물품은\n주장비? : " << m_pShop[i].bIs_Main << "\n이름 : " << m_pShop[i].szName << "\n가격 : " << m_pShop[i].iGold << endl << endl;
+			}
+			cout << "등록된 물품은 총 " << m_pShop->iCount << "개 입니다." << endl;
+			break;
+		case 4:
+			Map_Shop_Save();
+			break;
+		default:
+			break;
+		}
+	}
+}
+
+void CMapBuilder::Map_Shop_Save()
+{
+	FILE* pFileShop = NULL;
+	errno_t errReadItem = 0;
+	errReadItem = fopen_s(&pFileShop, "./Data/Info/Shop.txt", "wb");
+	if (0 == errReadItem)
+	{
+		fwrite(m_pShop, sizeof(SHOP), m_pShop->iCount, pFileShop);
+		fclose(pFileShop);
+		cout << "상점 저장 성공" << endl;
+		system("pause");
+	}
+	else
+	{
+		cout << "상점 저장 실패" << endl;
+		system("pause");
+	}
+}
+
+void CMapBuilder::Map_Shop_Load()
+{
+	SHOP* pTemp = new SHOP;
+	FILE* pFileShop = NULL;
+	errno_t errReadItem = 0;
+	errReadItem = fopen_s(&pFileShop, "./Data/Info/Shop.txt", "rb");
+	if (0 == errReadItem)
+	{
+		fread(pTemp, sizeof(SHOP), 1, pFileShop);
+		fclose(pFileShop);
+		cout << "상점 갯수 불러오기 성공" << endl;
+		system("pause");
+		if (0 == errReadItem)
+		{
+			m_pShop = new SHOP[pTemp->iCount];
+			fread(m_pShop, sizeof(SHOP), pTemp->iCount, pFileShop);
+			fclose(pFileShop);
+			cout << "상점 불러오기 성공" << endl;
+			SAFE_DELETE(pTemp);
+			system("pause");
+		}
+		else
+		{
+			cout << "상점 불러오기 실패" << endl;
+			system("pause");
+		}
+	}
+	else
+	{
+		cout << "상점 갯수 불러오기 실패" << endl;
+		system("pause");
+	}
+	if (nullptr != pTemp)
+	{
+		SAFE_DELETE(pTemp);
 	}
 }
 

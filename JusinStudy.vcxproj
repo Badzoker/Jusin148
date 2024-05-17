@@ -140,6 +140,7 @@
     <ClCompile Include="TR_Monster.cpp" />
     <ClCompile Include="TR_OBJ.CPP" />
     <ClCompile Include="TR_Player.cpp" />
+    <ClCompile Include="TR_Shop.cpp" />
     <ClCompile Include="TR_Struct.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -155,6 +156,7 @@
     <ClInclude Include="TR_MapBuilder.h" />
     <ClInclude Include="TR_Monster.h" />
     <ClInclude Include="TR_Player.h" />
+    <ClInclude Include="TR_Shop.h" />
     <ClInclude Include="TR_Struct.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -11,8 +11,6 @@ CMonster::CMonster()
 
 CMonster::~CMonster()
 {
-	cout << "child monster eliminated" << endl;
-	system("pause");
 	Release();
 }
 

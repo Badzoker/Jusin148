@@ -10,8 +10,6 @@ CBattle::CBattle()
 
 CBattle::~CBattle()
 {
-	cout << "child battle Eliminated" << endl;
-	system("pause");
 	//Release();
 }
 

@@ -10,7 +10,6 @@ CMainGame::CMainGame()
 CMainGame::~CMainGame()
 {
 	Release();
-	cout << "main game eliminated" << endl;
 }
 
 void CMainGame::Initialize()

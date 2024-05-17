@@ -10,9 +10,7 @@ CObj::CObj()
 
 CObj::~CObj()
 {
-	cout << "parent eliminated" << endl;
 	Release();
-	system("pause");
 }
 
 void CObj::Damaged(CObj* _Attacker, int _iDamage) // _Target
@@ -39,7 +37,7 @@ void CObj::Damaged(CObj* _Attacker, int _iDamage) // _Target
 			iDamage_Final /=2;
 		break;
 	case ATTACK_CHAOS:
-		iDamage_Final *= 1.2f;
+		iDamage_Final = iDamage_Final + (int)(iDamage_Final * 0.2f);
 		break;
 	case ATTACK_TYPE_END:
 		break;
