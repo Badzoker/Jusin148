@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <stdio.h>
 #include "CToString.h"
 #include "TR_Enum.h"
 

@@ -283,15 +283,20 @@ void CMapBuilder::Map_Shop_Manager()
 			else
 				m_pShop[m_pShop->iCount].bIs_Main = false;
 
+			
 			cout << "아이템 이름이 뭡니까? :" << endl;
-			cin >> szTemp;
-			strcpy_s(m_pShop[m_pShop->iCount].szName, sizeof(szTemp), szTemp);
+			cin >> m_pShop[m_pShop->iCount].szName;
+			//gets_s(m_pShop[m_pShop->iCount].szName, sizeof(m_pShop[m_pShop->iCount].szName));
+			//fgets(szTemp, sizeof(szTemp), stdin);
+			//strcpy_s()
+			cout << "이름 입력완료" << endl;
 			cout << "가격은 얼맙니까? :" << endl;
 			cin >> iInput;
 			m_pShop[m_pShop->iCount].iGold = iInput;
 			cout << "등록된 물품은\n주장비? : " << m_pShop[m_pShop->iCount].bIs_Main << "\n이름 : " << m_pShop[m_pShop->iCount].szName << "\n가격 : " << m_pShop[m_pShop->iCount].iGold << endl;
 			m_pShop->iCount += 1;
 			cout << "등록된 물품은 총 " << m_pShop->iCount << "개 입니다." << endl;
+			system("pause");
 			break;
 		case 2:
 			SAFE_DELETE_ARRAY(m_pShop);
@@ -302,6 +307,7 @@ void CMapBuilder::Map_Shop_Manager()
 				cout << "등록된 물품은\n주장비? : " << m_pShop[i].bIs_Main << "\n이름 : " << m_pShop[i].szName << "\n가격 : " << m_pShop[i].iGold << endl << endl;
 			}
 			cout << "등록된 물품은 총 " << m_pShop->iCount << "개 입니다." << endl;
+			system("pause");
 			break;
 		case 4:
 			Map_Shop_Save();
@@ -334,13 +340,16 @@ void CMapBuilder::Map_Shop_Save()
 void CMapBuilder::Map_Shop_Load()
 {
 	SHOP* pTemp = new SHOP;
+	FILE* pFileShopCount = NULL;
 	FILE* pFileShop = NULL;
+	errno_t errReadItemCount = 0;
 	errno_t errReadItem = 0;
+	errReadItemCount = fopen_s(&pFileShopCount, "./Data/Info/Shop.txt", "rb");
 	errReadItem = fopen_s(&pFileShop, "./Data/Info/Shop.txt", "rb");
 	if (0 == errReadItem)
 	{
-		fread(pTemp, sizeof(SHOP), 1, pFileShop);
-		fclose(pFileShop);
+		fread(pTemp, sizeof(SHOP), 1, pFileShopCount);
+		fclose(pFileShopCount);
 		cout << "상점 갯수 불러오기 성공" << endl;
 		system("pause");
 		if (0 == errReadItem)
@@ -349,7 +358,7 @@ void CMapBuilder::Map_Shop_Load()
 			fread(m_pShop, sizeof(SHOP), pTemp->iCount, pFileShop);
 			fclose(pFileShop);
 			cout << "상점 불러오기 성공" << endl;
-			SAFE_DELETE(pTemp);
+			//SAFE_DELETE(pTemp);
 			system("pause");
 		}
 		else
