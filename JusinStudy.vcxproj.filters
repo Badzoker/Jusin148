@@ -16,6 +16,9 @@
     <Filter Include="TextRpg">
       <UniqueIdentifier>{321e64e3-844d-4953-a45f-068f6ddc83c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="FSM">
+      <UniqueIdentifier>{a697b6b7-4dee-4534-9eb0-7768f227e5f7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TextRpg_ForClass.cpp">
@@ -50,6 +53,21 @@
     </ClCompile>
     <ClCompile Include="TR_Shop.cpp">
       <Filter>TextRpg</Filter>
+    </ClCompile>
+    <ClCompile Include="State_Run.cpp">
+      <Filter>FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="State_Idle.cpp">
+      <Filter>FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="State_Attack.cpp">
+      <Filter>FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMain.cpp">
+      <Filter>FSM</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -88,6 +106,18 @@
     </ClInclude>
     <ClInclude Include="TR_Shop.h">
       <Filter>TextRpg</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="State_Attack.h">
+      <Filter>FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="State_Idle.h">
+      <Filter>FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="State_Run.h">
+      <Filter>FSM</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
