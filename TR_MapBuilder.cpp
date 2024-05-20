@@ -57,7 +57,7 @@ void CMapBuilder::Map_Home()
 		case 3:
 			SC_PLAYER->Check_Equip();
 			//DC_PLAYER->Check_Equip();
-			//dynamic_cast<CPlayer*>(m_pPlayer_GameManager)->Check_Equip();
+			//dynamic_cast<CPlayer*>(m_pPlayer)->Check_Equip();
 			//m_pPlayer_GameManager-> Check_Equip();
 			system("pause");
 			break;
@@ -295,7 +295,7 @@ void CMapBuilder::Map_Shop_Manager()
 				m_pShop[m_pShop->iCount].bIs_Main = true;
 			else
 				m_pShop[m_pShop->iCount].bIs_Main = false;
-
+			
 			
 			cout << "아이템 이름이 뭡니까? :" << endl;
 			//cin >> m_pShop[m_pShop->iCount].szName;
