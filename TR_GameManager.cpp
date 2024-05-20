@@ -2,8 +2,8 @@
 
 CGameManager::CGameManager()
 {
-	m_pMonster_GameManager = nullptr;
-	m_pPlayer_GameManager = nullptr;
+	m_pMonster = nullptr;
+	m_pPlayer = nullptr;
 	iRandom = 0;
 	m_pBattle = nullptr;
 	m_pCToString = nullptr;

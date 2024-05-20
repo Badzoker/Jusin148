@@ -15,21 +15,21 @@ public:
 	void Damaged(CObj* _Attacker, int _iDamage);//  °ø
 	int Attack();
 	void Set_CToString(CToString* _pCToString) { m_pCToString = _pCToString; }
-	INFO* Get_Info() { return m_Info; }//			¿ë
-	//====player
+	INFO* Get_Info() { return m_Info; }
 	virtual void Initialize(int _iChoose);
 	virtual void Render();
-	virtual void Release();
-	virtual void Level_Up();
-	virtual void Load();
-	virtual void Save();
-	virtual void Check_Equip();
-	virtual void Respawn();
-	virtual void Take_Reward(int _iReward, int _iGold);
-	virtual int Skill();
-	virtual void Using_Tools();
-	ITEM* Get_Item() { return m_Item; }//player only
+	virtual void Release();//						¿ë
+	//====player
+	//virtual void Level_Up();
+	//virtual void Load();
+	//virtual void Save();
+	//virtual void Check_Equip();
+	//virtual void Respawn();
+	//virtual void Take_Reward(int _iReward, int _iGold);
+	//virtual int Skill();
+	//virtual void Using_Tools();
+	//ITEM* Get_Item() { return m_Item; }//player only
 	//====monster
-	virtual int Reward() { return m_Info->iMaxHp; }
+	//virtual int Reward() { return m_Info->iMaxHp; }
 };
 

@@ -53,7 +53,9 @@ void CMainGame::Menu()
 			m_pMapBuilder->Map_Home();
 			break;
 		case 2:
-			m_pPlayer->Load();
+			SC_PLAYER->Load();
+			//dynamic_cast<CPlayer*>(m_pPlayer)->Load();
+			//m_pPlayer->Load();
 			m_pMapBuilder->Map_Home();
 			break;
 		case 3:

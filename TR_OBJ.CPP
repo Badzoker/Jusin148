@@ -113,35 +113,35 @@ void CObj::Release()
 	SAFE_DELETE(m_Item);
 }
 
-void CObj::Level_Up()
-{
-}
-
-void CObj::Load()
-{
-}
-
-void CObj::Save()
-{
-}
-
-void CObj::Check_Equip()
-{
-}
-
-void CObj::Respawn()
-{
-}
-
-void CObj::Take_Reward(int _iReward, int _iGold)
-{
-}
-
-int CObj::Skill()
-{
-	return 0;
-}
-
-void CObj::Using_Tools()
-{
-}
+//void CObj::Level_Up()
+//{
+//}
+//
+//void CObj::Load()
+//{
+//}
+//
+//void CObj::Save()
+//{
+//}
+//
+//void CObj::Check_Equip()
+//{
+//}
+//
+//void CObj::Respawn()
+//{
+//}
+//
+//void CObj::Take_Reward(int _iReward, int _iGold)
+//{
+//}
+//
+//int CObj::Skill()
+//{
+//	return 0;
+//}
+//
+//void CObj::Using_Tools()
+//{
+//}

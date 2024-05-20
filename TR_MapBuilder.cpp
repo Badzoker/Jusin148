@@ -2,9 +2,9 @@
 
 CMapBuilder::CMapBuilder()
 {
-	m_pPlayer_GameManager = nullptr;
+	m_pPlayer = nullptr;
 	m_pBattle = nullptr;
-	m_pMonster_GameManager = nullptr;
+	m_pMonster = nullptr;
 	m_pCToString = nullptr;
 }
 
@@ -24,10 +24,10 @@ CMapBuilder::~CMapBuilder()
 
 void CMapBuilder::Release()
 {
-	SAFE_DELETE(m_pMonster_GameManager);
+	SAFE_DELETE(m_pMonster);
 	SAFE_DELETE(m_pBattle);
 	SAFE_DELETE(m_pCToString);
-	SAFE_DELETE(m_pPlayer_GameManager);
+	SAFE_DELETE(m_pPlayer);
 	cout << "mapbuilder eliminated" << endl; //안불림..
 	system("pause");
 }
@@ -38,12 +38,12 @@ void CMapBuilder::Map_Home()
 	if (!m_pCToString)
 	{
 		m_pCToString = new CToString;
-		m_pPlayer_GameManager->Set_CToString(m_pCToString);
+		m_pPlayer->Set_CToString(m_pCToString);
 	}
 	while (true)
 	{
 		system("cls");
-		m_pPlayer_GameManager->Render();
+		m_pPlayer->Render();
 		cout << "1. 사냥터    2. 상점    3. 상태창    4. 게임저장 후 종료    5. 메뉴" << endl;
 		cin >> iInput;
 		switch (iInput)
@@ -55,15 +55,21 @@ void CMapBuilder::Map_Home()
 			Map_Shop();
 			break;
 		case 3:
-			m_pPlayer_GameManager->Check_Equip();
+			SC_PLAYER->Check_Equip();
+			//DC_PLAYER->Check_Equip();
+			//dynamic_cast<CPlayer*>(m_pPlayer_GameManager)->Check_Equip();
+			//m_pPlayer_GameManager-> Check_Equip();
 			system("pause");
 			break;
 		case 4:
-			m_pPlayer_GameManager->Save();
-			SAFE_DELETE(m_pPlayer_GameManager);
+			SC_PLAYER->Save();
+			//DC_PLAYER->Save();
+			//dynamic_cast<CPlayer*>(m_pPlayer_GameManager)->Save();
+			//m_pPlayer_GameManager->Save();
+			SAFE_DELETE(m_pPlayer);
 			return;
 		case 5:
-			SAFE_DELETE(m_pPlayer_GameManager);
+			SAFE_DELETE(m_pPlayer);
 			return;
 		default:
 			cout << "wrong" << endl;
@@ -78,7 +84,10 @@ void CMapBuilder::Map_Shop()
 	while (true)
 	{
 		system("cls");
-		m_pPlayer_GameManager->Check_Equip();
+		SC_PLAYER->Check_Equip();
+		//DC_PLAYER->Check_Equip();
+		//dynamic_cast<CPlayer*>(m_pPlayer_GameManager)->Check_Equip();
+		//m_pPlayer_GameManager->Check_Equip();
 		cout << "1. 장비\t2. 도구\t3. 돌아가기     4.관리자" << endl;
 		cin >> iInput;
 		switch (iInput)
@@ -107,16 +116,19 @@ void CMapBuilder::Map_Shop_Equip()
 	while (true)
 	{
 		system("cls");
-		m_pPlayer_GameManager->Check_Equip();
-		if (!strcmp(PLAYER_G->szName, "전사"))
+		SC_PLAYER->Check_Equip();
+		//DC_PLAYER->Check_Equip();
+		//dynamic_cast<CPlayer*>(m_pPlayer_GameManager)->Check_Equip();
+		//m_pPlayer_GameManager->Check_Equip();
+		if (!strcmp(PLAYER->szName, "전사"))
 		{
 			cout << "1. 장검(1000G)\t2. 방패(1500G)\t3. 돌아가기" << endl;
 		}
-		else if (!strcmp(PLAYER_G->szName, "마법사"))
+		else if (!strcmp(PLAYER->szName, "마법사"))
 		{
 			cout << "1. 지팡이(1000G)\t2. 마법책(1500G)\t3. 돌아가기" << endl;
 		}
-		else//(!strcmp(PLAYER_G->szName, "도적"))
+		else//(!strcmp(PLAYER->szName, "도적"))
 		{
 			cout << "1. 뾰족한 단검(1000G)\t2. 날쌘 장갑(1500G)\t3. 돌아가기" << endl;
 		}
@@ -124,27 +136,27 @@ void CMapBuilder::Map_Shop_Equip()
 		switch (iInput)
 		{
 		case 1:
-			if (!(PLAYER_G_ITEM->bMain_Item))
+			if (!(SC_PLAYER->Get_Item()->bMain_Item))
 			{
 				
-				if (WEAPON <= PLAYER_G->iGold)
+				if (WEAPON <= PLAYER->iGold)
 				{
-					PLAYER_G->iGold -= 1000;
+					PLAYER->iGold -= 1000;
 					cout << "주장비 구매완료!" << endl;
-					PLAYER_G_ITEM->bMain_Item = true;
-					if (!strcmp(PLAYER_G->szName, "전사"))
+					SC_PLAYER->Get_Item()->bMain_Item = true;
+					if (!strcmp(PLAYER->szName, "전사"))
 					{
-						PLAYER_G->iAttack += 15; //전사는 공격력 +++
+						PLAYER->iAttack += 15; //전사는 공격력 +++
 					}
-					else if (!strcmp(PLAYER_G->szName, "마법사"))
+					else if (!strcmp(PLAYER->szName, "마법사"))
 					{
-						PLAYER_G->iAttack += 10; //마법사는 공격력++ 
-						PLAYER_G->iCritical_Percent += 5; //치명타+
+						PLAYER->iAttack += 10; //마법사는 공격력++ 
+						PLAYER->iCritical_Percent += 5; //치명타+
 					}
 					else//(!strcmp(PLAYER_G->szName, "도적"))
 					{
-						PLAYER_G->iAttack += 5; //도적은 공격력+
-						PLAYER_G->iCritical_Percent += 10; //치명타++
+						PLAYER->iAttack += 5; //도적은 공격력+
+						PLAYER->iCritical_Percent += 10; //치명타++
 					}
 				}
 				else
@@ -159,26 +171,26 @@ void CMapBuilder::Map_Shop_Equip()
 			system("pause");
 			break;
 		case 2:
-			if (!(PLAYER_G_ITEM->bSub_Item))
+			if (!(SC_PLAYER->Get_Item()->bSub_Item))
 			{
-				if (SUB_WEAPON <= PLAYER_G->iGold)
+				if (SUB_WEAPON <= PLAYER->iGold)
 				{
-					PLAYER_G->iGold -= 1500;
+					PLAYER->iGold -= 1500;
 					cout << "보조장비 구매완료!" << endl;
-					PLAYER_G_ITEM->bSub_Item = true;
-					if (!strcmp(PLAYER_G->szName, "전사"))
+					SC_PLAYER->Get_Item()->bSub_Item = true;
+					if (!strcmp(PLAYER->szName, "전사"))
 					{
-						PLAYER_G->iMaxHp += 50; // 전사는 체력+
-						PLAYER_G->iCurrentHp += 50;
+						PLAYER->iMaxHp += 50; // 전사는 체력+
+						PLAYER->iCurrentHp += 50;
 					}
-					else if (!strcmp(PLAYER_G->szName, "마법사"))
+					else if (!strcmp(PLAYER->szName, "마법사"))
 					{
-						PLAYER_G->iMaxMana += 50; // 마법사는 마나+
-						PLAYER_G->iCurrentMana += 50;
+						PLAYER->iMaxMana += 50; // 마법사는 마나+
+						PLAYER->iCurrentMana += 50;
 					}
 					else//(!strcmp(PLAYER_G->szName, "도적"))
 					{
-						PLAYER_G->iCritical_Percent += 10; //도적은 치명타+
+						PLAYER->iCritical_Percent += 10; //도적은 치명타+
 					}
 					
 				}
@@ -207,18 +219,19 @@ void CMapBuilder::Map_Shop_Consumable()
 	while (true)
 	{
 		system("cls");
-		m_pPlayer_GameManager->Check_Equip();
+		SC_PLAYER->Check_Equip();
+		//m_pPlayer_GameManager->Check_Equip();
 		cout << "1. 체력포션\t2. 마나포션\t3. 돌아가기" << endl;
 		cin >> iInput;
 		switch (iInput)
 		{
 		case 1:
-			if (HEAL_POTION <= PLAYER_G->iGold)
+			if (HEAL_POTION <= PLAYER->iGold)
 			{
-				PLAYER_G->iGold -= 100;
-				PLAYER_G_ITEM->iPotion += 1;
+				PLAYER->iGold -= 100;
+				SC_PLAYER->Get_Item()->iPotion += 1;
 				cout << "체력포션 구매완료!" << endl;
-				cout << "현재 포션수 : " << PLAYER_G_ITEM->iPotion << " 개" << endl;
+				cout << "현재 포션수 : " << SC_PLAYER->Get_Item()->iPotion << " 개" << endl;
 			}
 			else
 			{
@@ -228,12 +241,12 @@ void CMapBuilder::Map_Shop_Consumable()
 			system("pause");
 			break;
 		case 2:
-			if (MANA_POTION <= PLAYER_G->iGold)
+			if (MANA_POTION <= PLAYER->iGold)
 			{
-				PLAYER_G->iGold -= 150;
-				PLAYER_G_ITEM->iManaPotion += 1;
+				PLAYER->iGold -= 150;
+				SC_PLAYER->Get_Item()->iManaPotion += 1;
 				cout << "마나포션 구매완료!" << endl;
-				cout << "현재 마나포션수 : " << PLAYER_G_ITEM->iManaPotion << " 개" << endl;
+				cout << "현재 마나포션수 : " << SC_PLAYER->Get_Item()->iManaPotion << " 개" << endl;
 			}
 			else
 			{
@@ -285,10 +298,9 @@ void CMapBuilder::Map_Shop_Manager()
 
 			
 			cout << "아이템 이름이 뭡니까? :" << endl;
-			cin >> m_pShop[m_pShop->iCount].szName;
-			//gets_s(m_pShop[m_pShop->iCount].szName, sizeof(m_pShop[m_pShop->iCount].szName));
-			//fgets(szTemp, sizeof(szTemp), stdin);
-			//strcpy_s()
+			//cin >> m_pShop[m_pShop->iCount].szName;
+			cin.ignore(); //버퍼에 남아있는 \n 한칸 지워주는 역할
+			gets_s(m_pShop[m_pShop->iCount].szName, sizeof(m_pShop[m_pShop->iCount].szName));
 			cout << "이름 입력완료" << endl;
 			cout << "가격은 얼맙니까? :" << endl;
 			cin >> iInput;
@@ -384,35 +396,35 @@ void CMapBuilder::Map_Dungeon()
 	if (!m_pBattle)
 	{
 		m_pBattle = new CBattle;
-		m_pBattle->Set_Player(m_pPlayer_GameManager);
+		m_pBattle->Set_Player(m_pPlayer);
 	}
-	if (!m_pMonster_GameManager)
+	if (!m_pMonster)
 	{
-		m_pMonster_GameManager = new CMonster;
-		m_pBattle->Set_Monster(m_pMonster_GameManager);
-		m_pMonster_GameManager->Set_CToString(m_pCToString);
+		m_pMonster = new CMonster;
+		m_pBattle->Set_Monster(m_pMonster);
+		m_pMonster->Set_CToString(m_pCToString);
 	}
 	while (true)
 	{
-		m_pPlayer_GameManager->Render();
+		m_pPlayer->Render();
 		cout << "1. 초급\t2. 중급\t3. 고급\t4. 돌아가기" << endl;
 		cin >> iInput;
 		switch (iInput)
 		{
 		case 1:
-			m_pMonster_GameManager->Initialize(iInput);
+			m_pMonster->Initialize(iInput);
 			m_pBattle->Update();
 			break;
 		case 2:
-			m_pMonster_GameManager->Initialize(iInput);
+			m_pMonster->Initialize(iInput);
 			m_pBattle->Update();
 			break;
 		case 3:
-			m_pMonster_GameManager->Initialize(iInput);
+			m_pMonster->Initialize(iInput);
 			m_pBattle->Update();
 			break;
 		case 4:
-			SAFE_DELETE(m_pMonster_GameManager);
+			SAFE_DELETE(m_pMonster);
 			return;
 		default:
 			cout << "wrong" << endl;

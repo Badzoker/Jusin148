@@ -22,7 +22,7 @@ public:
 	void Take_Reward(int _iReward, int _iGold);
 	int Skill();
 	void Using_Tools();
-	//ITEM* Get_Item() { return m_pItem; }
+	ITEM* Get_Item() { return m_Item; }//{ return m_pItem; }
 	//INFO* Get_Info() {return m_Info;}
 	//void Set_CToString(CToString* _pCToString) { m_pCToString = _pCToString; }
 	//int Attack() {return m_Info->iAttack;}

@@ -7,8 +7,8 @@
 class CGameManager
 {
 public:
-	CObj* m_pMonster_GameManager;
-	CObj* m_pPlayer_GameManager;
+	CObj* m_pMonster;
+	CObj* m_pPlayer;
 	//Battle==========
 	int iRandom;
 	//MapBuilder==========
@@ -19,8 +19,8 @@ public:
 public:
 	CGameManager();
 	virtual ~CGameManager();
-	void Set_Player(CObj* _pPlayer) { m_pPlayer_GameManager = _pPlayer; }//		공
-	void Set_Monster(CObj* _pMonster) { m_pMonster_GameManager = _pMonster; }// 용
+	void Set_Player(CObj* _pPlayer) { m_pPlayer = _pPlayer; }//		공
+	void Set_Monster(CObj* _pMonster) { m_pMonster = _pMonster; }// 용
 	//Battle========
 	virtual void Update();
 	//void Initialize();

@@ -51,22 +51,19 @@
     <ClCompile Include="TR_GameManager.cpp">
       <Filter>TextRpg</Filter>
     </ClCompile>
-    <ClCompile Include="TR_Shop.cpp">
-      <Filter>TextRpg</Filter>
+    <ClCompile Include="State.cpp">
+      <Filter>FSM</Filter>
     </ClCompile>
-    <ClCompile Include="State_Run.cpp">
+    <ClCompile Include="StateMain.cpp">
+      <Filter>FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="State_Player.cpp">
       <Filter>FSM</Filter>
     </ClCompile>
     <ClCompile Include="State_Idle.cpp">
       <Filter>FSM</Filter>
     </ClCompile>
     <ClCompile Include="State_Attack.cpp">
-      <Filter>FSM</Filter>
-    </ClCompile>
-    <ClCompile Include="State.cpp">
-      <Filter>FSM</Filter>
-    </ClCompile>
-    <ClCompile Include="StateMain.cpp">
       <Filter>FSM</Filter>
     </ClCompile>
   </ItemGroup>
@@ -104,19 +101,19 @@
     <ClInclude Include="TR_GameManager.h">
       <Filter>TextRpg</Filter>
     </ClInclude>
-    <ClInclude Include="TR_Shop.h">
-      <Filter>TextRpg</Filter>
-    </ClInclude>
     <ClInclude Include="State.h">
       <Filter>FSM</Filter>
     </ClInclude>
-    <ClInclude Include="State_Attack.h">
+    <ClInclude Include="StateMynamespace.h">
+      <Filter>FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="State_Player.h">
       <Filter>FSM</Filter>
     </ClInclude>
     <ClInclude Include="State_Idle.h">
       <Filter>FSM</Filter>
     </ClInclude>
-    <ClInclude Include="State_Run.h">
+    <ClInclude Include="State_Attack.h">
       <Filter>FSM</Filter>
     </ClInclude>
   </ItemGroup>

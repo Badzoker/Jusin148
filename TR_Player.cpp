@@ -3,7 +3,7 @@
 CPlayer::CPlayer()
 {
 	m_Info = nullptr;
-	//m_Item = nullptr;
+	m_Item = nullptr;
 	m_pCToString = nullptr;
 }
 
