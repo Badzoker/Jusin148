@@ -127,16 +127,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CFSM.cpp" />
     <ClCompile Include="CToString.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateMain.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="State_Attack.cpp" />
     <ClCompile Include="State_Idle.cpp" />
     <ClCompile Include="State_Player.cpp" />
     <ClCompile Include="TextRpg_ForClass.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="TR_Battle.cpp" />
     <ClCompile Include="TR_GameManager.cpp">
@@ -150,6 +151,7 @@
     <ClCompile Include="TR_Struct.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CFSM.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateMynamespace.h" />
     <ClInclude Include="State_Attack.h" />

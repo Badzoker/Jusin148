@@ -12,11 +12,8 @@ State_Idle::~State_Idle()
 
 void State_Idle::Initialize(State_Player* _pPlayer)
 {
-	if (_pPlayer->Check_State() == STATE_IDLE)
-	{
-		cout << "Idle class Initialize" << endl;
-		Update(_pPlayer);
-	}
+	cout << "Idle class Initialize" << endl;
+	Update(_pPlayer);
 }
 
 void State_Idle::Update(State_Player* _pPlayer)
@@ -38,7 +35,7 @@ void State_Idle::Update(State_Player* _pPlayer)
 		if ((end - start) / CLOCKS_PER_SEC == iTimer)
 		{
 			cout << "5sec" << endl;
-			_pPlayer->Change_State(STATE_ATTACK);
+			//_pState->Change_State(STATE_ATTACK);
 			break;
 		}
 	}

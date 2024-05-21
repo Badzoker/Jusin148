@@ -22,6 +22,5 @@ private:
 	STATE state;
 	int iAttack_Count;
 	bool bPlayer_Class;
-	State* currentState;
 };
 

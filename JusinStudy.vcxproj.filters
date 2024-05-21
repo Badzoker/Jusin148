@@ -66,6 +66,9 @@
     <ClCompile Include="State_Attack.cpp">
       <Filter>FSM</Filter>
     </ClCompile>
+    <ClCompile Include="CFSM.cpp">
+      <Filter>FSM</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mynamespace.h">
@@ -114,6 +117,9 @@
       <Filter>FSM</Filter>
     </ClInclude>
     <ClInclude Include="State_Attack.h">
+      <Filter>FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="CFSM.h">
       <Filter>FSM</Filter>
     </ClInclude>
   </ItemGroup>

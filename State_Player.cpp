@@ -1,6 +1,4 @@
 #include "State_Player.h"
-#include "State_Attack.h"
-#include "State_Idle.h"
 
 State_Player::State_Player()
 {
@@ -25,32 +23,34 @@ void State_Player::Update() //player 안에서 모두 다 컨트롤
 {
 	State_Idle* idle = nullptr;		// 동영왈 single
 	State_Attack* attack = nullptr; // 동영왈 single
-	while (bPlayer_Class)
-	{
-		cout << "player YC update" << endl;
-		switch (state)
-		{
-		case STATE_IDLE:
-			idle = new State_Idle;
-			idle->Initialize(this);
-			SAFE_DELETE(idle);
-			break;
-		case STATE_RUN:
-			break;
-		case STATE_ATTACK:
-			attack = new State_Attack;
-			attack->Initialize(this);
-			SAFE_DELETE(attack);
-			break;
-		case STATE_DEAD:
-			cout << "class player dead" << endl;
-			return;
-		case STATE_END:
-			break;
-		default:
-			break;
-		}
-	}
+	//while (bPlayer_Class)
+	//{
+	//	cout << "player YC update" << endl;
+	//	switch (currentState->Get_State())
+	//	{
+	//	case STATE_IDLE:
+	//		//idle = new State_Idle;
+	//		//idle->Initialize(this);
+	//		currentState->Initialize(currentState);
+	//		SAFE_DELETE(idle);
+	//		break;
+	//	case STATE_RUN:
+	//		break;
+	//	case STATE_ATTACK:
+	//		//attack = new State_Attack;
+	//		//attack->Initialize(this);
+	//		currentState->Initialize(currentState);
+	//		SAFE_DELETE(attack);
+	//		break;
+	//	case STATE_DEAD:
+	//		cout << "class player dead" << endl;
+	//		return;
+	//	case STATE_END:
+	//		break;
+	//	default:
+	//		break;
+	//	}
+	//}
 	while (!bPlayer_Class)
 	{
 		cout << "player NC update" << endl;

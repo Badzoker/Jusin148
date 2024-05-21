@@ -12,11 +12,8 @@ State_Attack::~State_Attack()
 
 void State_Attack::Initialize(State_Player* _pPlayer)
 {
-	if (_pPlayer->Check_State() == STATE_ATTACK)
-	{
-		cout << "attack class Initialize" << endl;
-		Update(_pPlayer);
-	}
+	cout << "attack class Initialize" << endl;
+	Update(_pPlayer);
 }
 
 void State_Attack::Update(State_Player* _pPlayer)
