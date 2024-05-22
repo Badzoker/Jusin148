@@ -127,15 +127,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CFSM.cpp" />
     <ClCompile Include="CToString.cpp" />
-    <ClCompile Include="State.cpp" />
-    <ClCompile Include="StateMain.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="State_Attack.cpp" />
-    <ClCompile Include="State_Idle.cpp" />
-    <ClCompile Include="State_Player.cpp" />
+    <ClCompile Include="FSM_Attack.cpp" />
+    <ClCompile Include="FSM_Dead.cpp" />
+    <ClCompile Include="FSM_Idle.cpp" />
+    <ClCompile Include="FSM_Machine.cpp" />
+    <ClCompile Include="FSM_main.cpp" />
+    <ClCompile Include="FSM_Player.cpp" />
     <ClCompile Include="TextRpg_ForClass.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -151,12 +149,13 @@
     <ClCompile Include="TR_Struct.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CFSM.h" />
-    <ClInclude Include="State.h" />
-    <ClInclude Include="StateMynamespace.h" />
-    <ClInclude Include="State_Attack.h" />
-    <ClInclude Include="State_Idle.h" />
-    <ClInclude Include="State_Player.h" />
+    <ClInclude Include="FSM_Attack.h" />
+    <ClInclude Include="FSM_Dead.h" />
+    <ClInclude Include="FSM_Idle.h" />
+    <ClInclude Include="FSM_Machine.h" />
+    <ClInclude Include="FSM_mynamespace.h" />
+    <ClInclude Include="FSM_Player.h" />
+    <ClInclude Include="FSM_State.h" />
     <ClInclude Include="TR_GameManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
