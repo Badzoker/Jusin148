@@ -35,3 +35,23 @@ using namespace std;
 #endif
 
 //_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
+template<typename T>
+void Safe_Delete(T & _p)
+{
+	if (_p)
+	{
+		delete _p;
+		_p = nullptr;
+	}
+}
+
+template<typename T>
+void Safe_Delete_Array(T & _p)
+{
+	if (_p)
+	{
+		delete[] _p;
+		_p = nullptr;
+	}
+}
