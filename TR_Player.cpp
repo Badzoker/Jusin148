@@ -311,6 +311,6 @@ void CPlayer::Render()
 void CPlayer::Release()
 {
 	cout << "플레이어 소멸자 호출" << endl;
-	SAFE_DELETE(m_Info);
-	SAFE_DELETE(m_Item);
+	Safe_Delete(m_Info);
+	Safe_Delete(m_Item);
 }

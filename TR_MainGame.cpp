@@ -25,7 +25,7 @@ void CMainGame::Update()
 
 void CMainGame::Release()
 {
-	SAFE_DELETE(m_pMapBuilder);
+	Safe_Delete(m_pMapBuilder);
 }
 
 void CMainGame::Menu()

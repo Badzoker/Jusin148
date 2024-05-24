@@ -66,7 +66,7 @@ void CMonster::Render()
 void CMonster::Release()
 {
 	cout << "몬스터 소멸자 호출" << endl;
-	SAFE_DELETE(m_Info);
+	Safe_Delete(m_Info);
 }
 
 //void CMonster::Damaged(int _iDamage, ATTACK_TYPE _eAttacked_Type, ARMOR_TYPE _eMyArmor_Type)

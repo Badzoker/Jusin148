@@ -24,10 +24,10 @@ CMapBuilder::~CMapBuilder()
 
 void CMapBuilder::Release()
 {
-	SAFE_DELETE(m_pMonster);
-	SAFE_DELETE(m_pBattle);
-	SAFE_DELETE(m_pCToString);
-	SAFE_DELETE(m_pPlayer);
+	Safe_Delete(m_pMonster);
+	Safe_Delete(m_pBattle);
+	Safe_Delete(m_pCToString);
+	Safe_Delete(m_pPlayer);
 	cout << "mapbuilder eliminated" << endl; 
 	system("pause");
 }
@@ -66,10 +66,10 @@ void CMapBuilder::Map_Home()
 			//DC_PLAYER->Save();
 			//dynamic_cast<CPlayer*>(m_pPlayer_GameManager)->Save();
 			//m_pPlayer_GameManager->Save();
-			SAFE_DELETE(m_pPlayer);
+			Safe_Delete(m_pPlayer);
 			return;
 		case 5:
-			SAFE_DELETE(m_pPlayer);
+			Safe_Delete(m_pPlayer);
 			return;
 		default:
 			cout << "wrong" << endl;
@@ -286,7 +286,7 @@ void CMapBuilder::Map_Shop_Manager()
 			{
 				tTemp = new SHOP[(m_pShop->iCount) + 1];
 				memcpy(tTemp, m_pShop, sizeof(SHOP) * (m_pShop->iCount));
-				SAFE_DELETE_ARRAY(m_pShop);
+				Safe_Delete_Array(m_pShop);
 				m_pShop = tTemp;
 			}
 			cout << "주장비 입니까?  1. Y  2. N" << endl;
@@ -311,7 +311,7 @@ void CMapBuilder::Map_Shop_Manager()
 			system("pause");
 			break;
 		case 2:
-			SAFE_DELETE_ARRAY(m_pShop);
+			Safe_Delete_Array(m_pShop);
 			return;
 		case 3:
 			for (int i = 0; i < m_pShop->iCount; i++)
@@ -386,7 +386,7 @@ void CMapBuilder::Map_Shop_Load()
 	}
 	if (nullptr != pTemp)
 	{
-		SAFE_DELETE(pTemp);
+		Safe_Delete(pTemp);
 	}
 }
 
@@ -424,7 +424,7 @@ void CMapBuilder::Map_Dungeon()
 			m_pBattle->Update();
 			break;
 		case 4:
-			SAFE_DELETE(m_pMonster);
+			Safe_Delete(m_pMonster);
 			return;
 		default:
 			cout << "wrong" << endl;

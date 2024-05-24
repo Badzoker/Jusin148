@@ -3,8 +3,8 @@
 
 using namespace std;
 
-#define SAFE_DELETE(p) if(p != nullptr){delete p;p = nullptr;}
-#define SAFE_DELETE_ARRAY(p) if(p != nullptr){delete[] p;p = nullptr;}
+//#define SAFE_DELETE(p) if(p != nullptr){delete p;p = nullptr;}
+//#define SAFE_DELETE_ARRAY(p) if(p != nullptr){delete[] p;p = nullptr;}
 
 
 #ifdef _DEBUG
@@ -25,7 +25,7 @@ using namespace std;
 template<typename T>
 void Safe_Delete(T & _p)
 {
-	if (_p)
+	if (_p != nullptr)
 	{
 		delete _p;
 		_p = nullptr;
@@ -35,7 +35,7 @@ void Safe_Delete(T & _p)
 template<typename T>
 void Safe_Delete_Array(T& _p)
 {
-	if (_p)
+	if (_p != nullptr)
 	{
 		delete[] _p;
 		_p = nullptr;

@@ -57,10 +57,10 @@ void FSM_Machine::Update()
 
 void FSM_Machine::Release()
 {
-	SAFE_DELETE(m_pPlayer);
-	SAFE_DELETE(m_pState_Idle);
-	SAFE_DELETE(m_pState_Attack);
-	SAFE_DELETE(m_pState_Dead);
+	Safe_Delete(m_pPlayer);
+	Safe_Delete(m_pState_Idle);
+	Safe_Delete(m_pState_Attack);
+	Safe_Delete(m_pState_Dead);
 }
 
 

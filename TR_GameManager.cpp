@@ -33,8 +33,8 @@ void CGameManager::Battle_UsingTools()
 
 void CGameManager::Release()
 {
-	SAFE_DELETE(m_pBattle);
-	SAFE_DELETE(m_pCToString);
+	Safe_Delete(m_pBattle);
+	Safe_Delete(m_pCToString);
 	cout << "gamemanager eliminated" << endl;
 }
 

@@ -109,8 +109,8 @@ void CObj::Render()
 
 void CObj::Release()
 {
-	SAFE_DELETE(m_Info);
-	SAFE_DELETE(m_Item);
+	Safe_Delete(m_Info);
+	Safe_Delete(m_Item);
 }
 
 //void CObj::Level_Up()
