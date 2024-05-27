@@ -84,7 +84,7 @@ void CMapBuilder::Map_Shop()
 	while (true)
 	{
 		system("cls");
-		SC_PLAYER->Check_Equip();
+		SC_PLAYER->Render();
 		//DC_PLAYER->Check_Equip();
 		//dynamic_cast<CPlayer*>(m_pPlayer_GameManager)->Check_Equip();
 		//m_pPlayer_GameManager->Check_Equip();
@@ -116,7 +116,7 @@ void CMapBuilder::Map_Shop_Equip()
 	while (true)
 	{
 		system("cls");
-		SC_PLAYER->Check_Equip();
+		SC_PLAYER->Render();
 		//DC_PLAYER->Check_Equip();
 		//dynamic_cast<CPlayer*>(m_pPlayer_GameManager)->Check_Equip();
 		//m_pPlayer_GameManager->Check_Equip();
@@ -144,20 +144,6 @@ void CMapBuilder::Map_Shop_Equip()
 					PLAYER->iGold -= 1000;
 					cout << "주장비 구매완료!" << endl;
 					SC_PLAYER->Get_Item()->bMain_Item = true;
-					if (!strcmp(PLAYER->szName, "전사"))
-					{
-						PLAYER->iAttack += 15; //전사는 공격력 +++
-					}
-					else if (!strcmp(PLAYER->szName, "마법사"))
-					{
-						PLAYER->iAttack += 10; //마법사는 공격력++ 
-						PLAYER->iCritical_Percent += 5; //치명타+
-					}
-					else//(!strcmp(PLAYER_G->szName, "도적"))
-					{
-						PLAYER->iAttack += 5; //도적은 공격력+
-						PLAYER->iCritical_Percent += 10; //치명타++
-					}
 				}
 				else
 				{
@@ -178,21 +164,6 @@ void CMapBuilder::Map_Shop_Equip()
 					PLAYER->iGold -= 1500;
 					cout << "보조장비 구매완료!" << endl;
 					SC_PLAYER->Get_Item()->bSub_Item = true;
-					if (!strcmp(PLAYER->szName, "전사"))
-					{
-						PLAYER->iMaxHp += 50; // 전사는 체력+
-						PLAYER->iCurrentHp += 50;
-					}
-					else if (!strcmp(PLAYER->szName, "마법사"))
-					{
-						PLAYER->iMaxMana += 50; // 마법사는 마나+
-						PLAYER->iCurrentMana += 50;
-					}
-					else//(!strcmp(PLAYER_G->szName, "도적"))
-					{
-						PLAYER->iCritical_Percent += 10; //도적은 치명타+
-					}
-					
 				}
 				else
 				{
@@ -219,7 +190,7 @@ void CMapBuilder::Map_Shop_Consumable()
 	while (true)
 	{
 		system("cls");
-		SC_PLAYER->Check_Equip();
+		SC_PLAYER->Render();
 		//m_pPlayer_GameManager->Check_Equip();
 		cout << "1. 체력포션\t2. 마나포션\t3. 돌아가기" << endl;
 		cin >> iInput;

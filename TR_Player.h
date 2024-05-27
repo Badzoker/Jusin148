@@ -15,6 +15,7 @@ public:
 	void Load();
 	void Save();
 	void Check_Equip();
+	void Render_Equip();
 	void Respawn();
 	void Take_Reward(int _iReward, int _iGold);
 	int Skill();

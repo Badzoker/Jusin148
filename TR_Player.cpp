@@ -117,22 +117,129 @@ void CPlayer::Save()
 
 void CPlayer::Check_Equip()
 {
-	char cTemp[32] = {};
-	if (m_Item->bMain_Item)
-		strcpy_s(cTemp, sizeof(cTemp), "착용중");
-	else
-		strcpy_s(cTemp, sizeof(cTemp), "없음");
-	cout << "주장비 : " << cTemp << endl;
+	while (true)
+	{
+		system("cls");
+		//주장비
+		Render();
+		cout << "주장비 : ";
+		if (!strcmp(m_Info->szName, "전사"))
+		{
+			cout << "장검 ";
+		}
+		else if (!strcmp(m_Info->szName, "마법사"))
+		{
+			cout << "지팡이 ";
+		}
+		else//(!strcmp(PLAYER->szName, "도적"))
+		{
+			cout << "뾰족한 단검 ";
+		}
+		if (m_Item->bMain_Item)
+		{
+			cout << "보유중" << endl;
+		}
+		else
+		{
+			cout << "없음" << endl;
+		}
+		//보조장비
+		cout << "보조장비 : ";
+		if (!strcmp(m_Info->szName, "전사"))
+		{
+			cout << "방패 ";
+		}
+		else if (!strcmp(m_Info->szName, "마법사"))
+		{
+			cout << "마법책 ";
+		}
+		else//(!strcmp(PLAYER->szName, "도적"))
+		{
+			cout << "날쌘 장갑 ";
+		}
+		if (m_Item->bSub_Item)
+		{
+			cout << "보유중" << endl;
+		}
+		else
+		{
+			cout << "없음" << endl;
+		}
+		cout << "1. 주장비   2. 보조장비   3. 뒤로" << endl;
+		int iInput(0);
+		cin >> iInput;
+		switch (iInput)
+		{
+		case 1: 
+			cout << "1. 착용 / 해제   2. 뒤로" << endl;
+			cin >> iInput;
+			if (m_Item->bMain_Item && 1 == iInput)
+			{
+				m_Item->bMain_Item_Equiped = !m_Item->bMain_Item_Equiped;
+			}
+			else
+			{
+				cout << "주장비 없음" << endl;
+			}
+			if (m_Item->bMain_Item_Equiped)
+			{
+				if (!strcmp(m_Info->szName, "전사"))
+				{
+					m_Info->iAttack += 15; //전사는 공격력 +++
+				}
+				else if (!strcmp(m_Info->szName, "마법사"))
+				{
+					m_Info->iAttack += 10; //마법사는 공격력++ 
+					m_Info->iCritical_Percent += 5; //치명타+
+				}
+				else//(!strcmp(PLAYER_G->szName, "도적"))
+				{
+					m_Info->iAttack += 5; //도적은 공격력+
+					m_Info->iCritical_Percent += 10; //치명타++
+				}
+			}
+			break;
+		case 2:
+			cout << "1. 착용 / 해제   2. 뒤로" << endl;
+			cin >> iInput;
+			if (m_Item->bSub_Item && 1 == iInput)
+			{
+				m_Item->bSub_Item_Equiped = !m_Item->bSub_Item_Equiped;
+			}
+			else
+			{
+				cout << "보조장비 없음" << endl;
+			}
+			if (m_Item->bSub_Item_Equiped)
+			{
+				if (!strcmp(m_Info->szName, "전사"))
+				{
+					m_Info->iMaxHp += 50; // 전사는 체력+
+					m_Info->iCurrentHp += 50;
+				}
+				else if (!strcmp(m_Info->szName, "마법사"))
+				{
+					m_Info->iMaxMana += 50; // 마법사는 마나+
+					m_Info->iCurrentMana += 50;
+				}
+				else//(!strcmp(PLAYER_G->szName, "도적"))
+				{
+					m_Info->iCritical_Percent += 10; //도적은 치명타+
+				}
+			}
+			break;
+		case 3:
+			return;
+		default:
+			break;
+		}
+	}
+	
+}
 
-	if (m_Item->bSub_Item)
-		strcpy_s(cTemp, sizeof(cTemp), "착용중");
-	else
-		strcpy_s(cTemp, sizeof(cTemp), "없음");
-	cout << "보조장비 : " << cTemp << endl;
-
-	cout << "체력포션 : " << m_Item->iPotion << " 개" << endl;
-	cout << "마나포션 : " << m_Item->iManaPotion << " 개" << endl;
-	cout << "소지 골드 : " << m_Info->iGold << " G" << endl;
+void CPlayer::Render_Equip()
+{
+	
 }
 
 void CPlayer::Respawn()
@@ -305,7 +412,23 @@ void CPlayer::Render()
 	cout << "방어타입 : " << m_pCToString->Get_cToString() << endl;
 	cout << "경험치 : " << m_Info->iExp << " / " << m_Info->iMaxExp << endl;
 	cout << "레벨 : " << m_Info->iLevel << endl;
-	
+	cout << "---아이템---" << endl;
+	char cTemp[32] = {};
+	if (m_Item->bMain_Item_Equiped)
+		strcpy_s(cTemp, sizeof(cTemp), "착용중");
+	else
+		strcpy_s(cTemp, sizeof(cTemp), "없음");
+	cout << "주장비 : " << cTemp << endl;
+
+	if (m_Item->bSub_Item_Equiped)
+		strcpy_s(cTemp, sizeof(cTemp), "착용중");
+	else
+		strcpy_s(cTemp, sizeof(cTemp), "없음");
+	cout << "보조장비 : " << cTemp << endl;
+
+	cout << "체력포션 : " << m_Item->iPotion << " 개" << endl;
+	cout << "마나포션 : " << m_Item->iManaPotion << " 개" << endl;
+	cout << "소지 골드 : " << m_Info->iGold << " G" << endl;
 }
 
 void CPlayer::Release()

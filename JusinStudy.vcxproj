@@ -132,10 +132,12 @@
     <ClCompile Include="FSM_Dead.cpp" />
     <ClCompile Include="FSM_Idle.cpp" />
     <ClCompile Include="FSM_Machine.cpp" />
-    <ClCompile Include="FSM_main.cpp" />
+    <ClCompile Include="FSM_main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="FSM_Player.cpp" />
     <ClCompile Include="TextRpg_ForClass.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="TR_Battle.cpp" />
     <ClCompile Include="TR_GameManager.cpp">

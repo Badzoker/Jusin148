@@ -26,7 +26,9 @@ typedef struct tagItem
 	tagItem();
 	~tagItem();
 	bool bMain_Item;
+	bool bMain_Item_Equiped;
 	bool bSub_Item;
+	bool bSub_Item_Equiped;
 	int iPotion;
 	int iManaPotion;
 }ITEM;
