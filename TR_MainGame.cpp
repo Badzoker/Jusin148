@@ -5,6 +5,7 @@ CMainGame::CMainGame()
 	m_pPlayer = nullptr;
 	m_pMapBuilder = nullptr;
 	m_pInven = nullptr;
+	m_pQuest = nullptr;
 }
 
 CMainGame::~CMainGame()
@@ -16,6 +17,7 @@ void CMainGame::Initialize()
 {
 	m_pMapBuilder = new CMapBuilder; //여기서 할당하고 여기서 해제
 	m_pInven = new CInventory;
+	m_pQuest = new CQuest;
 }
 
 void CMainGame::Update()
@@ -42,6 +44,7 @@ void CMainGame::Menu()
 			m_pPlayer = new CPlayer;
 			m_pMapBuilder->Set_Player(m_pPlayer);
 			DC_PLAYER->Set_Inven(m_pInven);
+			m_pQuest->Set_Player(m_pPlayer);
 		}
 		switch (iInput)
 		{

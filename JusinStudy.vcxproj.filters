@@ -60,6 +60,9 @@
     <ClCompile Include="TR_Item_Consumable.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="TR_Quest.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mynamespace.h">
@@ -105,6 +108,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="TR_Item_Consumable.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="TR_Quest.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
