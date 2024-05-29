@@ -5,10 +5,6 @@ CToString::CToString()
 	cToString[0] = {};
 }
 
-CToString::~CToString()
-{
-}
-
 void CToString::Attack_ToString(int _eAttack)
 {
 	switch ((ATTACK_TYPE)_eAttack)

@@ -8,7 +8,7 @@ private:
 
 public:
 	CBattle();
-	virtual ~CBattle();
+	virtual ~CBattle() {}
 	void Update();
 	void Battle_Normal();
 	void Battle_Skill();

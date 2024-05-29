@@ -12,47 +12,6 @@ CPlayer::~CPlayer()
 	Release();
 }
 
-//void CPlayer::Damaged(int _iDamage, ATTACK_TYPE _eAttacked_Type, ARMOR_TYPE _eMyArmor_Type)
-//{
-//	int iDamage_Final = _iDamage;
-//	switch (_eAttacked_Type)
-//	{
-//	case ATTACK_NORMAL:
-//		if (ARMOR_MEDIUM == _eMyArmor_Type)
-//			iDamage_Final = _iDamage * 2;
-//		else if (ARMOR_LIGHT == _eMyArmor_Type)
-//			iDamage_Final = (int)(_iDamage / 2);
-//		break;
-//	case ATTACK_MAGIC:
-//		if (ARMOR_HEAVY == _eMyArmor_Type)
-//			iDamage_Final = _iDamage * 2;
-//		else if (ARMOR_MEDIUM == _eMyArmor_Type)
-//			iDamage_Final = (int)(_iDamage / 2);
-//		break;
-//	case ATTACK_LIGHT:
-//		if (ARMOR_LIGHT == _eMyArmor_Type)
-//			iDamage_Final = _iDamage * 2;
-//		else if (ARMOR_HEAVY == _eMyArmor_Type)
-//			iDamage_Final = (int)(_iDamage / 2);
-//		break;
-//	case ATTACK_CHAOS:
-//		iDamage_Final = (int)((float)_iDamage * 1.2f);
-//		break;
-//	case ATTACK_TYPE_END:
-//		break;
-//	default:
-//		break;
-//	}
-//	m_Info->iCurrentHp -= iDamage_Final;
-//	cout << m_Info->szName <<" 가 " << iDamage_Final << " 만큼 피해를 입었다!" << endl;
-//
-//	if (0 >= m_Info->iCurrentHp)
-//	{
-//		cout << "플레이어가 죽었다!" << endl;
-//	}
-//	
-//}
-
 void CPlayer::Level_Up()
 {
 	m_Info->iMaxExp += 50;
@@ -348,6 +307,11 @@ void CPlayer::Using_Tools()
 	}
 }
 
+void CPlayer::Inventory()
+{
+	m_pInven->Render();
+}
+
 void CPlayer::Initialize(int _iChoose)
 {
 	if (!m_Info)
@@ -367,6 +331,7 @@ void CPlayer::Initialize(int _iChoose)
 		m_Info->iCritical_Percent = 20;
 		m_Info->eAttack_Type = ATTACK_NORMAL;
 		m_Info->eArmor_Type = ARMOR_HEAVY;
+		m_Info->eJob = WARRIOR;
 		strcpy_s(m_Info->szName, sizeof(m_Info->szName), "전사");
 		break;
 	case 2:
@@ -376,6 +341,7 @@ void CPlayer::Initialize(int _iChoose)
 		m_Info->iCritical_Percent = 20;
 		m_Info->eAttack_Type = ATTACK_MAGIC;
 		m_Info->eArmor_Type = ARMOR_LIGHT;
+		m_Info->eJob = WIZARD;
 		strcpy_s(m_Info->szName, sizeof(m_Info->szName), "마법사");
 		break;
 	case 3:
@@ -385,6 +351,7 @@ void CPlayer::Initialize(int _iChoose)
 		m_Info->iCritical_Percent = 30;
 		m_Info->eAttack_Type = ATTACK_LIGHT;
 		m_Info->eArmor_Type = ARMOR_MEDIUM;
+		m_Info->eJob = THIEF;
 		strcpy_s(m_Info->szName, sizeof(m_Info->szName), "도적");
 		break;
 	default:
@@ -396,11 +363,6 @@ void CPlayer::Initialize(int _iChoose)
 
 void CPlayer::Render()
 {
-	/*if (!m_pCToString)
-	{
-		m_pCToString = new CToString;
-	}
-	m_pCToString->Enum_ToString((ATTACK_TYPE)m_Info->eAttack_Type);*/
 	system("cls");
 	cout << "================\n직업 : " << m_Info->szName << endl;
 	cout << "체력 : " << m_Info->iCurrentHp << " / " << m_Info->iMaxHp << endl;

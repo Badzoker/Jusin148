@@ -4,7 +4,7 @@ CMainGame::CMainGame()
 {
 	m_pPlayer = nullptr;
 	m_pMapBuilder = nullptr;
-	//m_pCToString = nullptr;
+	m_pInven = nullptr;
 }
 
 CMainGame::~CMainGame()
@@ -15,7 +15,7 @@ CMainGame::~CMainGame()
 void CMainGame::Initialize()
 {
 	m_pMapBuilder = new CMapBuilder; //여기서 할당하고 여기서 해제
-	//m_pCToString = new CToString;
+	m_pInven = new CInventory;
 }
 
 void CMainGame::Update()
@@ -26,6 +26,7 @@ void CMainGame::Update()
 void CMainGame::Release()
 {
 	Safe_Delete(m_pMapBuilder);
+	Safe_Delete(m_pInven);
 }
 
 void CMainGame::Menu()
@@ -39,9 +40,8 @@ void CMainGame::Menu()
 		if (!m_pPlayer)
 		{
 			m_pPlayer = new CPlayer;
-			//m_pPlayer->Set_CToString(m_pCToString);
 			m_pMapBuilder->Set_Player(m_pPlayer);
-			//m_pMapBuilder->Set_CToString(m_pCToString);
+			DC_PLAYER->Set_Inven(m_pInven);
 		}
 		switch (iInput)
 		{
@@ -54,8 +54,6 @@ void CMainGame::Menu()
 			break;
 		case 2:
 			SC_PLAYER->Load();
-			//dynamic_cast<CPlayer*>(m_pPlayer)->Load();
-			//m_pPlayer->Load();
 			m_pMapBuilder->Map_Home();
 			break;
 		case 3:

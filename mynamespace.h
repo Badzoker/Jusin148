@@ -3,6 +3,10 @@
 #include <stdio.h>
 #include "CToString.h"
 #include "TR_Enum.h"
+#include "TR_Struct.h"
+#include <vector>
+#include <algorithm>
+#include <string>
 
 using namespace std;
 
@@ -16,10 +20,7 @@ using namespace std;
 #define DC_MONSTER dynamic_cast<CMonster*>(m_pMonster)
 #define SC_PLAYER static_cast<CPlayer*>(m_pPlayer)
 #define SC_MONSTER static_cast<CMonster*>(m_pMonster)
-//#define PLAYER_G m_pPlayer_GameManager->Get_Info()
-//#define PLAYER_G_ITEM m_pPlayer_GameManager->Get_Item()
-//#define MONSTER_G m_pMonster_GameManager->Get_Info()
-//#define DC_PLAYER_G_ITEM dynamic_cast<CPlayer*>(m_pPlayer_GameManager)->Get_Item()
+
 
 #ifdef _DEBUG
 

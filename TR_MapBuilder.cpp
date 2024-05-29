@@ -13,15 +13,6 @@ CMapBuilder::~CMapBuilder()
 	Release();
 }
 
-//void CMapBuilder::Initialize()
-//{
-//	
-//}
-//
-//void CMapBuilder::Update()
-//{
-//}
-
 void CMapBuilder::Release()
 {
 	Safe_Delete(m_pMonster);
@@ -56,16 +47,10 @@ void CMapBuilder::Map_Home()
 			break;
 		case 3:
 			SC_PLAYER->Check_Equip();
-			//DC_PLAYER->Check_Equip();
-			//dynamic_cast<CPlayer*>(m_pPlayer)->Check_Equip();
-			//m_pPlayer_GameManager-> Check_Equip();
 			system("pause");
 			break;
 		case 4:
 			SC_PLAYER->Save();
-			//DC_PLAYER->Save();
-			//dynamic_cast<CPlayer*>(m_pPlayer_GameManager)->Save();
-			//m_pPlayer_GameManager->Save();
 			Safe_Delete(m_pPlayer);
 			return;
 		case 5:
@@ -85,10 +70,7 @@ void CMapBuilder::Map_Shop()
 	{
 		system("cls");
 		SC_PLAYER->Render();
-		//DC_PLAYER->Check_Equip();
-		//dynamic_cast<CPlayer*>(m_pPlayer_GameManager)->Check_Equip();
-		//m_pPlayer_GameManager->Check_Equip();
-		cout << "1. 장비\t2. 도구\t3. 돌아가기     4.관리자" << endl;
+		cout << "1. 장비\t2. 도구\t3. 돌아가기   4.관리자   5. 인벤토리" << endl;
 		cin >> iInput;
 		switch (iInput)
 		{
@@ -102,6 +84,9 @@ void CMapBuilder::Map_Shop()
 			return;
 		case 4:
 			Map_Shop_Manager();
+			break;
+		case 5:
+			Map_Shop_Inventory();
 			break;
 		default:
 			cout << "wrong" << endl;
@@ -117,9 +102,6 @@ void CMapBuilder::Map_Shop_Equip()
 	{
 		system("cls");
 		SC_PLAYER->Render();
-		//DC_PLAYER->Check_Equip();
-		//dynamic_cast<CPlayer*>(m_pPlayer_GameManager)->Check_Equip();
-		//m_pPlayer_GameManager->Check_Equip();
 		if (!strcmp(PLAYER->szName, "전사"))
 		{
 			cout << "1. 장검(1000G)\t2. 방패(1500G)\t3. 돌아가기" << endl;
@@ -191,7 +173,6 @@ void CMapBuilder::Map_Shop_Consumable()
 	{
 		system("cls");
 		SC_PLAYER->Render();
-		//m_pPlayer_GameManager->Check_Equip();
 		cout << "1. 체력포션\t2. 마나포션\t3. 돌아가기" << endl;
 		cin >> iInput;
 		switch (iInput)
@@ -235,6 +216,44 @@ void CMapBuilder::Map_Shop_Consumable()
 	}
 }
 
+void CMapBuilder::Map_Shop_Inventory()
+{
+	int iInput(0);
+	while (true)
+	{
+		system("cls");
+		SC_PLAYER->Render();
+		cout << "1. 주장비  2. 보조장비  3. 돌아가기  4. 체력포션  5. 마나포션  6. 출력  7. 판매" << endl;
+		cin >> iInput;
+		switch (iInput)
+		{
+		case 1:
+			DC_PLAYER->Get_Inven()->Create_Main(PLAYER->eJob);
+			break;
+		case 2:
+			DC_PLAYER->Get_Inven()->Create_Sub(PLAYER->eJob);
+			break;
+		case 3:
+			return;
+		case 4:
+			DC_PLAYER->Get_Inven()->Create_Potion();
+			break;
+		case 5:
+			DC_PLAYER->Get_Inven()->Create_ManaPotion();
+			break;
+		case 6:
+			DC_PLAYER->Get_Inven()->Render();
+			break;
+		case 7:
+			DC_PLAYER->Get_Inven()->Sell_Item();
+			break;
+		default:
+			cout << "wrong" << endl;
+			break;
+		}
+	}
+}
+
 void CMapBuilder::Map_Shop_Manager()
 {
 	Map_Shop_Load();
@@ -269,7 +288,6 @@ void CMapBuilder::Map_Shop_Manager()
 			
 			
 			cout << "아이템 이름이 뭡니까? :" << endl;
-			//cin >> m_pShop[m_pShop->iCount].szName;
 			cin.ignore(); //버퍼에 남아있는 \n 한칸 지워주는 역할
 			gets_s(m_pShop[m_pShop->iCount].szName, sizeof(m_pShop[m_pShop->iCount].szName));
 			cout << "이름 입력완료" << endl;
@@ -341,7 +359,6 @@ void CMapBuilder::Map_Shop_Load()
 			fread(m_pShop, sizeof(SHOP), pTemp->iCount, pFileShop);
 			fclose(pFileShop);
 			cout << "상점 불러오기 성공" << endl;
-			//SAFE_DELETE(pTemp);
 			system("pause");
 		}
 		else

@@ -16,9 +16,6 @@
     <Filter Include="TextRpg">
       <UniqueIdentifier>{321e64e3-844d-4953-a45f-068f6ddc83c5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="FSM">
-      <UniqueIdentifier>{c49a2fb3-1e47-4be4-b6cf-3373450ab38f}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TextRpg_ForClass.cpp">
@@ -51,23 +48,17 @@
     <ClCompile Include="TR_GameManager.cpp">
       <Filter>TextRpg</Filter>
     </ClCompile>
-    <ClCompile Include="FSM_Attack.cpp">
-      <Filter>FSM</Filter>
+    <ClCompile Include="TR_Inventory.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="FSM_Dead.cpp">
-      <Filter>FSM</Filter>
+    <ClCompile Include="TR_Item.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="FSM_Idle.cpp">
-      <Filter>FSM</Filter>
+    <ClCompile Include="TR_Item_Equip.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="FSM_Machine.cpp">
-      <Filter>FSM</Filter>
-    </ClCompile>
-    <ClCompile Include="FSM_main.cpp">
-      <Filter>FSM</Filter>
-    </ClCompile>
-    <ClCompile Include="FSM_Player.cpp">
-      <Filter>FSM</Filter>
+    <ClCompile Include="TR_Item_Consumable.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -104,26 +95,17 @@
     <ClInclude Include="TR_GameManager.h">
       <Filter>TextRpg</Filter>
     </ClInclude>
-    <ClInclude Include="FSM_Attack.h">
-      <Filter>FSM</Filter>
+    <ClInclude Include="TR_Inventory.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="FSM_Dead.h">
-      <Filter>FSM</Filter>
+    <ClInclude Include="TR_Item.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="FSM_Idle.h">
-      <Filter>FSM</Filter>
+    <ClInclude Include="TR_Item_Equip.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="FSM_Machine.h">
-      <Filter>FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="FSM_mynamespace.h">
-      <Filter>FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="FSM_Player.h">
-      <Filter>FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="FSM_State.h">
-      <Filter>FSM</Filter>
+    <ClInclude Include="TR_Item_Consumable.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

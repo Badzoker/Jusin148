@@ -4,7 +4,7 @@
 typedef struct tagInfo
 {
 	tagInfo();
-	~tagInfo();
+	~tagInfo() {}
 	char szName[32];
 	int iCurrentHp;
 	int iMaxHp;
@@ -12,11 +12,11 @@ typedef struct tagInfo
 	int iMaxMana;
 	int iAttack;
 	int iCritical_Percent;
-	int iLevel;//
 	int iExp;
-	int iMaxExp;//
+	int iLevel;// 몬스터한텐
+	int iMaxExp;// 필요없음
 	int iGold;
-
+	JOB eJob;
 	ATTACK_TYPE eAttack_Type;
 	ARMOR_TYPE eArmor_Type;
 }INFO;
@@ -24,7 +24,7 @@ typedef struct tagInfo
 typedef struct tagItem
 {
 	tagItem();
-	~tagItem();
+	~tagItem() {}
 	bool bMain_Item;
 	bool bMain_Item_Equiped;
 	bool bSub_Item;
@@ -36,26 +36,20 @@ typedef struct tagItem
 typedef struct tagShop
 {
 	tagShop();
-	~tagShop();
+	~tagShop() {}
 	bool bIs_Main; // main이냐 sub냐
 	char szName[32];
 	int iGold;
 	int iCount;
 }SHOP;
 
-//typedef struct tagInfo_Mon
-//{
-//	tagInfo_Mon();
-//	~tagInfo_Mon();
-//	char szName[32];
-//	int iCurrentHp;
-//	int iMaxHp;
-//	int iCurrentMana;
-//	int iMaxMana;
-//	int iAttack;
-//	int iCritical_Percent;
-//	int iExp;
-//	int iGold;
-//	ATTACK_TYPE eAttack_Type;
-//	ARMOR_TYPE eArmor_Type;
-//}INFOMON;
+typedef struct tagItemInfo
+{
+	tagItemInfo();
+	~tagItemInfo() {}
+	char szName[32];
+	int iAttack;
+	int iHealth;
+	int iGold;
+	ITEM_TYPE eItem_Type;
+}ITEMINFO;

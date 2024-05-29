@@ -8,20 +8,6 @@ CBattle::CBattle()
 	iRandom = 0;
 }
 
-CBattle::~CBattle()
-{
-	//Release();
-}
-
-//void CBattle::Initialize()
-//{
-//
-//}
-// 
-//void CBattle::Release()
-//{
-//}
-
 void CBattle::Update()
 {
 	int iInput(0);
@@ -39,15 +25,11 @@ void CBattle::Update()
 			if (0 >= MONSTER->iCurrentHp)
 			{
 				SC_PLAYER->Take_Reward(SC_MONSTER->Reward(), MONSTER->iGold);
-				//dynamic_cast<CPlayer*>(m_pPlayer_GameManager)->Take_Reward(dynamic_cast<CMonster*>(m_pMonster_GameManager)->Reward(), MONSTER_G->iGold);
-				//m_pPlayer_GameManager->Take_Reward(m_pMonster_GameManager->Reward(), MONSTER_G->iGold);
 				return;
 			}
 			else if (0 >= PLAYER->iCurrentHp)
 			{
 				SC_PLAYER->Respawn();
-				//dynamic_cast<CPlayer*>(m_pPlayer_GameManager)->Respawn();
-				//m_pPlayer_GameManager->Respawn();
 				return;
 			}
 			system("pause");
@@ -57,23 +39,17 @@ void CBattle::Update()
 			if (0 >= MONSTER->iCurrentHp)
 			{
 				SC_PLAYER->Take_Reward(SC_MONSTER->Reward(), MONSTER->iGold);
-				//dynamic_cast<CPlayer*>(m_pPlayer_GameManager)->Take_Reward(dynamic_cast<CMonster*>(m_pMonster_GameManager)->Reward(), MONSTER_G->iGold);
-				//m_pPlayer_GameManager->Take_Reward(m_pMonster_GameManager->Reward(), MONSTER_G->iGold);
 				return;
 			}
 			else if (0 >= PLAYER->iCurrentHp)
 			{
 				SC_PLAYER->Respawn();
-				//dynamic_cast<CPlayer*>(m_pPlayer_GameManager)->Respawn();
-				//m_pPlayer_GameManager->Respawn();
 				return;
 			}
 			system("pause");
 			break;
 		case 3:
 			SC_PLAYER->Using_Tools();
-			//dynamic_cast<CPlayer*>(m_pPlayer_GameManager)->Using_Tools();
-			//m_pPlayer_GameManager->Using_Tools();
 			system("pause");
 			break;
 		case 4:
@@ -121,14 +97,10 @@ void CBattle::Battle_Skill()
 		if (0 < iRandom - (PLAYER->iCritical_Percent))
 		{
 			m_pMonster->Damaged(m_pPlayer, SC_PLAYER->Skill());
-			//m_pMonster_GameManager->Damaged(m_pPlayer_GameManager, dynamic_cast<CPlayer*>(m_pPlayer_GameManager)->Skill());
-			//m_pMonster_GameManager->Damaged(m_pPlayer_GameManager, m_pPlayer_GameManager->Skill());
 		}
 		else
 		{
 			m_pMonster->Damaged(m_pPlayer, (SC_PLAYER->Skill()) * 2);
-			//m_pMonster_GameManager->Damaged(m_pPlayer_GameManager, (dynamic_cast<CPlayer*>(m_pPlayer_GameManager)->Skill()) * 2);
-			//m_pMonster_GameManager->Damaged(m_pPlayer_GameManager, (m_pPlayer_GameManager->Skill()) * 2);
 		}
 		if (0 >= MONSTER->iCurrentHp)
 		{
