@@ -21,7 +21,7 @@ public:
 	virtual void Battle_Normal() {}
 	virtual void Battle_Skill() {}
 	virtual void Battle_UsingTools() {}
-	void Release();
+	virtual void Release();
 	virtual void Map_Home() {}
 	virtual void Map_Shop() {}
 	virtual void Map_Shop_Equip() {}
